@@ -11,7 +11,7 @@
 * Frontend: SASS, TypeScript, React, Redux Toolkit
 * Backend: ASP .NET Core, Entity Framework Core, PostgreSQL
 
-You can follow the same topics as your backend project. It is also possible to select a different topic
+You can follow the same topics as your backend project. It is also possible to select from different topic
 
 ## Setting Up for folder `Backend`
 
