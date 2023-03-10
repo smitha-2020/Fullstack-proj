@@ -34,4 +34,5 @@ public class AppDBContext : DbContext
         base.OnModelCreating(modelBuilder); 
     }
     public DbSet<Category> Categorys { get; set; } = null!;
+    public DbSet<Product> Products { get; set; } = null!;
 }

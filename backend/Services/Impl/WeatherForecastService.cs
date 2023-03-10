@@ -1,5 +1,6 @@
-namespace backend.Services.Impl;
 using backend.Models;
+
+namespace backend.Services.Impl;
 
 public class WeatherForecastService : IWeatherForecastService
 {

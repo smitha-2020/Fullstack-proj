@@ -1,6 +1,7 @@
-namespace backend.Services;
 using backend.Models;
 using backend.DTOs;
+
+namespace backend.Services;
 
 public interface ICRUDService<TModel, TDto> 
 where TModel : BaseModel, new() 

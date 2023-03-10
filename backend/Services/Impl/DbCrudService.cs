@@ -1,5 +1,3 @@
-namespace backend.Services.Impl;
-
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using backend.DB;
@@ -7,6 +5,8 @@ using backend.DTOs;
 using backend.Models;
 using backend.Services;
 using Microsoft.EntityFrameworkCore;
+
+namespace backend.Services.Impl;
 
 public class DbCrudService<TModel, TDto> : ICRUDService<TModel, TDto>
 where TModel : BaseModel, new()

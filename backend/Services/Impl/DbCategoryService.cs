@@ -1,12 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-
 using backend.DB;
 using backend.DTOs;
 using backend.Models;
 using backend.Services.Impl;
 using backend.Services;
 
-namespace project.services.Impl;
+namespace backend.Services.Impl;
 
 public class DbCategoryService : DbCrudService<Category, DTOCategory>, ICategoryService
 {
@@ -15,7 +14,7 @@ public class DbCategoryService : DbCrudService<Category, DTOCategory>, ICategory
     {
         _dbContext = dbContext;
     }
-    
+
     public async Task<ICollection<Category>> GetByNameOrder()
     {
         return await Task.Run(() => _dbContext.Categorys.OrderBy(x => x.Id).ToList());

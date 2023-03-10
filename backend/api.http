@@ -1,1 +1,48 @@
-GET https://localhost:7054/weatherforecasts HTTP/1.1
+# GET https://localhost:7054/weatherforecasts HTTP/1.1
+
+# GET https://localhost:7054/categorys HTTP/1.1
+
+# POST https://localhost:7054/categorys HTTP/1.1
+# content-type: application/json
+
+# {
+#     "Name": "New Category",
+#     "Image": "https://source.unsplash.com/164_6wVEHfI"
+# }
+
+# PUT https://localhost:7054/categorys/1 HTTP/1.1
+# content-type: application/json
+
+# {
+#     "Name": "New Category Updated",
+#     "Image": "https://source.unsplash.com/164_6wVEHfI"
+# }
+
+# DELETE https://localhost:7054/categorys/1 HTTP/1.1
+
+#  GET https://localhost:7210/products HTTP/1.1
+
+# POST https://localhost:7210/products HTTP/1.1
+# content-type: application/json
+
+# {
+#     "Title": "New Product12",
+#     "Price": 500,
+#     "Description": "New product",
+#     "Images": ["https://source.unsplash.com/164_6wVEHfI"],
+#     "CategoryID":1
+# }
+
+# PUT https://localhost:7210/products/1 HTTP/1.1
+# content-type: application/json
+
+# {
+#     "Title": "New Product1123",
+#     "Price": 500,
+#     "Description": "New product",
+#     "Images": ["https://source.unsplash.com/164_6wVEHfI"],
+#     "CategoryID":1
+# }
+
+# DELETE https://localhost:7210/products/2 HTTP/1.1
+
