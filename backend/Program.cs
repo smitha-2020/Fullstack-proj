@@ -1,6 +1,9 @@
 using backend.DB;
 using backend.Services;
 using backend.Services.Impl;
+using backend.Models;
+using backend.DTOs;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +17,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IWeatherForecastService, WeatherForecastService>();
 builder.Services.AddScoped<ICategoryService, DbCategoryService>();
+builder.Services.AddScoped<IUserservice, DBUserService>();
+
+builder.Services
+    .AddIdentity<User, IdentityRole<Guid>>()
+    .AddEntityFrameworkStores<AppDBContext>();
 
 var app = builder.Build();
 

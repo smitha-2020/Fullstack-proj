@@ -1,10 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using backend.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Npgsql;
 
 namespace backend.DB;
 
-public class AppDBContext : DbContext
+public class AppDBContext:
+IdentityDbContext<User,IdentityRole<Guid>, Guid>
 {
     static AppDBContext()
     {
@@ -32,6 +35,8 @@ public class AppDBContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder); 
+
+        modelBuilder.AddIdentityConfig();
     }
     public DbSet<Category> Categorys { get; set; } = null!;
     public DbSet<Product> Products { get; set; } = null!;
