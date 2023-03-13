@@ -8,13 +8,13 @@ public class DBUserService : IUserservice
 {
     private readonly UserManager<User> _userManager;
     private readonly RoleManager<IdentityRole<Guid>> _roleManager;
-    //private readonly ITokenService _service;
+    private readonly ITokenService _service;
 
-    public DBUserService(UserManager<User> userManager, RoleManager<IdentityRole<Guid>> roleManager)
+    public DBUserService(UserManager<User> userManager, RoleManager<IdentityRole<Guid>> roleManager,ITokenService service)
     {
         _userManager = userManager;
         _roleManager = roleManager;
-       // _service = service;
+        _service = service;
     }
     
     public async Task<User?> SingnUpAsync(DTOUserSignUp request)
@@ -46,7 +46,6 @@ public class DBUserService : IUserservice
         {
             return null;
         }
-        return null;
-       //return _service.GetTokenAsync(user);
+       return _service.GetTokenAsync(user);
     }
 }
