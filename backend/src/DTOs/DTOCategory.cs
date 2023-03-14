@@ -12,9 +12,9 @@ public class DTOCategory : BaseDTO<Category>
 
   //public ICollection<Product> Products {get; set;} = null!;
 
-  public override void UpdateModel(Category model)
-  {
-    model.Name = Name;
-    model.Image = Image;
-  }
+  // public override void UpdateModel(Category model)
+  // {
+  //   model.Name = Name;
+  //   model.Image = Image;
+  // }
 }

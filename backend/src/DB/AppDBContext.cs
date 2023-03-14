@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Npgsql;
 using backend.src.Repository;
 using backend.src.DB;
+using backend.src.Repository.BaseRepo;
 
 namespace backend.src.DB;
 

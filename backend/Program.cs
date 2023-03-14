@@ -1,12 +1,11 @@
 using backend.src.DB;
-using backend.src.Services;
-using backend.src.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-
-
+using backend.src.Services.CategoryService;
+using backend.src.Repository.CategoryRepo;
+using backend.src.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,20 +14,20 @@ builder.Services.AddDbContext<AppDBContext>();
 
 builder.Services.AddAuthentication(option =>
 {
-  option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-  option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-  option.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
+    option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    option.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
 }).AddJwtBearer(options =>
 {
-  options.TokenValidationParameters = new TokenValidationParameters
-  {
-    ValidateIssuer = true,
-    ValidateAudience = true,
-    ValidateLifetime = true,
-    ValidIssuer = builder.Configuration["jwt:Issuer"],
-    ValidAudience = builder.Configuration["jwt:Aud"],
-    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["jwt:Secret"]))
-  };
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidIssuer = builder.Configuration["jwt:Issuer"],
+        ValidAudience = builder.Configuration["jwt:Aud"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["jwt:Secret"]))
+    };
 });
 
 builder.Services.AddControllers();
@@ -37,11 +36,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 //Dependency Injection
-builder.Services.AddScoped<IWeatherForecastService, WeatherForecastService>();
-builder.Services.AddScoped<ICategoryService, DbCategoryService>();
-builder.Services.AddScoped<IProductService,DbProductService>();
-builder.Services.AddScoped<IUserservice, DBUserService>();
-builder.Services.AddScoped<ITokenService, DbTokenService>();
+//builder.Services.AddScoped<IWeatherForecastService, WeatherForecastService>();
+
+builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+
+// builder.Services.AddScoped<IProductService, DbProductService>();
+// builder.Services.AddScoped<IUserservice, DBUserService>();
+// builder.Services.AddScoped<ITokenService, DbTokenService>();
 
 
 //Configuration for AutoMapper

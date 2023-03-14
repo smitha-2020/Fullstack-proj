@@ -1,7 +1,7 @@
-using backend.DTOs;
-using backend.Models;
+using backend.src.DTOs;
+using backend.src.Models;
 
-namespace backend.AutoMapper;
+namespace backend;
 
 public static class UserExtension
 {

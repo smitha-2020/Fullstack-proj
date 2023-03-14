@@ -20,13 +20,5 @@ public class DTOProduct : BaseDTO<Product>
 
     public int Category { get; set; }
 
-    public override void UpdateModel(Product p)
-    {
-        p.Images = Images;
-        p.Price = Price;
-        p.Description = Description;
-        p.Title = Title;
-        p.CategoryId = CategoryId;
-    }
 }
 

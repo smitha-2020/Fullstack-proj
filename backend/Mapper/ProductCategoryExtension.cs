@@ -1,7 +1,7 @@
 using backend.src.DTOs;
 using backend.src.Models;
 
-namespace backend.src.Mapper;
+namespace backend;
 
 public static class ProductCategoryExtension
 {

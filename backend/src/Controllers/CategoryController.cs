@@ -1,11 +1,10 @@
-using Microsoft.AspNetCore.Mvc;
 using backend.src.DTOs;
 using backend.src.Models;
-using backend.src.Services;
+using backend.src.Services.CategoryService;
 
 namespace backend.src.Controllers;
 
-public class CategoryController : DbCRUDController<Category, DTOCategory,DTOCategoryResponse>
+public class CategoryController : BaseController<Category, DTOCategory, DTOCategory, DTOCategoryResponse>
 {
     private readonly ICategoryService _service;
 

@@ -1,9 +1,8 @@
 using backend.src.Models;
-using backend.src.DTOs;
 using backend.src.DB;
 using Microsoft.EntityFrameworkCore;
 
-namespace backend.src.Repository;
+namespace backend.src.Repository.BaseRepo;
 
 public class BaseRepo<TModel> : IBaseRepo<TModel>
 where TModel : BaseModel
