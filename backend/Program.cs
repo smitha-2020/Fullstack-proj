@@ -1,13 +1,35 @@
-using backend.DB;
-using backend.Services;
-using backend.Services.Impl;
-using backend.Models;
+using backend.src.DB;
+using backend.src.Services;
+using backend.src.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add database services to the container.
 builder.Services.AddDbContext<AppDBContext>();
+
+builder.Services.AddAuthentication(option =>
+{
+  option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+  option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+  option.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+  options.TokenValidationParameters = new TokenValidationParameters
+  {
+    ValidateIssuer = true,
+    ValidateAudience = true,
+    ValidateLifetime = true,
+    ValidIssuer = builder.Configuration["jwt:Issuer"],
+    ValidAudience = builder.Configuration["jwt:Aud"],
+    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["jwt:Secret"]))
+  };
+});
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -20,6 +42,7 @@ builder.Services.AddScoped<ICategoryService, DbCategoryService>();
 builder.Services.AddScoped<IProductService,DbProductService>();
 builder.Services.AddScoped<IUserservice, DBUserService>();
 builder.Services.AddScoped<ITokenService, DbTokenService>();
+
 
 //Configuration for AutoMapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

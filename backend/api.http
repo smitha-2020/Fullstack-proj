@@ -20,7 +20,14 @@
 
 # DELETE https://localhost:7054/categorys/1 HTTP/1.1
 
-GET https://localhost:7054/products/1 HTTP/1.1
+
+GET https://localhost:7054/products
+
+{
+  "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlN2U2YTdhMi1lODcxLTRkZTMtOTM1Yy1hNjM5Njg0ZWNkZDEiLCJpYXQiOiIxNC8wMy8yMDIzIDkuMjMuMDMiLCJlbWFpbCI6InNtaXRoYWthbWF0aEBtYWlsLmNvbSIsIm5hbWUiOiJzbWl0aGEiLCJleHAiOjE2Nzg3ODIxODMsImlzcyI6IlNtaXRoYSIsImF1ZCI6IkFkbWluIn0.c1fusYLAzuJJNaA1HtYmOeAVDlo1Q5Y5a71CtTYlyAw"
+}
+
+#GET https://localhost:7054/products/1 HTTP/1.1
 
 # POST https://localhost:7054/products HTTP/1.1
 # content-type: application/json
@@ -56,11 +63,11 @@ GET https://localhost:7054/products/1 HTTP/1.1
 #     "Password": "Smitha@123"
 # }
 
-# POST https://localhost:7054/signin HTTP/1.1
-# content-type: application/json
+POST https://localhost:7054/signin HTTP/1.1
+content-type: application/json
 
-# {
-#     "Email": "smithakamath@mail.com",
-#     "Password": "Smitha@123"
-# }
+{
+    "Email": "smithakamath@mail.com",
+    "Password": "Smitha@123"
+}
 
