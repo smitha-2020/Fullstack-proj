@@ -5,26 +5,26 @@ using backend.DTOs;
 
 namespace backend.Controllers;
 
-public abstract class DbCRUDController<TModel, TDto> : ApiController
+public abstract class DbCRUDController<TModel, TDto, TResponse> : ApiController
 where TModel : BaseModel, new()
 where TDto : BaseDTO<TModel>
 {
-    private readonly ICRUDService<TModel, TDto> _service;
+    private readonly ICRUDService<TModel, TDto, TResponse> _service;
     
-    public DbCRUDController(ICRUDService<TModel, TDto> service)
+    public DbCRUDController(ICRUDService<TModel, TDto, TResponse> service)
     {
         _service = service;
     }
 
     [HttpGet]
-    public virtual async Task<ICollection<TModel>?> GetAll()
+    public virtual async Task<ICollection<TResponse>?> GetAll()
     {
         var data = _service.GetAllAsync();
         if (data is null)
         {
             return null;
         }
-       return await data;
+       return (ICollection<TResponse>?)await data;
     }
 
     [HttpPost]
@@ -39,14 +39,14 @@ where TDto : BaseDTO<TModel>
     }
 
     [HttpGet("{id}")]
-    public virtual async Task<ActionResult<TModel?>> Get(int id)
+    public virtual async Task<ActionResult<TResponse?>> Get(int id)
     {
         var data = await _service.GetAsync(id);
         if (data is null)
         {
             return NotFound("Item is not found");
         }
-        return data;
+        return Ok(data);
     }
 
     [HttpPut("{id}")]

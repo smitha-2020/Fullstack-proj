@@ -3,7 +3,7 @@ using backend.DTOs;
 
 namespace backend.Services;
 
-public interface ICRUDService<TModel, TDto> 
+public interface ICRUDService<TModel, TDto, TResponse> 
 where TModel : BaseModel, new() 
 where TDto:BaseDTO<TModel>
 {
@@ -12,5 +12,5 @@ where TDto:BaseDTO<TModel>
   Task<TModel?> GetAsync(int id);
   Task<TModel?> UpdateAsync(int id, TDto request);
   Task<bool> DeleteAsync(int id);
-  Task<ICollection<TModel>> GetAllAsync();
+  Task<ICollection<TModel>?> GetAllAsync();
 }

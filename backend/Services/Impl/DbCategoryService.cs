@@ -7,7 +7,7 @@ using backend.Services;
 
 namespace backend.Services.Impl;
 
-public class DbCategoryService : DbCrudService<Category, DTOCategory>, ICategoryService
+public class DbCategoryService : DbCrudService<Category, DTOCategory, DTOCategoryResponse>, ICategoryService
 {
     private readonly AppDBContext _dbContext;
     public DbCategoryService(AppDBContext dbContext) : base(dbContext)

@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using backend.DTOs;
-using backend.Models;
 using backend.Services;
-using backend.AutoMapper;
+using backend.Mapper;
 
 namespace backend.Controllers;
 
@@ -20,7 +19,8 @@ public class UserController : ApiController
         {
             return BadRequest();
         }
-        return Ok(user.UserMapper());
+        return Ok();
+        //return Ok(user.UserMapper());
     }
 
     [HttpPost("/signin")]
@@ -32,6 +32,5 @@ public class UserController : ApiController
             return Unauthorized();
         }
         return Ok(response);
-    //return Ok(user.UserMapper());
     }
 }

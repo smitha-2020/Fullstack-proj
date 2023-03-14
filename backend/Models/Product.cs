@@ -18,22 +18,22 @@ public class Product : BaseModel
 
     public Category Category { get; set; } = null!;
 
-     public static Product ConvertToDTO(Product product)
-    {
-        return new Product
-        {
-            Id = product.Id,
-            Title = product.Title,
-            Price = product.Price,
-            Description = product.Description,
-            Images = product.Images,
-            Category = new Category
-            {
-                Id = product.Category.Id,
-                Name = product.Category.Name,
-                Image = product.Category.Image
-            }
-        };
+    //  public static Product ConvertToDTO(Product product)
+    // {
+    //     return new Product
+    //     {
+    //         Id = product.Id,
+    //         Title = product.Title,
+    //         Price = product.Price,
+    //         Description = product.Description,
+    //         Images = product.Images,
+    //         Category = new Category
+    //         {
+    //             Id = product.Category.Id,
+    //             Name = product.Category.Name,
+    //             Image = product.Category.Image
+    //         }
+    //     };
 
-    }
+    // }
 }

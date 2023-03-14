@@ -5,7 +5,7 @@ using backend.Services;
 
 namespace backend.Controllers;
 
-public class CategoryController : DbCRUDController<Category, DTOCategory>
+public class CategoryController : DbCRUDController<Category, DTOCategory,DTOCategoryResponse>
 {
     private readonly ICategoryService _service;
 

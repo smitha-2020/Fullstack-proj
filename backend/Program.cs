@@ -2,12 +2,11 @@ using backend.DB;
 using backend.Services;
 using backend.Services.Impl;
 using backend.Models;
-using backend.DTOs;
 using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+// Add database services to the container.
 builder.Services.AddDbContext<AppDBContext>();
 
 builder.Services.AddControllers();
@@ -15,10 +14,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Dependency Injection
 builder.Services.AddScoped<IWeatherForecastService, WeatherForecastService>();
 builder.Services.AddScoped<ICategoryService, DbCategoryService>();
+builder.Services.AddScoped<IProductService,DbProductService>();
 builder.Services.AddScoped<IUserservice, DBUserService>();
+builder.Services.AddScoped<ITokenService, DbTokenService>();
 
+//Configuration for AutoMapper
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+//Add services for the Identity
 builder.Services
     .AddIdentity<User, IdentityRole<Guid>>()
     .AddEntityFrameworkStores<AppDBContext>();
@@ -44,6 +50,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+//Adding Authentication
+app.UseAuthentication();
 
 app.UseAuthorization();
 

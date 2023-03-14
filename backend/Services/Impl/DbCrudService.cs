@@ -6,9 +6,9 @@ using backend.Models;
 using backend.Services;
 using Microsoft.EntityFrameworkCore;
 
-namespace backend.Services.Impl;
+namespace backend.Services;
 
-public class DbCrudService<TModel, TDto> : ICRUDService<TModel, TDto>
+public class DbCrudService<TModel, TDto, TResponse> : ICRUDService<TModel, TDto, TResponse>
 where TModel : BaseModel, new()
 where TDto : BaseDTO<TModel>
 {
@@ -44,10 +44,10 @@ where TDto : BaseDTO<TModel>
         return await _dbContext.Set<TModel>().FindAsync(id);
     }
 
-    public virtual async Task<ICollection<TModel>> GetAllAsync()
-    {
-        return await _dbContext.Set<TModel>().AsNoTracking().ToListAsync();
-    }
+    // public virtual async Task<ICollection<TModel>> GetAllAsync()
+    // {
+    //     return await _dbContext.Set<TModel>().AsNoTracking().ToListAsync();
+    // }
 
     public async Task<TModel?> UpdateAsync(int id, TDto request)
     {
@@ -59,5 +59,10 @@ where TDto : BaseDTO<TModel>
         request.UpdateModel(item);
         await _dbContext.SaveChangesAsync();
         return item;
+    }
+
+    public virtual async Task<ICollection<TModel>?> GetAllAsync()
+    {
+        return await _dbContext.Set<TModel>().AsNoTracking().ToListAsync();
     }
 }

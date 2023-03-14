@@ -2,23 +2,27 @@ using Microsoft.AspNetCore.Mvc;
 using backend.DTOs;
 using backend.Models;
 using backend.Services;
+using backend.Mapper;
+using AutoMapper;
 
 namespace backend.Controllers;
 
-public class ProductController : DbCRUDController<Product, DTOProduct>
+public class ProductController : DbCRUDController<Product, DTOProduct, DTOProductResponse>
 {
     private readonly IProductService _service;
     private readonly ILogger<ProductController> _logger;
-    public ProductController(IProductService service, ILogger<ProductController> logger) : base(service)
+    public readonly IMapper _mapper;
+    public ProductController(IProductService service, ILogger<ProductController> logger, IMapper mapper) : base(service)
     {
         _service = service;
         _logger = logger;
+        _mapper = mapper;
     }
 
     [HttpGet]
-    public override async Task<ICollection<Product>?> GetAll()
+    public override async Task<ICollection<DTOProductResponse>?> GetAll()
     {
-        ICollection<Product> _products = new List<Product>();
+        ICollection<DTOProductResponse> _products = new List<DTOProductResponse>();
         var products = await _service.GetAllAsync();
         if (products is null)
         {
@@ -26,19 +30,20 @@ public class ProductController : DbCRUDController<Product, DTOProduct>
         }
         foreach (var product in products)
         {
-            _products.Add(Product.ConvertToDTO(product));
+            var _mappedUser = _mapper.Map<DTOProductResponse>(product);
+            _products.Add(_mappedUser);
         }
         return _products;
     }
 
     [HttpGet("{id}")]
-    public override async Task<ActionResult<Product?>> Get(int id)
+    public override async Task<ActionResult<DTOProductResponse?>> Get(int id)
     {
         var data = await _service.GetAsync(id);
         if (data is null)
         {
             return NotFound("Item is not found");
         }
-        return Product.ConvertToDTO(data);
+        return _mapper.Map<DTOProductResponse>(data);
     }
 }
