@@ -3,7 +3,7 @@ using backend.src.Repository.BaseRepo;
 
 namespace backend.src.Services.BaseService;
 
-public class BaseService<TModel, TCreateDto, TUpdateDto, TResponse> : IBaseService<TModel, TCreateDto, TUpdateDto, TResponse>
+public class BaseService<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResponse> : IBaseService<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResponse>
 {
     private readonly IBaseRepo<TModel> _repo;
     private readonly IMapper _mapper;
@@ -20,9 +20,10 @@ public class BaseService<TModel, TCreateDto, TUpdateDto, TResponse> : IBaseServi
         var result = await _repo.CreateOneAsync(entity);
         if (result is null)
         {
-            throw new Exception("Cannot create");
+            throw new Exception("Item Cannot be Created");
         }
-        return _mapper.Map<TModel, TResponse>(result);
+        var newResult = _mapper.Map<TModel, TResponse>(result);
+        return newResult;
     }
 
     public async Task<bool> DeleteAsync(int id)
@@ -41,13 +42,33 @@ public class BaseService<TModel, TCreateDto, TUpdateDto, TResponse> : IBaseServi
         var singleData = await _repo.GetByIdAsync(id);
         if (singleData is null)
         {
-            throw new Exception("id is not found");
+            throw new Exception("ID is not found");
         }
         return _mapper.Map<TModel, TResponse>(singleData);
     }
 
     public async Task<TResponse?> UpdateAsync(int id, TUpdateDto update)
     {
+        // var entity = await _repo.GetByIdAsync(id);
+        // if (entity is null)
+        // {
+        //     throw new ArgumentNullException("entity Reference rror!!");
+        // }
+
+        // var newData = _mapper.Map<TUpdateDto, TModel>(update);
+
+        // if (newData is null)
+        // {
+        //     throw new ArgumentNullException("newData Reference rror!!");
+        // }
+
+        // var updatedData = await _repo.UpdateOneAsync(id, _mapper.Map<TUpdateDto, TModel>(update));
+        // if (updatedData is null)
+        // {
+        //     throw new ArgumentNullException("Null Reference rror!!");
+        // }
+        // return _mapper.Map<TModel, TResponse>(updatedData);
+
         var entity = _mapper.Map<TUpdateDto, TModel>(update);
         if (entity is null)
         {
@@ -56,7 +77,7 @@ public class BaseService<TModel, TCreateDto, TUpdateDto, TResponse> : IBaseServi
         var updatedData = await _repo.UpdateOneAsync(id, entity);
         if (updatedData is null)
         {
-            throw new Exception("Data cannot be updated");
+            throw new Exception("Item cannot be updated");
         }
         return _mapper.Map<TModel, TResponse>(updatedData);
     }

@@ -3,15 +3,18 @@ using backend.src.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Npgsql;
-using backend.src.Repository;
-using backend.src.DB;
 using backend.src.Repository.BaseRepo;
 
 namespace backend.src.DB;
 
-public class AppDBContext:
-IdentityDbContext<User,IdentityRole<Guid>, Guid>
+public class AppDBContext :
+IdentityDbContext<User, IdentityRole<Guid>, Guid>
 {
+    public DbSet<Category> Categorys { get; set; } = null!;
+    public DbSet<Product> Products { get; set; } = null!;
+    public DbSet<Cart> Carts { get; set; } = null!;
+    public DbSet<CartItem> CartItems { get; set; } = null!;
+
     static AppDBContext()
     {
         NpgsqlConnection.GlobalTypeMapper.MapEnum<SortBy>();
@@ -39,14 +42,29 @@ IdentityDbContext<User,IdentityRole<Guid>, Guid>
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder); 
+        base.OnModelCreating(modelBuilder);
 
         modelBuilder.HasPostgresEnum<SortBy>();
-        
+
+        //modelBuilder.Entity<Product>().HasIndex(x => x.Category.Id).IsUnique();
         modelBuilder.Entity<Product>().Navigation(x => x.Category).AutoInclude();
+
+        modelBuilder.Entity<Product>()
+                .HasIndex(item => item.Title);
+        modelBuilder.Entity<Product>()
+                .HasIndex(item => item.Price);
+
+        modelBuilder.Entity<Cart>().Navigation(x => x.CartItems).AutoInclude();
+
+        modelBuilder.Entity<CartItem>().Navigation(x => x.Products).AutoInclude();
+
+        // modelBuilder.Entity<Product>()
+        //     .HasOne(s => s.Category)
+        //     .WithMany()
+        //     .HasForeignKey(s => s.CategoryId)
+        //     .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.AddIdentityConfig();
     }
-    public DbSet<Category> Categorys { get; set; } = null!;
-    public DbSet<Product> Products { get; set; } = null!;
+
 }

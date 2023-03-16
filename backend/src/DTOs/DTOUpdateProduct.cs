@@ -1,13 +1,14 @@
-using backend.src.DTOs.DTOResponse;
+using System.ComponentModel.DataAnnotations;
+using backend.src.Models;
 
 namespace backend.src.DTOs;
 
-public class DTOProductResponse
+public class DTOUpdateProduct
 {
-    public int Id {get; set;}
     public string Title { get; set; } = null!;
     public double Price { get; set; }
     public string Description { get; set; } = null!;
+    //public int AvailableQuantity {get; set;}
     public ICollection<string> Images { get; set; } = null!;
-    public DTOCategoryResponse Category { get; set; } = null!;
 }
+

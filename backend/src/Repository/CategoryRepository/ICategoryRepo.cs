@@ -1,7 +1,7 @@
 using backend.src.Models;
 using backend.src.Repository.BaseRepo;
 
-namespace backend.src.Repository.CategoryRepo;
+namespace backend.src.Repository.CategoryRepository;
 
 public interface ICategoryRepo: IBaseRepo<Category>
 {

@@ -6,9 +6,9 @@ namespace backend.src.Controllers;
 
 public class UserController : ApiController
 {
-    private readonly IUserservice _service;
+    private readonly IUserService _service;
 
-    public UserController(IUserservice service) => _service = service;
+    public UserController(IUserService service) => _service = service;
 
     [HttpPost("/signup")]
     public async Task<IActionResult?> SingnUp([FromBody] DTOUserSignUp request)
@@ -18,7 +18,7 @@ public class UserController : ApiController
         {
             return BadRequest();
         }
-        return Ok();
+        return Ok(user);
         //return Ok(user.UserMapper());
     }
 

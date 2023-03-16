@@ -1,7 +1,7 @@
 using backend.src.Models;
 using backend.src.Repository.BaseRepo;
 
-namespace backend.src.Repository.ProductRepo;
+namespace backend.src.Repository.ProductRepository;
 
 public interface IProductRepo: IBaseRepo<Product>
 {

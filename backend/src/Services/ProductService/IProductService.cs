@@ -4,9 +4,9 @@ using backend.src.DTOs;
 using backend.src.Services.BaseService;
 
 
-namespace backend.src.Services.CategoryService;
+namespace backend.src.Services.ProductService;
 
-public interface ICategoryService : IBaseService<Category, DTOCategory, DTOUpdateCategory, DTOCategoryResponse, DTOCategoryUpdatedResponse>
+public interface IProductService : IBaseService<Product, DTOProduct, DTOUpdateProduct, DTOProductResponse,DTOProductUpdatedResponse>
 {
     //Task<ICollection<Category>> GetByNameOrder();
     //Task<int> AddProductToCategory(int id, ICollection<int> productIds);

@@ -4,10 +4,20 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using backend.src.Services.CategoryService;
-using backend.src.Repository.CategoryRepo;
+using backend.src.Services.ProductService;
+using backend.src.Repository.CategoryRepository;
+using backend.src.Repository.ProductRepository;
+using backend.src.Services.TokenService;
+using backend.src.Repository;
 using backend.src.Models;
+using backend.src.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.UseKestrel(options =>
+    //options.ListenLocalhost(5000),
+    options.ListenLocalhost(5001, options => options.UseHttps())
+);
 
 // Add database services to the container.
 builder.Services.AddDbContext<AppDBContext>();
@@ -35,20 +45,31 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+//Configuration for AutoMapper
+builder.Services.AddAutoMapper(typeof(Program).Assembly);
+//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 //Dependency Injection
 //builder.Services.AddScoped<IWeatherForecastService, WeatherForecastService>();
 
 builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
+builder.Services.AddScoped<IProductRepo,ProductRepo>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
+builder.Services.AddScoped<IUserRepo,UserRepo>();
+builder.Services.AddScoped<IUserService, UserService>();
+
+
+builder.Services.AddScoped<ITokenService,TokenService>();
+
+
+
 
 // builder.Services.AddScoped<IProductService, DbProductService>();
 // builder.Services.AddScoped<IUserservice, DBUserService>();
 // builder.Services.AddScoped<ITokenService, DbTokenService>();
-
-
-//Configuration for AutoMapper
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //Add services for the Identity
 builder.Services
@@ -78,7 +99,7 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 //Adding Authentication
-app.UseAuthentication();
+//app.UseAuthentication();
 
 app.UseAuthorization();
 

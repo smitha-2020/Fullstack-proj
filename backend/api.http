@@ -1,8 +1,8 @@
-# GET https://localhost:7054/weatherforecasts HTTP/1.1
+# GET https://localhost:5001/weatherforecasts HTTP/1.1
 
-#  GET https://localhost:7054/categorys HTTP/1.1
+#GET https://localhost:5001/categorys HTTP/1.1
 
-# POST https://localhost:7054/categorys HTTP/1.1
+# POST https://localhost:5001/categorys HTTP/1.1
 # content-type: application/json
 
 # {
@@ -10,7 +10,7 @@
 #     "Image": "https://source.unsplash.com/164_6wVEHfI"
 # }
 
-# PUT https://localhost:7054/categorys/1 HTTP/1.1
+# PUT https://localhost:5001/categorys/1 HTTP/1.1
 # content-type: application/json
 
 # {
@@ -18,29 +18,34 @@
 #     "Image": "https://source.unsplash.com/164_6wVEHfI"
 # }
 
-# DELETE https://localhost:7054/categorys/1 HTTP/1.1
+# DELETE https://localhost:5001/categorys/1 HTTP/1.1
 
 
-GET https://localhost:7054/products
+# GET https://localhost:5001/products
 
-{
-  "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlN2U2YTdhMi1lODcxLTRkZTMtOTM1Yy1hNjM5Njg0ZWNkZDEiLCJpYXQiOiIxNC8wMy8yMDIzIDkuMjMuMDMiLCJlbWFpbCI6InNtaXRoYWthbWF0aEBtYWlsLmNvbSIsIm5hbWUiOiJzbWl0aGEiLCJleHAiOjE2Nzg3ODIxODMsImlzcyI6IlNtaXRoYSIsImF1ZCI6IkFkbWluIn0.c1fusYLAzuJJNaA1HtYmOeAVDlo1Q5Y5a71CtTYlyAw"
-}
+# {
+#   "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlN2U2YTdhMi1lODcxLTRkZTMtOTM1Yy1hNjM5Njg0ZWNkZDEiLCJpYXQiOiIxNC8wMy8yMDIzIDkuMjMuMDMiLCJlbWFpbCI6InNtaXRoYWthbWF0aEBtYWlsLmNvbSIsIm5hbWUiOiJzbWl0aGEiLCJleHAiOjE2Nzg3ODIxODMsImlzcyI6IlNtaXRoYSIsImF1ZCI6IkFkbWluIn0.c1fusYLAzuJJNaA1HtYmOeAVDlo1Q5Y5a71CtTYlyAw"
+# }
 
-#GET https://localhost:7054/products/1 HTTP/1.1
+#GET https://localhost:5001/products HTTP/1.1
 
-# POST https://localhost:7054/products HTTP/1.1
+# GET https://localhost:5001/products
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiOTVjOGNhZC1kNWM4LTRjZjItYjA1OS1hYmViZTU4M2FiNzUiLCJpYXQiOiIxNS8wMy8yMDIzIDEyLjE3LjEyIiwiZW1haWwiOiJzbWl0aGFrYW1hdGhAbWFpbC5jb20iLCJuYW1lIjoic21pdGhhIiwiZXhwIjoxNjc4ODc5MDMyLCJpc3MiOiJTbWl0aGEiLCJhdWQiOiJBZG1pbiJ9.FduyrxvLVfu4Sh_C9lufgcYERc36G1_xcie52CGE7eM
+
+# GET https://localhost:5001/products HTTP/1.1
+
+# POST https://localhost:5001/products HTTP/1.1
 # content-type: application/json
 
 # {
-#     "Title": "New Category Product",
-#     "Price": 500,
+#     "Title": "New Category Products",
+#     "Price": 700,
 #     "Description": "New product",
 #     "Images": ["https://source.unsplash.com/164_6wVEHfI"],
 #     "CategoryID":1
 # }
 
-# PUT https://localhost:7210/products/1 HTTP/1.1
+# PUT https://localhost:5001/products/1 HTTP/1.1
 # content-type: application/json
 
 # {
@@ -51,23 +56,24 @@ GET https://localhost:7054/products
 #     "CategoryID":1
 # }
 
-# DELETE https://localhost:7210/products/2 HTTP/1.1
+#  DELETE https://localhost:5001/products/2 HTTP/1.1
 
-# POST https://localhost:7054/signup HTTP/1.1
+# POST https://localhost:5001/signup HTTP/1.1
 # content-type: application/json
 
 # {
 #     "FirstName": "smitha",
 #     "LastName": "kamath",
+#     "UserName": "smithakamathm",
 #     "Email": "smithakamath@mail.com",
 #     "Password": "Smitha@123"
 # }
 
-POST https://localhost:7054/signin HTTP/1.1
-content-type: application/json
+# POST https://localhost:5001/signin HTTP/1.1
+# content-type: application/json
 
-{
-    "Email": "smithakamath@mail.com",
-    "Password": "Smitha@123"
-}
+# {
+#     "Email": "smithakamath@mail.com",
+#     "Password": "Smitha@123"
+# }
 

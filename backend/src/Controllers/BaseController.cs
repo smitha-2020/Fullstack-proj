@@ -1,20 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
-using backend.src.Services;
-using backend.src.Models;
-using backend.src.DTOs;
-using backend.src.Repository;
 using backend.src.Services.BaseService;
 using backend.src.Repository.BaseRepo;
 
 namespace backend.src.Controllers;
 
-public abstract class BaseController<TModel, TCreateDto, TUpdateDto, TResponse> : ApiController
+public abstract class BaseController<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResponse> : ApiController
 {
-    private readonly IBaseService<TModel, TCreateDto, TUpdateDto, TResponse> _service;
+    private readonly IBaseService<TModel, TCreateDto, TUpdateDto, TResponse,TUpdatedResponse> _service;
 
-    public BaseController(IBaseService<TModel, TCreateDto, TUpdateDto, TResponse> service)
+
+    public BaseController(IBaseService<TModel, TCreateDto, TUpdateDto, TResponse,TUpdatedResponse> service)
     {
         _service = service;
+
     }
 
     [HttpGet]
@@ -26,8 +24,8 @@ public abstract class BaseController<TModel, TCreateDto, TUpdateDto, TResponse> 
     [HttpPost]
     public async Task<IActionResult> Create(TCreateDto item)
     {
-        var createdData = await _service.CreateAsync(item);
-        return CreatedAtAction("created", createdData);
+        return Ok(await _service.CreateAsync(item));
+        //return CreatedAtAction("created", item);
     }
 
     [HttpGet("{id}")]
@@ -37,7 +35,7 @@ public abstract class BaseController<TModel, TCreateDto, TUpdateDto, TResponse> 
     }
 
     [HttpPut("{id}")]
-    public async Task<ActionResult> Update(int id, TUpdateDto item)
+    public virtual async Task<ActionResult> Update(int id, TUpdateDto item)
     {
         return Ok(await _service.UpdateAsync(id, item));
     }

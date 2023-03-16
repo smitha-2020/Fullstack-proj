@@ -5,6 +5,6 @@ using backend.src.Models;
 
 public interface IUserservice
 {
-    Task<User?> SingnUpAsync(DTOUserSignUp request);
+    Task<User?> SingnUpAsync(DTOUserSignUp user);
     Task<DTOUserSignInResponse?> SingnInAsync(DTOUserSignIn request);
 }

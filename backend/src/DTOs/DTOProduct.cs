@@ -11,6 +11,8 @@ public class DTOProduct : BaseDTO<Product>
     [Range(1, 100000, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
     public double Price { get; set; }
 
+    //public int AvailableQuantity {get; set;}
+
     [MinLength(10, ErrorMessage = "minimum {1} characters should be provided")]
     public string Description { get; set; } = null!;
 
@@ -18,7 +20,5 @@ public class DTOProduct : BaseDTO<Product>
 
     public int CategoryId { get; set; }
 
-    public int Category { get; set; }
-
+    public Category? Category { get; set; }
 }
-

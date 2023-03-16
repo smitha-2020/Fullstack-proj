@@ -2,7 +2,7 @@ using backend.src.Repository.BaseRepo;
 
 namespace backend.src.Services.BaseService;
 
-public interface IBaseService<TModel, TCreateDto, TUpdateDto, TResponse>
+public interface IBaseService<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResponse>
 {
     // CURD Operations
     Task<TResponse?> CreateAsync(TCreateDto request);
