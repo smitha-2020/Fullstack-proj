@@ -37,7 +37,7 @@ public class UserService : IUserService
         return _service.GetTokenAsync(validUser);
     }
 
-    public async Task<User?> SingnUpAsync(DTOUserSignUp request)
+    public async Task<DTOUserResponse?> SingnUpAsync(DTOUserSignUp request)
     {
         //var user = _mapper.Map<DTOUserSignUp, DTOCreateUser>(request);
         if (request is null)
@@ -54,7 +54,8 @@ public class UserService : IUserService
         {
             throw new ArgumentNullException("Null Value found");
         }
-        return userIdentity;
+        return _mapper.Map<User,DTOUserResponse>(userIdentity);
+        //return userIdentity;
     }
 
     public async Task<bool> IsEmailAvailable(string email)

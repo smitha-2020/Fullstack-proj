@@ -58,6 +58,11 @@ IdentityDbContext<User, IdentityRole<Guid>, Guid>
 
         modelBuilder.Entity<CartItem>().Navigation(x => x.Products).AutoInclude();
 
+        modelBuilder.Entity<User>()
+            .HasOne(e => e.Cart)
+            .WithOne(e => e.User)
+            .OnDelete(DeleteBehavior.SetNull);
+
         // modelBuilder.Entity<Product>()
         //     .HasOne(s => s.Category)
         //     .WithMany()

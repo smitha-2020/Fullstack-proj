@@ -7,7 +7,9 @@ using backend.src.Services.CategoryService;
 using backend.src.Services.ProductService;
 using backend.src.Repository.CategoryRepository;
 using backend.src.Repository.ProductRepository;
+using backend.src.Repository.CartRepository;
 using backend.src.Services.TokenService;
+using  backend.src.Services.CartService;
 using backend.src.Repository;
 using backend.src.Models;
 using backend.src.Services;
@@ -61,10 +63,10 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddScoped<IUserService, UserService>();
 
-
 builder.Services.AddScoped<ITokenService, TokenService>();
 
-
+builder.Services.AddScoped<ICartRepo, CartRepo>();
+builder.Services.AddScoped<ICartService, CartService>();
 
 
 // builder.Services.AddScoped<IProductService, DbProductService>();

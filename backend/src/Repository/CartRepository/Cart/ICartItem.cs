@@ -4,7 +4,7 @@ using backend.src.DTOs;
 
 namespace backend.src.Repository;
 
-public interface ICartItem:IBaseRepo<CartItem>
+public interface ICartItem : IBaseRepo<CartItem>
 {
 
 }

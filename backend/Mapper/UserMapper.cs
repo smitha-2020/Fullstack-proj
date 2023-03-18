@@ -12,5 +12,6 @@ public class UserMapper : BaseMapper
         CreateMap<DTOCreateUser, User>();
         CreateMap<IdentityResult, User>();
         CreateMap<DTOUserSignUp, User>();
+        CreateMap<User, DTOUserResponse>();
     }
 }

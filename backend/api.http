@@ -21,7 +21,7 @@
 # DELETE https://localhost:5001/categorys/1 HTTP/1.1
 
 
-# GET https://localhost:5001/products
+#GET https://localhost:5001/products
 
 # {
 #   "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlN2U2YTdhMi1lODcxLTRkZTMtOTM1Yy1hNjM5Njg0ZWNkZDEiLCJpYXQiOiIxNC8wMy8yMDIzIDkuMjMuMDMiLCJlbWFpbCI6InNtaXRoYWthbWF0aEBtYWlsLmNvbSIsIm5hbWUiOiJzbWl0aGEiLCJleHAiOjE2Nzg3ODIxODMsImlzcyI6IlNtaXRoYSIsImF1ZCI6IkFkbWluIn0.c1fusYLAzuJJNaA1HtYmOeAVDlo1Q5Y5a71CtTYlyAw"
@@ -58,12 +58,17 @@
 
 #  DELETE https://localhost:5001/products/2 HTTP/1.1
 
-POST https://localhost:5001/signup HTTP/1.1
-content-type: application/json
+# POST https://localhost:5001/signup HTTP/1.1
+# content-type: application/json
 
-{
-  
-}
+# {
+#     "FirstName": "smitha",
+#     "LastName": "kamath",
+#     "UserName": "smithakamathm",
+#     "Email": "smithakamath@mail.com",
+#     "Password": "Smitha@123",
+#     "ConfirmPassword":"Smitha@123"
+# }
 
 # POST https://localhost:5001/signin HTTP/1.1
 # content-type: application/json
@@ -73,3 +78,11 @@ content-type: application/json
 #     "Password": "Smitha@123"
 # }
 
+
+
+POST https://localhost:5001/carts HTTP/1.1
+content-type: application/json
+
+{
+    "UserId":"b1db5a95-a29b-4fd3-ba9c-1aca56cf93f8"
+}

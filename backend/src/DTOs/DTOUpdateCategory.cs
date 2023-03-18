@@ -1,6 +1,3 @@
-using backend.src.Models;
-using System.ComponentModel.DataAnnotations;
-
 namespace backend.src.DTOs;
 
 public class DTOUpdateCategory

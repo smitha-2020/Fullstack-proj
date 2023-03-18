@@ -11,6 +11,8 @@ public class User :IdentityUser<Guid>
     [MaxLength(30)]
     public string LastName { get; set; } = null!;
 
+     public Cart Cart { get; set; } = null!;
+
     //public byte[] Salt {get; set;} = null!;
 }
 
