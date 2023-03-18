@@ -58,17 +58,12 @@
 
 #  DELETE https://localhost:5001/products/2 HTTP/1.1
 
-# POST https://localhost:5001/signup HTTP/1.1
-# content-type: application/json
+POST https://localhost:5001/signup HTTP/1.1
+content-type: application/json
 
-# {
-#     "FirstName": "smitha",
-#     "LastName": "kamath",
-#     "UserName": "smithakamathm",
-#     "Email": "smithakamath@mail.com",
-#     "Password": "Smitha@123",
-#     "ConfirmPassword":"Smitha@123"
-# }
+{
+  
+}
 
 # POST https://localhost:5001/signin HTTP/1.1
 # content-type: application/json

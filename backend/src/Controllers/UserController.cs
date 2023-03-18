@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using backend.src.DTOs;
 using backend.src.Services;
+using backend.src.ModelValidation;
 
 namespace backend.src.Controllers;
 
@@ -11,6 +12,7 @@ public class UserController : ApiController
     public UserController(IUserService service) => _service = service;
 
     [HttpPost("/signup")]
+    [EnsureMandatoryFieldsActionFilter]
     public async Task<IActionResult?> SingnUp([FromBody] DTOUserSignUp request)
     {
         var user = await _service.SingnUpAsync(request);

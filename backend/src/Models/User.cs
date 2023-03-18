@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using backend.src.DTOs;
 using Microsoft.AspNetCore.Identity;
 
 namespace backend.src.Models;

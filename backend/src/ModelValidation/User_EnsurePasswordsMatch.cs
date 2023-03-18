@@ -9,13 +9,20 @@ public class User_EnsurePasswordsMatch : ValidationAttribute
     protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
     {
         var userObj = validationContext.ObjectInstance as DTOUserSignUp;
-        if (userObj != null && userObj.Password != null && userObj.ConfirmPassword != null)
+        if (userObj is not null)
         {
-            if (userObj.Password != userObj.ConfirmPassword)
+            if (!userObj.CheckPasswordAndConfirmPasswordMatch())
             {
                 return new ValidationResult(ErrorMessage);
             }
         }
+        // if (userObj != null && string.IsNullOrWhiteSpace(userObj.Password) && string.IsNullOrWhiteSpace(userObj.ConfirmPassword))
+        // {
+        //     if (userObj.Password != userObj.ConfirmPassword)
+        //     {
+        //         return new ValidationResult(ErrorMessage);
+        //     }
+        // }
         return ValidationResult.Success;
     }
 

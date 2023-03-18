@@ -1,15 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using backend.src.Services.BaseService;
 using backend.src.Repository.BaseRepo;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace backend.src.Controllers;
 
 public abstract class BaseController<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResponse> : ApiController
 {
-    private readonly IBaseService<TModel, TCreateDto, TUpdateDto, TResponse,TUpdatedResponse> _service;
+    private readonly IBaseService<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResponse> _service;
 
 
-    public BaseController(IBaseService<TModel, TCreateDto, TUpdateDto, TResponse,TUpdatedResponse> service)
+    public BaseController(IBaseService<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResponse> service)
     {
         _service = service;
 
@@ -45,4 +46,25 @@ public abstract class BaseController<TModel, TCreateDto, TUpdateDto, TResponse, 
     {
         return Ok(await _service.DeleteAsync(id));
     }
+
+    [Route("/error-development")]
+    public IActionResult HandleErrorDevelopment(
+    [FromServices] IHostEnvironment hostEnvironment)
+    {
+        if (!hostEnvironment.IsDevelopment())
+        {
+            return NotFound();
+        }
+
+        var exceptionHandlerFeature =
+            HttpContext.Features.Get<IExceptionHandlerFeature>()!;
+
+        return Problem(
+            detail: exceptionHandlerFeature.Error.StackTrace,
+            title: exceptionHandlerFeature.Error.Message);
+    }
+
+    [Route("/error")]
+    public IActionResult HandleError() =>
+        Problem();
 }

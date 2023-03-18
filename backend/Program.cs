@@ -55,14 +55,14 @@ builder.Services.AddAutoMapper(typeof(Program).Assembly);
 builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 
-builder.Services.AddScoped<IProductRepo,ProductRepo>();
+builder.Services.AddScoped<IProductRepo, ProductRepo>();
 builder.Services.AddScoped<IProductService, ProductService>();
 
-builder.Services.AddScoped<IUserRepo,UserRepo>();
+builder.Services.AddScoped<IUserRepo, UserRepo>();
 builder.Services.AddScoped<IUserService, UserService>();
 
 
-builder.Services.AddScoped<ITokenService,TokenService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 
 
@@ -77,10 +77,14 @@ builder.Services
     .AddEntityFrameworkStores<AppDBContext>();
 
 var app = builder.Build();
+//ExceptionHandler Middleware
+app.UseHttpsRedirection();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseExceptionHandler("/error-development");
+    // app.UseExceptionHandler("/error");
     app.UseSwagger();
     app.UseSwaggerUI();
 
@@ -96,7 +100,7 @@ if (app.Environment.IsDevelopment())
     }
 }
 
-app.UseHttpsRedirection();
+
 
 //Adding Authentication
 //app.UseAuthentication();
