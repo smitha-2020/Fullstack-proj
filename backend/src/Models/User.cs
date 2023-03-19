@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace backend.src.Models;
 
-public class User :IdentityUser<Guid>
+public class User : IdentityUser<Guid>
 {
     [MaxLength(30)]
     public string FirstName { get; set; } = null!;
@@ -11,7 +11,9 @@ public class User :IdentityUser<Guid>
     [MaxLength(30)]
     public string LastName { get; set; } = null!;
 
-     public Cart Cart { get; set; } = null!;
+    public ICollection<Cart> Carts {get; set;}  = null!;
+
+    //public Cart Cart { get; set; } = null!;
 
     //public byte[] Salt {get; set;} = null!;
 }

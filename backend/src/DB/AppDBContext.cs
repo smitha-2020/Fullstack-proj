@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Npgsql;
 using backend.src.Repository.BaseRepo;
+using backend.src.DTOs.DTOResponse;
 
 namespace backend.src.DB;
 
@@ -12,8 +13,8 @@ IdentityDbContext<User, IdentityRole<Guid>, Guid>
 {
     public DbSet<Category> Categorys { get; set; } = null!;
     public DbSet<Product> Products { get; set; } = null!;
-    public DbSet<Cart> Carts { get; set; } = null!;
-    public DbSet<CartItem> CartItems { get; set; } = null!;
+    // public DbSet<Cart> Carts { get; set; } = null!;
+    // public DbSet<CartItem> CartItems { get; set; } = null!;
 
     static AppDBContext()
     {
@@ -49,19 +50,25 @@ IdentityDbContext<User, IdentityRole<Guid>, Guid>
         //modelBuilder.Entity<Product>().HasIndex(x => x.Category.Id).IsUnique();
         modelBuilder.Entity<Product>().Navigation(x => x.Category).AutoInclude();
 
+        modelBuilder.Entity<Category>().Navigation(x => x.Products).AutoInclude();
+
+        modelBuilder.Entity<Cart>().Navigation(x => x.Products).AutoInclude();
+
+        modelBuilder.Entity<DTOCategoryProductResponse>().Navigation(x => x.Products).AutoInclude();
+
         modelBuilder.Entity<Product>()
                 .HasIndex(item => item.Title);
         modelBuilder.Entity<Product>()
                 .HasIndex(item => item.Price);
 
-        modelBuilder.Entity<Cart>().Navigation(x => x.CartItems).AutoInclude();
+        //modelBuilder.Entity<Cart>().Navigation(x => x.CartItems).AutoInclude();
 
-        modelBuilder.Entity<CartItem>().Navigation(x => x.Products).AutoInclude();
+        //modelBuilder.Entity<CartItem>().Navigation(x => x.Products).AutoInclude();
 
-        modelBuilder.Entity<User>()
-            .HasOne(e => e.Cart)
-            .WithOne(e => e.User)
-            .OnDelete(DeleteBehavior.SetNull);
+        // modelBuilder.Entity<User>()
+        //     .HasOne(e => e.Cart)
+        //     .WithOne(e => e.User)
+        //     .OnDelete(DeleteBehavior.Cascade);
 
         // modelBuilder.Entity<Product>()
         //     .HasOne(s => s.Category)

@@ -10,7 +10,17 @@ namespace backend.src.Services.CategoryService;
 
 public class CategoryService : BaseService<Category, DTOCategory, DTOUpdateCategory, DTOCategoryResponse, DTOCategoryUpdatedResponse>, ICategoryService
 {
+    private readonly ICategoryRepo _repo;
+    private readonly IMapper _mapper;
     public CategoryService(ICategoryRepo repo, IMapper mapper) : base(repo, mapper)
     {
+        _repo = repo;
+        _mapper = mapper;
+    }
+
+    public async Task<ICollection<DTOCategoryProductResponse>> GetAllProductsByCategory(int categoryId)
+    {
+        var categoryProducts = await _repo.GetAllProductsByCategory(categoryId);
+        return _mapper.Map<ICollection<Category>,ICollection<DTOCategoryProductResponse>>(categoryProducts);
     }
 }

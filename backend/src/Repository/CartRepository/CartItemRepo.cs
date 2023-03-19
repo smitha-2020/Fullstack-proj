@@ -1,12 +1,12 @@
-using backend.src.Models;
-using backend.src.Repository.BaseRepo;
-using backend.src.DB;
+// using backend.src.Models;
+// using backend.src.Repository.BaseRepo;
+// using backend.src.DB;
 
-namespace backend.src.Repository;
+// namespace backend.src.Repository;
 
-public class CartItemRepo : BaseRepo<CartItem>, ICartItem
-{
-    public CartItemRepo(AppDBContext dbcontext) : base(dbcontext)
-    {
-    }
-}
+// public class CartItemRepo : BaseRepo<CartItem>, ICartItemRepo
+// {
+//     public CartItemRepo(AppDBContext dbcontext) : base(dbcontext)
+//     {
+//     }
+// }

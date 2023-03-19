@@ -12,5 +12,6 @@ public class ProductMapper : BaseMapper
         CreateMap<DTOProduct, Product>();
         CreateMap<DTOUpdateProduct, DTOProductResponse>();
         CreateMap<DTOProductResponse, Product>();
+        CreateMap<Product , DTOProductCategoryResponse>();
     }
 }

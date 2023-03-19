@@ -6,5 +6,6 @@ public class DTOCartResponse
 {
     public int Id {get; set;}
     public Guid UserId { get; set; }
-    public ICollection<DTOCartItemResponse> CartItems { get; set; } = null!;
+    public DTOProductResponse Products { get; set; } = null!;
+    public int Quantity { get; set; }
 }

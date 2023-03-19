@@ -68,6 +68,9 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ICartRepo, CartRepo>();
 builder.Services.AddScoped<ICartService, CartService>();
 
+//builder.Services.AddScoped<ICartItemRepo, CartItemRepo>();
+//builder.Services.AddScoped<ICartItemService, CartItemService>();
+
 
 // builder.Services.AddScoped<IProductService, DbProductService>();
 // builder.Services.AddScoped<IUserservice, DBUserService>();
@@ -85,7 +88,7 @@ app.UseHttpsRedirection();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/error-development");
+    //app.UseExceptionHandler("/error-development");
     // app.UseExceptionHandler("/error");
     app.UseSwagger();
     app.UseSwaggerUI();

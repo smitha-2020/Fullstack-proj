@@ -13,5 +13,6 @@ public class CategoryMapper : BaseMapper
         CreateMap<DTOCategory, Category>();
         CreateMap<DTOUpdateCategory, DTOCategoryResponse>();
         CreateMap<DTOCategoryResponse, Category>();
+        CreateMap<Category, DTOCategoryProductResponse>();
     }
 }

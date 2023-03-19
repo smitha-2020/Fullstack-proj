@@ -1,6 +1,6 @@
 namespace backend.src.DTOs;
 
-public class DTOUpdateCartItems
+public class DTOUpdateCartItem
 {
     public int Quantity { get; set; }
 

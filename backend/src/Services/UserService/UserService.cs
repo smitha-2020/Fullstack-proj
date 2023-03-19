@@ -42,7 +42,7 @@ public class UserService : IUserService
         //var user = _mapper.Map<DTOUserSignUp, DTOCreateUser>(request);
         if (request is null)
         {
-            throw new ArgumentNullException("Null Value found");
+            throw new ArgumentNullException("Data is not found");
         }
         var isUser = await IsEmailAvailable(request.Email);
         if (!isUser)
