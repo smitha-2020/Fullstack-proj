@@ -16,13 +16,6 @@ public class User_EnsurePasswordsMatch : ValidationAttribute
                 return new ValidationResult(ErrorMessage);
             }
         }
-        // if (userObj != null && string.IsNullOrWhiteSpace(userObj.Password) && string.IsNullOrWhiteSpace(userObj.ConfirmPassword))
-        // {
-        //     if (userObj.Password != userObj.ConfirmPassword)
-        //     {
-        //         return new ValidationResult(ErrorMessage);
-        //     }
-        // }
         return ValidationResult.Success;
     }
 
