@@ -35,3 +35,10 @@ Below are the steps that you need to finish in order to finish this module
 3. `backend` should have proper file structure, naming convention, and comply with Rest API.
 4. Each topic would have different features. However, the main routes should have CRUD operations, authentication and authorization.
 5. You need to deploy the fullstack project, rewrite `README.md` as instructed earlier in the course.
+
+EFCore for database connection
+ActionFilterAttribute
+AutoMapper
+
+1.Implemented AutoMapper
+

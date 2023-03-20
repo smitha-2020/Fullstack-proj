@@ -46,7 +46,7 @@
 #######################################################################################################
 
 # Get all products
-# GET https://localhost:5001/products HTTP/1.1
+GET https://localhost:5001/products HTTP/1.1
 
 # GET https://localhost:5001/products HTTP/1.1
 # content-type: application/json

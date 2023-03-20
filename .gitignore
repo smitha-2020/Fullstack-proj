@@ -5,6 +5,12 @@ backend/appsettings.json
 backend/appsettings.*.json
 backend/obj
 backend/bin
+backend/api.http
+
+#settings 
+appsettings.Development.json
+
+*.http
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
@@ -98,3 +104,5 @@ frontend/package-*.json
 .DS_Store
 .AppleDouble
 .LSOverride
+
+
