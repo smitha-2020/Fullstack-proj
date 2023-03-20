@@ -28,6 +28,7 @@ public class ImageController : BaseController<Image, DTOImage, DTOUpdateImage, D
         {
             return BadRequest();
         }
-        return Ok(new { Message = $"{count} images are assigned to product"});
+        return Ok(count);
+        //return Ok(new { Message = $"{count} images are assigned to product"});
     }
 }

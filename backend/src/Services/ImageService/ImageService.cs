@@ -28,11 +28,13 @@ public class ImageService : BaseService<Image, DTOImage, DTOUpdateImage, DTOImag
             return -1;
         }
         var validImagesCollection = await _repo.GetAllDataAsync();
+        
         if (validImagesCollection is null)
         {
             return -1;
         }
-        var count = await _repo.AssignImagesToProduct(validProduct, validImagesCollection);
+        var validImagObj = validImagesCollection.Where(e => images.Contains(e.Id)).ToArray();
+        var count = await _repo.AssignImagesToProduct(validProduct, validImagObj);
         return count;
     }
 }

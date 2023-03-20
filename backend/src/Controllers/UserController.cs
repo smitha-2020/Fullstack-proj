@@ -8,7 +8,6 @@ namespace backend.src.Controllers;
 public class UserController : ApiController
 {
     private readonly IUserService _service;
-
     public UserController(IUserService service) => _service = service;
 
     [HttpPost("/signup")]

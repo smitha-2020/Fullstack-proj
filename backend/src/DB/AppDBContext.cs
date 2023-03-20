@@ -46,21 +46,11 @@ IdentityDbContext<User, IdentityRole<Guid>, Guid>
 
         modelBuilder.HasPostgresEnum<SortBy>();
 
-        //modelBuilder.Entity<Product>().HasIndex(x => x.Category.Id).IsUnique();
-        modelBuilder.Entity<Product>().Navigation(x => x.Category).AutoInclude();
+        modelBuilder.ConfigureProduct();
+        modelBuilder.ConfigureCart();
+        modelBuilder.ConfigureCategory();
 
-        modelBuilder.Entity<Product>().Navigation(x => x.ImageLink).AutoInclude();
-
-        modelBuilder.Entity<Category>().Navigation(x => x.Products).AutoInclude();
-
-        modelBuilder.Entity<Cart>().Navigation(x => x.Products).AutoInclude();
-
-        modelBuilder.Entity<DTOCategoryProductResponse>().Navigation(x => x.Products).AutoInclude();
-
-        modelBuilder.Entity<Product>()
-                .HasIndex(item => item.Title);
-        modelBuilder.Entity<Product>()
-                .HasIndex(item => item.Price);
+        // modelBuilder.Entity<Product>().HasIndex(x => x.Category.Id).IsUnique();
 
         modelBuilder.AddIdentityConfig();
     }

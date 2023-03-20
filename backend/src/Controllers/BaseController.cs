@@ -9,11 +9,9 @@ public abstract class BaseController<TModel, TCreateDto, TUpdateDto, TResponse, 
 {
     private readonly IBaseService<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResponse> _service;
 
-
     public BaseController(IBaseService<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResponse> service)
     {
         _service = service;
-
     }
 
     [HttpGet]

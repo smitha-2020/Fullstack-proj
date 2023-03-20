@@ -74,16 +74,15 @@ content-type: application/json
 }
 
 # Update a product
-# PUT https://localhost:5001/products/1 HTTP/1.1
-# content-type: application/json
+PUT https://localhost:5001/products/1 HTTP/1.1
+content-type: application/json
 
-# {
-#     "Title": "New Product1123",
-#     "Price": 500,
-#     "Description": "New product",
-#     "Images": ["https://source.unsplash.com/164_6wVEHfI"],
-#     "CategoryID":1
-# }
+{
+    "Title": "New Product1123",
+    "Price": 500,
+    "Description": "New product",
+    "CategoryID":1
+}
 
 # Delete a product
 # DELETE https://localhost:5001/products/3 HTTP/1.1
