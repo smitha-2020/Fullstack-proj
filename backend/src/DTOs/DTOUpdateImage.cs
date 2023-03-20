@@ -5,6 +5,6 @@ namespace backend.src.DTOs;
 
 public class DTOUpdateImage
 {
-    public Uri ImageURL { get; set; } = null!;
+    public string ImageURL { get; set; } = null!;
 }
 

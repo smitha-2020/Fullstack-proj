@@ -10,8 +10,10 @@ public class Product : BaseModel
     public double Price { get; set; }
     public string Description { get; set; } = null!;
 
-    [Column(TypeName = "jsonb")]
-    public ICollection<string> Images { get; set; } = null!;
+    // [Column(TypeName = "jsonb")]
+    // public ICollection<string> Images { get; set; } = null!;
+
+    //public ICollection<Image> Image { get; set; } = null!;
 
     //public int AvailableQuantity { get; set; }
 
@@ -19,4 +21,7 @@ public class Product : BaseModel
     public int CategoryId { get; set; }
 
     public Category Category { get; set; } = null!;
+
+    //many to many relationship
+    public ICollection<Image> ImageLink { get; set; } = null!;
 }

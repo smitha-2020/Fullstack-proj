@@ -51,9 +51,13 @@ IdentityDbContext<User, IdentityRole<Guid>, Guid>
         //modelBuilder.Entity<Product>().HasIndex(x => x.Category.Id).IsUnique();
         modelBuilder.Entity<Product>().Navigation(x => x.Category).AutoInclude();
 
+        //modelBuilder.Entity<DTOImageResponse>().HasNoKey();
+
+        modelBuilder.Entity<Product>().Navigation(x => x.ImageLink).AutoInclude();
+
         modelBuilder.Entity<Category>().Navigation(x => x.Products).AutoInclude();
 
-        modelBuilder.Entity<Category>().Navigation(x => x.Image).AutoInclude();
+        // modelBuilder.Entity<Category>().Navigation(x => x.Image).AutoInclude();
 
         modelBuilder.Entity<Cart>().Navigation(x => x.Products).AutoInclude();
 
@@ -64,11 +68,11 @@ IdentityDbContext<User, IdentityRole<Guid>, Guid>
         modelBuilder.Entity<Product>()
                 .HasIndex(item => item.Price);
 
-        modelBuilder.Entity<Category>()
-                .HasOne(s => s.Image)
-                .WithMany()
-                .HasForeignKey(s => s.ImageId)
-                .OnDelete(DeleteBehavior.SetNull);
+        // modelBuilder.Entity<Category>()
+        //         .HasOne(s => s.Image)
+        //         .WithMany()
+        //         .HasForeignKey(s => s.ImageId)
+        //         .OnDelete(DeleteBehavior.SetNull);
 
         //modelBuilder.Entity<Cart>().Navigation(x => x.CartItems).AutoInclude();
 

@@ -1,33 +1,4 @@
 
-# Get all Images
-# GET https://localhost:5001/images HTTP/1.1
-
-# Get a single category
-# GET https://localhost:5001/categorys/1 HTTP/1.1
-
-#Create a Image
-# POST https://localhost:5001/images HTTP/1.1
-# content-type: application/json
-
-# {
-#     "ImageURL": "https://source.unsplash.com/164_6wVEHfI"
-# }
-
-# Update a category
-# PUT https://localhost:5001/categorys/1 HTTP/1.1
-# content-type: application/json
-
-# {
-#     "Name": "New Category Updated",
-#     "Image": "https://source.unsplash.com/164_6wVEHfI"
-# }
-
-# Delete a category
-# DELETE https://localhost:5001/images/1 HTTP/1.1
-
-# Get all products by category
-# GET https://localhost:5001/categorys/3/products HTTP/1.1
-
 
 #####################################################################################################
 
@@ -39,14 +10,23 @@
 # # Get a single category
 # GET https://localhost:5001/categorys/1 HTTP/1.1
 
-# Create a category
-POST https://localhost:5001/categorys HTTP/1.1
-content-type: application/json
+# create a category
+# POST https://localhost:5001/categorys HTTP/1.1
+# content-type: application/json
 
-{
-    "Name": "New Category",
-    "ImageId": 1
-}
+# {
+#     "Name": "New Category Updated",
+#     "Image": "https://source.unsplash.com/164_6wVEHfI"
+# }
+
+#Create a category
+# POST https://localhost:5001/categorys HTTP/1.1
+# content-type: application/json
+
+# {
+#     "Name": "New Category",
+#     "ImageId": 1
+# }
 
 # Update a category
 # PUT https://localhost:5001/categorys/1 HTTP/1.1
@@ -58,7 +38,7 @@ content-type: application/json
 # }
 
 # Delete a category
-DELETE https://localhost:5001/categorys/1 HTTP/1.1
+# DELETE https://localhost:5001/categorys/1 HTTP/1.1
 
 # Get all products by category
 # GET https://localhost:5001/categorys/3/products HTTP/1.1
@@ -90,7 +70,6 @@ DELETE https://localhost:5001/categorys/1 HTTP/1.1
 #     "Title": "New Category Products",
 #     "Price": 200,
 #     "Description": "New product",
-#     "Images": ["https://source.unsplash.com/164_6wVEHfI"],
 #     "CategoryID":1
 # }
 
@@ -117,7 +96,7 @@ DELETE https://localhost:5001/categorys/1 HTTP/1.1
 #Get By Guid
 # GET https://localhost:5001/users/d06c52e3-41c0-4aab-9d9e-17ed500a0d7e
 
-#Create a new User
+# #Create a new User
 # POST https://localhost:5001/signup HTTP/1.1
 # content-type: application/json
 
@@ -195,3 +174,36 @@ DELETE https://localhost:5001/categorys/1 HTTP/1.1
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YmE3ZmFiOS1jZGI3LTQ3OWUtYWIyMS0yNzBkMDhiODhiYjQiLCJpYXQiOiIyMC8wMy8yMDIzIDEwLjQzLjEzIiwiZW1haWwiOiJzbWl0aGFrYW1hdGhAbWFpbC5jb20iLCJuYW1lIjoiU21pdGhhIiwiZXhwIjoxNjc5MzA1MzkzLCJpc3MiOiJTbWl0aGEiLCJhdWQiOiJBZG1pbiJ9.pIJS5xDW_KVOSHJJRp6UNQmi6Eb_Ju3a_WaamsSc5RI
 
 # DELETE https://localhost:5001/carts HTTP/1.1
+
+
+################################################################################
+
+
+# Get all Images
+# GET https://localhost:5001/images HTTP/1.1
+
+# Get a single category
+# GET https://localhost:5001/categorys/1 HTTP/1.1
+
+#Create a Image
+# POST https://localhost:5001/images HTTP/1.1
+# content-type: application/json
+
+# {
+#     "ImageURL": "https://source.unsplash.com/164_6wVEHfI"
+# }
+
+# Update a category
+# PUT https://localhost:5001/categorys/1 HTTP/1.1
+# content-type: application/json
+
+# {
+#     "Name": "New Category Updated",
+#     "Image": "https://source.unsplash.com/164_6wVEHfI"
+# }
+
+# Delete a category
+# DELETE https://localhost:5001/images/1 HTTP/1.1
+
+# Get all products by category
+# GET https://localhost:5001/categorys/3/products HTTP/1.1

@@ -16,7 +16,8 @@ public class DTOProduct : BaseDTO<Product>
     [MinLength(10, ErrorMessage = "minimum {1} characters should be provided")]
     public string Description { get; set; } = null!;
 
-    public ICollection<string> Images { get; set; } = null!;
+    // prev solution
+    //public ICollection<string> Images { get; set; } = null!;
 
     public int CategoryId { get; set; }
 
