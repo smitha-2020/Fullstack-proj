@@ -5,7 +5,8 @@ backend/appsettings.json
 backend/appsettings.*.json
 backend/obj
 backend/bin
-backend/api.http
+backend/*.http
+backend/src/ModelValidation
 
 #settings 
 appsettings.Development.json
