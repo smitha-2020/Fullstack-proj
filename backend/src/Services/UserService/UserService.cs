@@ -47,14 +47,14 @@ public class UserService : IUserService
         var isUser = await IsEmailAvailable(request.Email);
         if (!isUser)
         {
-             throw ExceptionHandler.IllegalArgumentException("Email Address Already");
+            throw ExceptionHandler.IllegalArgumentException("Email Address Already");
         }
         var userIdentity = await _repo.SingnUpAsync(request, request.Password);
         if (userIdentity is null)
         {
             throw new ArgumentNullException("Null Value found");
         }
-        return _mapper.Map<User,DTOUserResponse>(userIdentity);
+        return _mapper.Map<User, DTOUserResponse>(userIdentity);
         //return userIdentity;
     }
 
@@ -67,4 +67,24 @@ public class UserService : IUserService
         }
         return false;
     }
+
+    public async Task<DTOUserResponse?> GetByIdAsync(Guid id)
+    {
+        var userData = await _repo.GetByIdAsync(id);
+        if (userData is null)
+        {
+            return null;
+        }
+        return _mapper.Map<User, DTOUserResponse>(userData);
+    }
+
+    // public async Task<string?> GetPasswordHash(string email)
+    // {
+    //     var userData = await _repo.GetPasswordHash(email);
+    //     if (userData is null)
+    //     {
+    //         return null;
+    //     }
+    //     return userData.PasswordHash;
+    // }
 }

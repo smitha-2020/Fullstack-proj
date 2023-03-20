@@ -13,11 +13,13 @@ public class DTOUserSignUp
 
     [EmailAddress]
     public string Email { get; set; } = null!;
-
+    
     //Custom Validation
     [User_EnsurePasswordsMatch(ErrorMessage ="Password and Confirm Password do not Match")]
     public string Password { get; set; } = null!;
     public string ConfirmPassword { get; set; } = null!;
+
+
 
     public bool CheckPasswordAndConfirmPasswordMatch()
     {

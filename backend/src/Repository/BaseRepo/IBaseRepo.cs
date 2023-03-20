@@ -15,7 +15,7 @@ public class QueryOptions
     public string SortByProperty { get; set; } = string.Empty;
     public string Search { get; set; } = string.Empty;
     public SortBy Sort { get; set; }
-    public int CardsPerPage { get; set; } = 30;
+    public int CardsPerPage { get; set; } = 1;
     public int Page { get; set; } = 0;
 }
 

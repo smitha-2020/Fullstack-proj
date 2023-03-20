@@ -1,15 +1,19 @@
-# GET https://localhost:5001/weatherforecasts HTTP/1.1
 
-# GET https://localhost:5001/categorys HTTP/1.1
+# Get all Images
+# GET https://localhost:5001/images HTTP/1.1
 
-# POST https://localhost:5001/categorys HTTP/1.1
+# Get a single category
+# GET https://localhost:5001/categorys/1 HTTP/1.1
+
+#Create a Image
+# POST https://localhost:5001/images HTTP/1.1
 # content-type: application/json
 
 # {
-#     "Name": "New Category",
-#     "Image": "https://source.unsplash.com/164_6wVEHfI"
+#     "ImageURL": "https://source.unsplash.com/164_6wVEHfI"
 # }
 
+# Update a category
 # PUT https://localhost:5001/categorys/1 HTTP/1.1
 # content-type: application/json
 
@@ -18,24 +22,67 @@
 #     "Image": "https://source.unsplash.com/164_6wVEHfI"
 # }
 
-# DELETE https://localhost:5001/categorys/1 HTTP/1.1
+# Delete a category
+# DELETE https://localhost:5001/images/1 HTTP/1.1
+
+# Get all products by category
+# GET https://localhost:5001/categorys/3/products HTTP/1.1
 
 
-#GET https://localhost:5001/products
+#####################################################################################################
+
+# GET https://localhost:5001/weatherforecasts HTTP/1.1
+
+# Get all categories
+# GET https://localhost:5001/categorys HTTP/1.1
+
+# # Get a single category
+# GET https://localhost:5001/categorys/1 HTTP/1.1
+
+# Create a category
+POST https://localhost:5001/categorys HTTP/1.1
+content-type: application/json
+
+{
+    "Name": "New Category",
+    "ImageId": 1
+}
+
+# Update a category
+# PUT https://localhost:5001/categorys/1 HTTP/1.1
+# content-type: application/json
 
 # {
-#   "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlN2U2YTdhMi1lODcxLTRkZTMtOTM1Yy1hNjM5Njg0ZWNkZDEiLCJpYXQiOiIxNC8wMy8yMDIzIDkuMjMuMDMiLCJlbWFpbCI6InNtaXRoYWthbWF0aEBtYWlsLmNvbSIsIm5hbWUiOiJzbWl0aGEiLCJleHAiOjE2Nzg3ODIxODMsImlzcyI6IlNtaXRoYSIsImF1ZCI6IkFkbWluIn0.c1fusYLAzuJJNaA1HtYmOeAVDlo1Q5Y5a71CtTYlyAw"
+#     "Name": "New Category Updated",
+#     "Image": "https://source.unsplash.com/164_6wVEHfI"
 # }
 
-#  GET https://localhost:5001/products HTTP/1.1
+# Delete a category
+DELETE https://localhost:5001/categorys/1 HTTP/1.1
 
+# Get all products by category
+# GET https://localhost:5001/categorys/3/products HTTP/1.1
+
+#######################################################################################################
+
+# Get all products
+# GET https://localhost:5001/products HTTP/1.1
+
+# GET https://localhost:5001/products HTTP/1.1
+# content-type: application/json
+
+# {
+#    "Sort": "Asc"
+# }
+
+# Get a Single Product
+# GET https://localhost:5001/products/1 HTTP/1.1 
+
+# Authorizarion
 # GET https://localhost:5001/products
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiOTVjOGNhZC1kNWM4LTRjZjItYjA1OS1hYmViZTU4M2FiNzUiLCJpYXQiOiIxNS8wMy8yMDIzIDEyLjE3LjEyIiwiZW1haWwiOiJzbWl0aGFrYW1hdGhAbWFpbC5jb20iLCJuYW1lIjoic21pdGhhIiwiZXhwIjoxNjc4ODc5MDMyLCJpc3MiOiJTbWl0aGEiLCJhdWQiOiJBZG1pbiJ9.FduyrxvLVfu4Sh_C9lufgcYERc36G1_xcie52CGE7eM
 
-# GET https://localhost:5001/products HTTP/1.1
-
-GET https://localhost:5001/categorys/1/products HTTP/1.1
-
+# Create a product
 # POST https://localhost:5001/products HTTP/1.1
 # content-type: application/json
 
@@ -47,6 +94,7 @@ GET https://localhost:5001/categorys/1/products HTTP/1.1
 #     "CategoryID":1
 # }
 
+# Update a product
 # PUT https://localhost:5001/products/1 HTTP/1.1
 # content-type: application/json
 
@@ -58,8 +106,18 @@ GET https://localhost:5001/categorys/1/products HTTP/1.1
 #     "CategoryID":1
 # }
 
-#  DELETE https://localhost:5001/products/2 HTTP/1.1
+# Delete a product
+# DELETE https://localhost:5001/products/3 HTTP/1.1
 
+###############################################################################################
+
+#Get All Users
+# POST https://localhost:5001/users 
+
+#Get By Guid
+# GET https://localhost:5001/users/d06c52e3-41c0-4aab-9d9e-17ed500a0d7e
+
+#Create a new User
 # POST https://localhost:5001/signup HTTP/1.1
 # content-type: application/json
 
@@ -72,6 +130,7 @@ GET https://localhost:5001/categorys/1/products HTTP/1.1
 #     "ConfirmPassword":"Nihan@123"
 # }
 
+# Create a new User
 # POST https://localhost:5001/signup HTTP/1.1
 # content-type: application/json
 
@@ -84,6 +143,8 @@ GET https://localhost:5001/categorys/1/products HTTP/1.1
 #     "ConfirmPassword":"Smitha@123"
 # }
 
+# Login and Get teh Access Token
+###
 # POST https://localhost:5001/signin HTTP/1.1
 # content-type: application/json
 
@@ -92,22 +153,45 @@ GET https://localhost:5001/categorys/1/products HTTP/1.1
 #     "Password": "Smitha@123"
 # }
 
+###############################################################################################################
+
+# Add To Cart
+###
 # POST https://localhost:5001/carts HTTP/1.1
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4MmIxNjA0Ni05MTY5LTQwOWQtOTQyYy0wZTdmYWFjZmI3NGIiLCJpYXQiOiIyMC8wMy8yMDIzIDEwLjM4LjExIiwiZW1haWwiOiJzbWl0aGFrYW1hdGhAbWFpbC5jb20iLCJuYW1lIjoiU21pdGhhIiwiZXhwIjoxNjc5MzA1MDkxLCJpc3MiOiJTbWl0aGEiLCJhdWQiOiJBZG1pbiJ9.GOUKqgf7WXkoSQSsZUuFfAtDfnguwTGgw4ntmFdwHjQ
 # content-type: application/json
 
 # {
-#     "UserId":"1f01ae34-d175-4d0a-9584-34f23d06eb11"
-# }
-
-# POST https://localhost:5001/carts HTTP/1.1
-# content-type: application/json
-
-# {
-#     "UserId": "fa41e651-4198-4630-97a5-58952ee320f0",
+#     "UserId": "d06c52e3-41c0-4aab-9d9e-17ed500a0d7e",
 #     "ProductId": 1,
-#     "Quantity":5
+#     "Quantity":10
 # }
 
+# POST https://localhost:5001/carts HTTP/1.1
+# content-type: application/json
+
+# {
+#     "UserId": "d06c52e3-41c0-4aab-9d9e-17ed500a0d7e",
+#     "ProductId": 1,
+#     "Quantity":10
+# }
+
+
+# POST https://localhost:5001/carts HTTP/1.1
+# content-type: application/json
+
+# {
+#     "UserId":"d06c52e3-41c0-4aab-9d9e-17ed500a0d7e"
+# }
 
 //Get all the cart items belonginng to a user
-# GET https://localhost:5001/carts/2 HTTP/1.1
+# GET https://localhost:5001/carts/d06c52e3-41c0-4aab-9d9e-17ed500a0d7e HTTP/1.1
+
+###
+# GET https://localhost:5001/carts HTTP/1.1
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3MjIzMTA5ZC0zNmU2LTQ3N2MtOTQyMC0zNjdkNjZkYzBiNDYiLCJpYXQiOiIyMC8wMy8yMDIzIDExLjM3LjAzIiwiZW1haWwiOiJzbWl0aGFrYW1hdGhAbWFpbC5jb20iLCJuYW1lIjoiU21pdGhhIiwiZXhwIjoxNjc5MzA4NjIzLCJpc3MiOiJTbWl0aGEiLCJhdWQiOiJBZG1pbiJ9.dp48xGKvyAX5aBNvYbHAjQfwdzBi-BTrXRSywoYuVII
+
+# GET https://localhost:5001/carts HTTP/1.1
+# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4YmE3ZmFiOS1jZGI3LTQ3OWUtYWIyMS0yNzBkMDhiODhiYjQiLCJpYXQiOiIyMC8wMy8yMDIzIDEwLjQzLjEzIiwiZW1haWwiOiJzbWl0aGFrYW1hdGhAbWFpbC5jb20iLCJuYW1lIjoiU21pdGhhIiwiZXhwIjoxNjc5MzA1MzkzLCJpc3MiOiJTbWl0aGEiLCJhdWQiOiJBZG1pbiJ9.pIJS5xDW_KVOSHJJRp6UNQmi6Eb_Ju3a_WaamsSc5RI
+
+# DELETE https://localhost:5001/carts HTTP/1.1

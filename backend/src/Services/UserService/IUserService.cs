@@ -9,4 +9,6 @@ public interface IUserService
     Task<DTOUserResponse?> SingnUpAsync(DTOUserSignUp request);
     Task<DTOUserSignInResponse?> SingnInAsync(DTOUserSignIn request);
     Task<bool> IsEmailAvailable(string email);
+    Task<DTOUserResponse?> GetByIdAsync(Guid id);
+    //Task<string?> GetPasswordHash(string email);
 }

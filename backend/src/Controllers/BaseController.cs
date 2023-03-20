@@ -29,7 +29,7 @@ public abstract class BaseController<TModel, TCreateDto, TUpdateDto, TResponse, 
         //return CreatedAtAction("created", item);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:int}")]
     public async Task<ActionResult<TResponse?>> Get(int id)
     {
         return Ok(await _service.GetAsync(id));
@@ -47,24 +47,24 @@ public abstract class BaseController<TModel, TCreateDto, TUpdateDto, TResponse, 
         return Ok(await _service.DeleteAsync(id));
     }
 
-    [Route("/error-development")]
-    public IActionResult HandleErrorDevelopment(
-    [FromServices] IHostEnvironment hostEnvironment)
-    {
-        if (!hostEnvironment.IsDevelopment())
-        {
-            return NotFound();
-        }
+    // [Route("/error-development")]
+    // public IActionResult HandleErrorDevelopment(
+    // [FromServices] IHostEnvironment hostEnvironment)
+    // {
+    //     if (!hostEnvironment.IsDevelopment())
+    //     {
+    //         return NotFound();
+    //     }
 
-        var exceptionHandlerFeature =
-            HttpContext.Features.Get<IExceptionHandlerFeature>()!;
+    //     var exceptionHandlerFeature =
+    //         HttpContext.Features.Get<IExceptionHandlerFeature>()!;
 
-        return Problem(
-            detail: exceptionHandlerFeature.Error.StackTrace,
-            title: exceptionHandlerFeature.Error.Message);
-    }
+    //     return Problem(
+    //         detail: exceptionHandlerFeature.Error.StackTrace,
+    //         title: exceptionHandlerFeature.Error.Message);
+    // }
 
-    [Route("/error")]
-    public IActionResult HandleError() =>
-        Problem();
+    // [Route("/error")]
+    // public IActionResult HandleError() =>
+    //     Problem();
 }

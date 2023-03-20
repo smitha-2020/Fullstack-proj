@@ -13,6 +13,8 @@ using  backend.src.Services.CartService;
 using backend.src.Repository;
 using backend.src.Models;
 using backend.src.Services;
+using backend.src.Repository.ImageRepository;
+using backend.src.Services.ImageService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -68,6 +70,9 @@ builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ICartRepo, CartRepo>();
 builder.Services.AddScoped<ICartService, CartService>();
 
+builder.Services.AddScoped<IImageRepo, ImageRepo>();
+builder.Services.AddScoped<IImageService, ImageService>();
+
 //builder.Services.AddScoped<ICartItemRepo, CartItemRepo>();
 //builder.Services.AddScoped<ICartItemService, CartItemService>();
 
@@ -105,10 +110,8 @@ if (app.Environment.IsDevelopment())
     }
 }
 
-
-
 //Adding Authentication
-//app.UseAuthentication();
+app.UseAuthentication();
 
 app.UseAuthorization();
 

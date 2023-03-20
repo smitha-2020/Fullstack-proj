@@ -34,4 +34,15 @@ public class UserController : ApiController
         }
         return Ok(response);
     }
+
+    [HttpGet("{id:Guid}")]
+    public async Task<IActionResult?> GetByGuid(Guid id)
+    {
+        var userData = await _service.GetByIdAsync(id);
+        if (userData is null)
+        {
+            return BadRequest();
+        }
+        return Ok(userData);
+    }
 }

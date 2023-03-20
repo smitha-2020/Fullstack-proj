@@ -2,6 +2,7 @@ using backend.src.DTOs;
 using Microsoft.AspNetCore.Identity;
 using backend.src.Models;
 using AutoMapper;
+using backend.src.Repository.BaseRepo;
 
 namespace backend.src.Repository;
 
@@ -18,6 +19,21 @@ public class UserRepo : IUserRepo
         _roleManager = roleManager;
         _mapper = mapper;
         _logger = logger;
+    }
+
+    public Task<bool> DeleteOneAsync(Guid id)
+    {
+        throw new NotImplementedException();
+    }
+
+    // public Task<IEnumerable<User>?> GetAllAsync()
+    // {
+    //     throw new NotImplementedException();
+    // }
+
+    public async Task<User?> GetByIdAsync(Guid id)
+    {
+        return await _userManager.FindByIdAsync(id.ToString());
     }
 
     public async Task<User> IsUserEmail(string email)
@@ -48,4 +64,14 @@ public class UserRepo : IUserRepo
         return await _userManager.FindByEmailAsync(userdata.Email);
         //return _mapper.Map<IdentityResult, User>(userData);
     }
+
+    public Task<User?> UpdateOneAsync(Guid id, User update)
+    {
+        throw new NotImplementedException();
+    }
+
+    // public async Task<User?> GetPasswordHash(string Email)
+    // {
+    //     return await _userManager.FindByEmailAsync(Email);
+    // }
 }

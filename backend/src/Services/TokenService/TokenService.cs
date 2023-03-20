@@ -29,7 +29,8 @@ public class TokenService : ITokenService
             new Claim(JwtRegisteredClaimNames.Email,user.Email),
             new Claim(JwtRegisteredClaimNames.Name,user.FirstName)
         };
-        var secret = _config["jwt:Secret"];
+        var secret = user.PasswordHash;
+        //var secret = _config["jwt:Secret"];
 
         //Generate Secret
         var signkey = new SigningCredentials(

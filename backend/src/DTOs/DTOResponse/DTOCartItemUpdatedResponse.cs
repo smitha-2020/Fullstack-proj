@@ -3,8 +3,7 @@ using backend.src.Models;
 namespace backend.src.DTOs;
 
 public class DTOCartItemUpdatedResponse
-{
-    
+{  
     public int Id {get; set;}
     public int CartId {get; set;}
     public Cart? Cart {get; set;} = null!;

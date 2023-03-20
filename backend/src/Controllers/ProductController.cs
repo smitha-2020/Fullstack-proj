@@ -24,5 +24,4 @@ public class ProductController : BaseController<Product, DTOProduct, DTOUpdatePr
 
         return Ok(await _service.UpdateAsync(id, item));
     }
-
 }
