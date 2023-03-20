@@ -12,7 +12,6 @@ public class UserController : ApiController
     public UserController(IUserService service) => _service = service;
 
     [HttpPost("/signup")]
-    //[EnsureMandatoryFieldsActionFilter]
     public async Task<IActionResult?> SingnUp([FromBody] DTOUserSignUp request)
     {
         var user = await _service.SingnUpAsync(request);
@@ -21,7 +20,6 @@ public class UserController : ApiController
             return BadRequest();
         }
         return Ok(user);
-        //return Ok(user.UserMapper());
     }
 
     [HttpPost("/signin")]

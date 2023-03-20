@@ -14,6 +14,7 @@ public class CategoryController : BaseController<Category, DTOCategory, DTOUpdat
     {
         _service = service;
     }
+    
     [HttpGet("{id}/products")]
     public async Task<ICollection<DTOCategoryProductResponse>> GetAllProductsByCategory(int id)
     {
