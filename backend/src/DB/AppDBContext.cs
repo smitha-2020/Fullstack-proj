@@ -14,8 +14,6 @@ IdentityDbContext<User, IdentityRole<Guid>, Guid>
     public DbSet<Category> Categorys { get; set; } = null!;
     public DbSet<Product> Products { get; set; } = null!;
     public DbSet<Image> Images { get; set; } = null!;
-    // public DbSet<Cart> Carts { get; set; } = null!;
-    // public DbSet<CartItem> CartItems { get; set; } = null!;
 
     static AppDBContext()
     {
@@ -51,13 +49,9 @@ IdentityDbContext<User, IdentityRole<Guid>, Guid>
         //modelBuilder.Entity<Product>().HasIndex(x => x.Category.Id).IsUnique();
         modelBuilder.Entity<Product>().Navigation(x => x.Category).AutoInclude();
 
-        //modelBuilder.Entity<DTOImageResponse>().HasNoKey();
-
         modelBuilder.Entity<Product>().Navigation(x => x.ImageLink).AutoInclude();
 
         modelBuilder.Entity<Category>().Navigation(x => x.Products).AutoInclude();
-
-        // modelBuilder.Entity<Category>().Navigation(x => x.Image).AutoInclude();
 
         modelBuilder.Entity<Cart>().Navigation(x => x.Products).AutoInclude();
 
@@ -67,27 +61,6 @@ IdentityDbContext<User, IdentityRole<Guid>, Guid>
                 .HasIndex(item => item.Title);
         modelBuilder.Entity<Product>()
                 .HasIndex(item => item.Price);
-
-        // modelBuilder.Entity<Category>()
-        //         .HasOne(s => s.Image)
-        //         .WithMany()
-        //         .HasForeignKey(s => s.ImageId)
-        //         .OnDelete(DeleteBehavior.SetNull);
-
-        //modelBuilder.Entity<Cart>().Navigation(x => x.CartItems).AutoInclude();
-
-        //modelBuilder.Entity<CartItem>().Navigation(x => x.Products).AutoInclude();
-
-        // modelBuilder.Entity<User>()
-        //     .HasOne(e => e.Cart)
-        //     .WithOne(e => e.User)
-        //     .OnDelete(DeleteBehavior.Cascade);
-
-        // modelBuilder.Entity<Product>()
-        //     .HasOne(s => s.Category)
-        //     .WithMany()
-        //     .HasForeignKey(s => s.CategoryId)
-        //     .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.AddIdentityConfig();
     }

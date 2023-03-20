@@ -8,6 +8,7 @@ public interface IBaseRepo<TModel>
     Task<TModel?> UpdateOneAsync(int id, TModel update);
     Task<bool> DeleteOneAsync(int id);
     Task<IEnumerable<TModel>?> GetAllAsync(QueryOptions options);
+    Task<ICollection<TModel>?> GetAllDataAsync();
 }
 
 public class QueryOptions

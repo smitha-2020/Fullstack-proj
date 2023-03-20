@@ -37,6 +37,17 @@ public class BaseService<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResp
         return dataArr is null ? null : _mapper.Map<IEnumerable<TModel>, IEnumerable<TResponse>>(dataArr);
     }
 
+    public async Task<ICollection<TResponse>?> GetAllDataAsync()
+    {
+        var dataArr = await _repo.GetAllDataAsync();
+        if (dataArr is null)
+        {
+            return null;
+        }
+        return _mapper.Map<ICollection<TModel>, ICollection<TResponse>>(dataArr);
+    }
+
+
     public async Task<TResponse?> GetAsync(int id)
     {
         var singleData = await _repo.GetByIdAsync(id);

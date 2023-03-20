@@ -10,4 +10,5 @@ public interface IBaseService<TModel, TCreateDto, TUpdateDto, TResponse, TUpdate
     Task<TResponse?> UpdateAsync(int id, TUpdateDto request);
     Task<bool> DeleteAsync(int id);
     Task<IEnumerable<TResponse>?> GetAllAsync(QueryOptions options);
+    Task<ICollection<TResponse>?> GetAllDataAsync();
 }

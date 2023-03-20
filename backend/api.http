@@ -11,15 +11,15 @@
 # GET https://localhost:5001/categorys/1 HTTP/1.1
 
 # create a category
-# POST https://localhost:5001/categorys HTTP/1.1
-# content-type: application/json
+POST https://localhost:5001/categorys HTTP/1.1
+content-type: application/json
 
-# {
-#     "Name": "New Category Updated",
-#     "Image": "https://source.unsplash.com/164_6wVEHfI"
-# }
+{
+    "Name": "New Category Updated",
+    "Image": "https://source.unsplash.com/164_6wVEHfI"
+}
 
-#Create a category
+# Create a category
 # POST https://localhost:5001/categorys HTTP/1.1
 # content-type: application/json
 
@@ -46,7 +46,7 @@
 #######################################################################################################
 
 # Get all products
-GET https://localhost:5001/products HTTP/1.1
+ GET https://localhost:5001/products HTTP/1.1
 
 # GET https://localhost:5001/products HTTP/1.1
 # content-type: application/json
@@ -63,15 +63,15 @@ GET https://localhost:5001/products HTTP/1.1
 # Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiOTVjOGNhZC1kNWM4LTRjZjItYjA1OS1hYmViZTU4M2FiNzUiLCJpYXQiOiIxNS8wMy8yMDIzIDEyLjE3LjEyIiwiZW1haWwiOiJzbWl0aGFrYW1hdGhAbWFpbC5jb20iLCJuYW1lIjoic21pdGhhIiwiZXhwIjoxNjc4ODc5MDMyLCJpc3MiOiJTbWl0aGEiLCJhdWQiOiJBZG1pbiJ9.FduyrxvLVfu4Sh_C9lufgcYERc36G1_xcie52CGE7eM
 
 # Create a product
-# POST https://localhost:5001/products HTTP/1.1
-# content-type: application/json
+POST https://localhost:5001/products HTTP/1.1
+content-type: application/json
 
-# {
-#     "Title": "New Category Products",
-#     "Price": 200,
-#     "Description": "New product",
-#     "CategoryID":1
-# }
+{
+    "Title": "New Category Products",
+    "Price": 200,
+    "Description": "New product",
+    "CategoryID":1
+}
 
 # Update a product
 # PUT https://localhost:5001/products/1 HTTP/1.1
@@ -186,12 +186,20 @@ GET https://localhost:5001/products HTTP/1.1
 # GET https://localhost:5001/categorys/1 HTTP/1.1
 
 #Create a Image
-# POST https://localhost:5001/images HTTP/1.1
-# content-type: application/json
+POST https://localhost:5001/images HTTP/1.1
+content-type: application/json
 
-# {
-#     "ImageURL": "https://source.unsplash.com/164_6wVEHfI"
-# }
+{
+    "ImageURL": "https://source.unsplash.com/164_6wVEHfI"
+}
+
+#Assign images to product
+POST https://localhost:5001/images/1/assign HTTP/1.1
+content-type: application/json
+
+{
+    "images": [1,2,3]
+}
 
 # Update a category
 # PUT https://localhost:5001/categorys/1 HTTP/1.1

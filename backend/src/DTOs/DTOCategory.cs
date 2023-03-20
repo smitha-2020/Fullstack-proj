@@ -9,6 +9,4 @@ public class DTOCategory : BaseDTO<Category>
   public string Name { get; set; } = String.Empty;
   
   public string Image { get; set; } = null!;
-//  public int ImageId {get; set;}
-
 }

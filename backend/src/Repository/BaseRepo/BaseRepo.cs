@@ -50,6 +50,12 @@ where TModel : BaseModel
         return await query.ToArrayAsync();
     }
 
+    public async Task<ICollection<TModel>?> GetAllDataAsync()
+    {
+        var query = DbSet.AsNoTracking();
+        return await query.ToListAsync();
+    }
+
     public async Task<TModel?> GetByIdAsync(int id)
     {
         return await DbSet.FindAsync(id);

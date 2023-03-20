@@ -8,7 +8,5 @@ namespace backend.src.Services.ImageService;
 
 public interface IImageService : IBaseService<Image, DTOImage, DTOUpdateImage, DTOImageResponse, DTOImageUpdatedResponse>
 {
-    //Task<ICollection<DTOCategoryProductResponse>> GetAllProductsByCategory(int categoryId);
-    //Task<ICollection<Category>> GetByNameOrder();
-    //Task<int> AddProductToCategory(int id, ICollection<int> productIds);
+    Task<int> AssignImagesToProduct(int productId, ICollection<int> images);
 }
