@@ -26,11 +26,6 @@ public class UserRepo : IUserRepo
         throw new NotImplementedException();
     }
 
-    // public Task<IEnumerable<User>?> GetAllAsync()
-    // {
-    //     throw new NotImplementedException();
-    // }
-
     public async Task<User?> GetByIdAsync(Guid id)
     {
         return await _userManager.FindByIdAsync(id.ToString());
@@ -59,7 +54,6 @@ public class UserRepo : IUserRepo
         };
         //Adds the data to the user table
         //var data = _mapper.Map<DTOUserSignUp, User>(user);
-        //_logger.LogCritical(data.ToString());
         var userData = await _userManager.CreateAsync(user, password);
         return await _userManager.FindByEmailAsync(userdata.Email);
         //return _mapper.Map<IdentityResult, User>(userData);
@@ -69,9 +63,4 @@ public class UserRepo : IUserRepo
     {
         throw new NotImplementedException();
     }
-
-    // public async Task<User?> GetPasswordHash(string Email)
-    // {
-    //     return await _userManager.FindByEmailAsync(Email);
-    // }
 }

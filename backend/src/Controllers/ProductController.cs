@@ -20,8 +20,6 @@ public class ProductController : BaseController<Product, DTOProduct, DTOUpdatePr
     [HttpPut("{id:int}")]
     public override async Task<ActionResult> Update(int id, DTOUpdateProduct item)
     {
-        _logger.LogCritical(item.ToString());
-
         return Ok(await _service.UpdateAsync(id, item));
     }
 }

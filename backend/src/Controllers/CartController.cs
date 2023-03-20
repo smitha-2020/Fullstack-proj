@@ -15,7 +15,6 @@ public class CartController : BaseController<Cart, DTOCart, DTOUpdateCart, DTOCa
         _service = service;
     }
 
-    //[HttpGet("carts/{id}")]
     [HttpGet("{id:Guid}/products")]
     public async Task<ActionResult<DTOCartResponse?>> GetCartData(Guid id)
     {

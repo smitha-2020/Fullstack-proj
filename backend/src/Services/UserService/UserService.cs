@@ -39,7 +39,6 @@ public class UserService : IUserService
 
     public async Task<DTOUserResponse?> SingnUpAsync(DTOUserSignUp request)
     {
-        //var user = _mapper.Map<DTOUserSignUp, DTOCreateUser>(request);
         if (request is null)
         {
             throw new ArgumentNullException("Data is not found");
@@ -55,7 +54,6 @@ public class UserService : IUserService
             throw new ArgumentNullException("Null Value found");
         }
         return _mapper.Map<User, DTOUserResponse>(userIdentity);
-        //return userIdentity;
     }
 
     public async Task<bool> IsEmailAvailable(string email)
@@ -77,14 +75,4 @@ public class UserService : IUserService
         }
         return _mapper.Map<User, DTOUserResponse>(userData);
     }
-
-    // public async Task<string?> GetPasswordHash(string email)
-    // {
-    //     var userData = await _repo.GetPasswordHash(email);
-    //     if (userData is null)
-    //     {
-    //         return null;
-    //     }
-    //     return userData.PasswordHash;
-    // }
 }

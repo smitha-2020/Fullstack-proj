@@ -9,7 +9,7 @@ using backend.src.Repository.CategoryRepository;
 using backend.src.Repository.ProductRepository;
 using backend.src.Repository.CartRepository;
 using backend.src.Services.TokenService;
-using  backend.src.Services.CartService;
+using backend.src.Services.CartService;
 using backend.src.Repository;
 using backend.src.Models;
 using backend.src.Services;
@@ -73,14 +73,6 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IImageRepo, ImageRepo>();
 builder.Services.AddScoped<IImageService, ImageService>();
 
-//builder.Services.AddScoped<ICartItemRepo, CartItemRepo>();
-//builder.Services.AddScoped<ICartItemService, CartItemService>();
-
-
-// builder.Services.AddScoped<IProductService, DbProductService>();
-// builder.Services.AddScoped<IUserservice, DBUserService>();
-// builder.Services.AddScoped<ITokenService, DbTokenService>();
-
 //Add services for the Identity
 builder.Services
     .AddIdentity<User, IdentityRole<Guid>>()
@@ -93,8 +85,6 @@ app.UseHttpsRedirection();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    //app.UseExceptionHandler("/error-development");
-    // app.UseExceptionHandler("/error");
     app.UseSwagger();
     app.UseSwaggerUI();
 
