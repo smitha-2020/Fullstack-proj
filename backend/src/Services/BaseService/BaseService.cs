@@ -60,25 +60,7 @@ public class BaseService<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResp
 
     public async Task<TResponse?> UpdateAsync(int id, TUpdateDto update)
     {
-        // var entity = await _repo.GetByIdAsync(id);
-        // if (entity is null)
-        // {
-        //     throw new ArgumentNullException("entity Reference rror!!");
-        // }
-
-        // var newData = _mapper.Map<TUpdateDto, TModel>(update);
-
-        // if (newData is null)
-        // {
-        //     throw new ArgumentNullException("newData Reference rror!!");
-        // }
-
-        // var updatedData = await _repo.UpdateOneAsync(id, _mapper.Map<TUpdateDto, TModel>(update));
-        // if (updatedData is null)
-        // {
-        //     throw new ArgumentNullException("Null Reference rror!!");
-        // }
-        // return _mapper.Map<TModel, TResponse>(updatedData);
+       
 
         var entity = _mapper.Map<TUpdateDto, TModel>(update);
         if (entity is null)

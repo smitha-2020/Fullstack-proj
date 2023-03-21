@@ -21,9 +21,12 @@ public class UserRepo : IUserRepo
         _logger = logger;
     }
 
-    public Task<bool> DeleteOneAsync(Guid id)
+    public async Task<bool> DeleteOneAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var userFull = await _userManager.FindByIdAsync(id.ToString());
+        var data = await _userManager.DeleteAsync(userFull);
+        return data.Succeeded;
+        //return _userManager.DeleteAsync(userFull);
     }
 
     public async Task<User?> GetByIdAsync(Guid id)
@@ -45,15 +48,42 @@ public class UserRepo : IUserRepo
 
     public async Task<User?> SingnUpAsync(DTOUserSignUp userdata, string password)
     {
-        var user = new User
+        var userFull = await _userManager.FindByEmailAsync(userdata.Email);
+        // var userRole = new User
+        // {
+        //     FirstName = userdata.FirstName,
+        //     LastName = userdata.LastName,
+        //     UserName = userdata.Email,
+        //     Email = userdata.Email,
+        //     SecurityStamp = userFull.SecurityStamp
+        // };
+
+         var user = new User
         {
             FirstName = userdata.FirstName,
             LastName = userdata.LastName,
             UserName = userdata.Email,
             Email = userdata.Email
         };
+
         //Adds the data to the user table
         //var data = _mapper.Map<DTOUserSignUp, User>(user);
+        //TODO: Put all these into a separate controller/service for roles
+        var roles = new[] { "Admin", "Dev" };
+        foreach (var role in roles)
+        {
+            if (await _roleManager.FindByNameAsync(role) is null)
+            {
+                _logger.LogCritical("null");
+                await _roleManager.CreateAsync(new IdentityRole<Guid>
+                {
+                    Name = role,
+                });
+            }
+        }
+        await _userManager.AddToRolesAsync(userFull, roles);
+
+        //replace until this 
         var userData = await _userManager.CreateAsync(user, password);
         return await _userManager.FindByEmailAsync(userdata.Email);
         //return _mapper.Map<IdentityResult, User>(userData);

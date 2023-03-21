@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using backend.src.Services.BaseService;
 using backend.src.Repository.BaseRepo;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 
 namespace backend.src.Controllers;
 
+[Authorize]
 public abstract class BaseController<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResponse> : ApiController
 {
     private readonly IBaseService<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResponse> _service;

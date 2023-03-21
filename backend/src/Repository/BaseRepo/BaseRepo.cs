@@ -41,6 +41,7 @@ where TModel : BaseModel
         var query = DbSet.AsNoTracking().AsQueryable();
         if (options.SortByProperty.Trim().Length > 0)
         {
+            Console.WriteLine(options.SortByProperty.Trim());
             if (query.GetType().GetProperty(options.SortByProperty) != null)
             {
                 query.OrderBy(e => e.GetType().GetProperty(options.SortByProperty));

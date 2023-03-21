@@ -15,6 +15,8 @@ using backend.src.Models;
 using backend.src.Services;
 using backend.src.Repository.ImageRepository;
 using backend.src.Services.ImageService;
+using backend.src.Repository.RoleRepository;
+using backend.src.Services.RoleService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,23 +28,7 @@ builder.WebHost.UseKestrel(options =>
 // Add database services to the container.
 builder.Services.AddDbContext<AppDBContext>();
 
-builder.Services.AddAuthentication(option =>
-{
-    option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    option.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidIssuer = builder.Configuration["jwt:Issuer"],
-        ValidAudience = builder.Configuration["jwt:Aud"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["jwt:Secret"]))
-    };
-});
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -73,10 +59,39 @@ builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<IImageRepo, ImageRepo>();
 builder.Services.AddScoped<IImageService, ImageService>();
 
+builder.Services.AddScoped<IRoleRepo, RoleRepo>();
+builder.Services.AddScoped<IRoleService, RoleService>();
+
 //Add services for the Identity
 builder.Services
-    .AddIdentity<User, IdentityRole<Guid>>()
+    .AddIdentity<User, IdentityRole<Guid>>(
+    //     options =>
+    // {
+    //     options.Password.RequiredLength = 6;
+    //     options.Password.RequireDigit = false;
+    //     options.Password.RequireLowercase = false;
+    // }
+    )
     .AddEntityFrameworkStores<AppDBContext>();
+
+
+builder.Services.AddAuthentication(option =>
+{
+    option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    option.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidIssuer = builder.Configuration["jwt:Issuer"],
+        ValidAudience = builder.Configuration["jwt:Aud"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["jwt:Secret"]))
+    };
+});
 
 var app = builder.Build();
 //ExceptionHandler Middleware
@@ -87,17 +102,6 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-
-    using (var scope = app.Services.CreateScope())
-    {
-        var dbContext = scope.ServiceProvider.GetService<AppDBContext>();
-
-        if (dbContext is not null)
-        {
-            dbContext.Database.EnsureDeleted();
-            dbContext.Database.EnsureCreated();
-        }
-    }
 }
 
 //Adding Authentication

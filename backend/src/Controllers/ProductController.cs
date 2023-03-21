@@ -2,6 +2,7 @@ using backend.src.DTOs;
 using backend.src.DTOs.DTOResponse;
 using backend.src.Models;
 using backend.src.Services.ProductService;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.src.Controllers;

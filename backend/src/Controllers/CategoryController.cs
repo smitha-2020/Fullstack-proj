@@ -3,6 +3,7 @@ using backend.src.DTOs;
 using backend.src.Models;
 using backend.src.Services.CategoryService;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace backend.src.Controllers;
 

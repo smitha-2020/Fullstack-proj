@@ -5,19 +5,21 @@
 # GET https://localhost:5001/weatherforecasts HTTP/1.1
 
 # Get all categories
-# GET https://localhost:5001/categorys HTTP/1.1
+GET https://localhost:5001/categorys HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxYTc3Y2MwNS1iMWYxLTQ4MWYtYTRjNi02OWNlYzFiYzBiODkiLCJpYXQiOiIyMS8wMy8yMDIzIDE4LjUxLjE3IiwiZW1haWwiOiJzbWl0aGFrYW1hdGhAbWFpbC5jb20iLCJuYW1lIjoiU21pdGhhIiwiZXhwIjoxNjc5NDIxMDc3LCJpc3MiOiJTbWl0aGEiLCJhdWQiOiJBZG1pbiJ9.nwtpS83CPbS-6trI6usekXp9PJp5tk6x322eotaOtlo
 
 # # Get a single category
-# GET https://localhost:5001/categorys/1 HTTP/1.1
+GET https://localhost:5001/categorys/2 HTTP/1.1
 
 # create a category
-POST https://localhost:5001/categorys HTTP/1.1
-content-type: application/json
+# POST https://localhost:5001/categorys HTTP/1.1
+# content-type: application/json
 
-{
-    "Name": "New Category Updated",
-    "Image": "https://source.unsplash.com/164_6wVEHfI"
-}
+# {
+#     "Name": "New Category Created",
+#     "Image": "https://source.unsplash.com/164_6wVEHfI"
+# }
 
 # Create a category
 # POST https://localhost:5001/categorys HTTP/1.1
@@ -29,13 +31,13 @@ content-type: application/json
 # }
 
 # Update a category
-PUT https://localhost:5001/categorys/1 HTTP/1.1
-content-type: application/json
+# PUT https://localhost:5001/categorys/2 HTTP/1.1
+# content-type: application/json
 
-{
-    "Name": "New Category Updated second time",
-    "Image": "https://source.unsplash.com/164_6wVEHfI"
-}
+# {
+#     "Name": "New Category Updated second time",
+#     "Image": "https://source.unsplash.com/164_6wVEHfI"
+# }
 
 # Delete a category
 # DELETE https://localhost:5001/categorys/1 HTTP/1.1
@@ -46,22 +48,28 @@ content-type: application/json
 #######################################################################################################
 
 # Get all products
- GET https://localhost:5001/products HTTP/1.1
+GET https://localhost:5001/products HTTP/1.1
 
-# GET https://localhost:5001/products HTTP/1.1
-# content-type: application/json
+GET https://localhost:5001/products HTTP/1.1
+content-type: application/json
 
-# {
-#    "Sort": "Asc"
-# }
+{
+   "Sort": "Asc",
+    "CardsPerPage":0,
+    "Page":0
+}
 
 # Get a Single Product
 # GET https://localhost:5001/products/1 HTTP/1.1 
 
-# Authorizarion
-# GET https://localhost:5001/products
-# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiOTVjOGNhZC1kNWM4LTRjZjItYjA1OS1hYmViZTU4M2FiNzUiLCJpYXQiOiIxNS8wMy8yMDIzIDEyLjE3LjEyIiwiZW1haWwiOiJzbWl0aGFrYW1hdGhAbWFpbC5jb20iLCJuYW1lIjoic21pdGhhIiwiZXhwIjoxNjc4ODc5MDMyLCJpc3MiOiJTbWl0aGEiLCJhdWQiOiJBZG1pbiJ9.FduyrxvLVfu4Sh_C9lufgcYERc36G1_xcie52CGE7eM
+#Authorizarion
+GET https://localhost:5001/products
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxYTc3Y2MwNS1iMWYxLTQ4MWYtYTRjNi02OWNlYzFiYzBiODkiLCJpYXQiOiIyMS8wMy8yMDIzIDE2LjA4LjQyIiwiZW1haWwiOiJzbWl0aGFrYW1hdGhAbWFpbC5jb20iLCJuYW1lIjoiU21pdGhhIiwiZXhwIjoxNjc5NDExMzIyLCJpc3MiOiJTbWl0aGEiLCJhdWQiOiJBZG1pbiJ9.uyMX31PMQZyUkQtXVvAGJgwzvY1xSJY8WPNftl6PtJI
 
+###
+GET https://localhost:5001/categorys/1/products HTTP/1.1
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxYTc3Y2MwNS1iMWYxLTQ4MWYtYTRjNi02OWNlYzFiYzBiODkiLCJpYXQiOiIyMS8wMy8yMDIzIDE2LjQ4LjI4IiwiYXVkIjpbIkFkbWluIiwiQWRtaW4iXSwiZW1haWwiOiJzbWl0aGFrYW1hdGhAbWFpbC5jb20iLCJuYW1lIjoiU21pdGhhIiwiZXhwIjoxNjc5NDEzNzA4LCJpc3MiOiJTbWl0aGEifQ.Xoxu2DblIneLOnUZt46nEe9b1lNe-7mF2_co_Czl3UU
 # Create a product
 POST https://localhost:5001/products HTTP/1.1
 content-type: application/json
@@ -70,7 +78,7 @@ content-type: application/json
     "Title": "New Category Products",
     "Price": 200,
     "Description": "New product",
-    "CategoryID":1
+    "CategoryID":2
 }
 
 # Update a product
@@ -81,7 +89,7 @@ content-type: application/json
     "Title": "New Product1123",
     "Price": 500,
     "Description": "New product",
-    "CategoryID":1
+    "CategoryID":2
 }
 
 # Delete a product
@@ -96,54 +104,53 @@ content-type: application/json
 # GET https://localhost:5001/users/d06c52e3-41c0-4aab-9d9e-17ed500a0d7e
 
 # #Create a new User
-# POST https://localhost:5001/signup HTTP/1.1
+# POST https://localhost:5001/users/signup HTTP/1.1
 # content-type: application/json
 
 # {
 #     "FirstName": "Nihan",
 #     "LastName": "Anwer",
 #     "UserName": "nihananwer",
-#     "Email": "nihananwer@mail.com",
+#     "Email": "nihan@mail.com",
 #     "Password": "Nihan@123",
 #     "ConfirmPassword":"Nihan@123"
 # }
 
 # Create a new User
-# POST https://localhost:5001/signup HTTP/1.1
-# content-type: application/json
+POST https://localhost:5001/signup HTTP/1.1
+content-type: application/json
 
-# {
-#     "FirstName": "Smitha",
-#     "LastName": "Kamath",
-#     "UserName": "smithakamath",
-#     "Email": "smithakamath@mail.com",
-#     "Password": "Smitha@123",
-#     "ConfirmPassword":"Smitha@123"
-# }
+{
+    "FirstName": "Smitha",
+    "LastName": "Kamath",
+    "UserName": "smithakamath",
+    "Email": "smithaWinner@mail.com",
+    "Password": "Smitha@123",
+    "ConfirmPassword":"Smitha@123"
+}
 
 # Login and Get teh Access Token
 ###
-# POST https://localhost:5001/signin HTTP/1.1
-# content-type: application/json
+POST https://localhost:5001/signin HTTP/1.1
+content-type: application/json
 
-# {
-#     "Email": "smithakamath@mail.com",
-#     "Password": "Smitha@123"
-# }
+{
+    "Email": "smithakamath@mail.com",
+    "Password": "Smitha@123"
+}
 
 ###############################################################################################################
 
 # Add To Cart
 ###
-# POST https://localhost:5001/carts HTTP/1.1
-# Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI4MmIxNjA0Ni05MTY5LTQwOWQtOTQyYy0wZTdmYWFjZmI3NGIiLCJpYXQiOiIyMC8wMy8yMDIzIDEwLjM4LjExIiwiZW1haWwiOiJzbWl0aGFrYW1hdGhAbWFpbC5jb20iLCJuYW1lIjoiU21pdGhhIiwiZXhwIjoxNjc5MzA1MDkxLCJpc3MiOiJTbWl0aGEiLCJhdWQiOiJBZG1pbiJ9.GOUKqgf7WXkoSQSsZUuFfAtDfnguwTGgw4ntmFdwHjQ
-# content-type: application/json
+POST https://localhost:5001/carts HTTP/1.1
+content-type: application/json
 
-# {
-#     "UserId": "d06c52e3-41c0-4aab-9d9e-17ed500a0d7e",
-#     "ProductId": 1,
-#     "Quantity":10
-# }
+{
+    "UserId": "1a77cc05-b1f1-481f-a4c6-69cec1bc0b89",
+    "ProductId": 2,
+    "Quantity":10
+}
 
 # POST https://localhost:5001/carts HTTP/1.1
 # content-type: application/json
@@ -193,11 +200,11 @@ content-type: application/json
 }
 
 #Assign images to product
-POST https://localhost:5001/images/1/assign HTTP/1.1
+POST https://localhost:5001/images/2/assign HTTP/1.1
 content-type: application/json
 
 {
-    "images": [1,2,3]
+    "images": [1,2]
 }
 
 # Update a category

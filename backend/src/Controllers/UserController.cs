@@ -42,4 +42,15 @@ public class UserController : ApiController
         }
         return Ok(userData);
     }
+
+    // [HttpDelete("{id:Guid}")]
+    // public async Task<IActionResult?> DeleteById(Guid id)
+    // {
+    //     var userData = await _service.(id);
+    //     if (userData is null)
+    //     {
+    //         return BadRequest();
+    //     }
+    //     return Ok(userData);
+    // }
 }
