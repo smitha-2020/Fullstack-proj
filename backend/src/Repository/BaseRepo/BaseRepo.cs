@@ -63,30 +63,15 @@ where TModel : BaseModel
 
     public async Task<TModel?> UpdateOneAsync(int id, TModel update)
     {
-        // dbEntityEntry = _dbcontext.Entry(update);
-        // if (dbEntityEntry.State == EntityState.Detached)
-        // {
-        //     DbSet.Attach(upate);
-        // }
-        // dbEntityEntry.State = EntityState.Modified;
-        //var entity = DbSet.FirstOrDefault(e => e.Id == id);
         var entity = await GetByIdAsync(id);
         if(entity is null){
             return null;
         }
-        Console.WriteLine(entity.Id);
         _dbcontext.Entry(entity).State = EntityState.Detached;
         entity = update;
         entity.Id = id;
-        //_dbcontext.Update(entity);
         _dbcontext.Entry(entity).State = EntityState.Modified;
         await _dbcontext.SaveChangesAsync();
-        // var entity2 =await DbSet.FirstOrDefault(e => e.Id == id);
-        // if (entity2 is not null)
-        // {
-        //     Console.WriteLine(entity2.updatedAt);
-        // }
-
         return entity;
     }
 }
