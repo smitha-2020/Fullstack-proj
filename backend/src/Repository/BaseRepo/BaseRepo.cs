@@ -69,16 +69,24 @@ where TModel : BaseModel
         //     DbSet.Attach(upate);
         // }
         // dbEntityEntry.State = EntityState.Modified;
+        //var entity = DbSet.FirstOrDefault(e => e.Id == id);
         var entity = await GetByIdAsync(id);
-        // if (entity is null)
-        // {
-        //     return null;
-        // }
+        if(entity is null){
+            return null;
+        }
+        Console.WriteLine(entity.Id);
+        _dbcontext.Entry(entity).State = EntityState.Detached;
         entity = update;
-        //_dbcontext.Entry(update).State = EntityState.Modified;
-        //DbSet.Add(entity);
-        //_dbcontext.Entry(entity).State = EntityState.Modified;
+        entity.Id = id;
+        //_dbcontext.Update(entity);
+        _dbcontext.Entry(entity).State = EntityState.Modified;
         await _dbcontext.SaveChangesAsync();
-        return await GetByIdAsync(update.Id);
+        // var entity2 =await DbSet.FirstOrDefault(e => e.Id == id);
+        // if (entity2 is not null)
+        // {
+        //     Console.WriteLine(entity2.updatedAt);
+        // }
+
+        return entity;
     }
 }

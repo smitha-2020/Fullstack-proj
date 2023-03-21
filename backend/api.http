@@ -29,13 +29,13 @@ content-type: application/json
 # }
 
 # Update a category
-# PUT https://localhost:5001/categorys/1 HTTP/1.1
-# content-type: application/json
+PUT https://localhost:5001/categorys/1 HTTP/1.1
+content-type: application/json
 
-# {
-#     "Name": "New Category Updated",
-#     "Image": "https://source.unsplash.com/164_6wVEHfI"
-# }
+{
+    "Name": "New Category Updated second time",
+    "Image": "https://source.unsplash.com/164_6wVEHfI"
+}
 
 # Delete a category
 # DELETE https://localhost:5001/categorys/1 HTTP/1.1
