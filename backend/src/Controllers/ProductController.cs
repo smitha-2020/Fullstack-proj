@@ -1,13 +1,14 @@
 using backend.src.DTOs;
 using backend.src.DTOs.DTOResponse;
 using backend.src.Models;
+using backend.src.Repository.BaseRepo;
 using backend.src.Services.ProductService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.src.Controllers;
 
-[Authorize(Roles ="Admin")]
+[Authorize(Roles = "Admin")]
 public class ProductController : BaseController<Product, DTOProduct, DTOUpdateProduct, DTOProductResponse, DTOProductUpdatedResponse>
 {
     private readonly IProductService _service;
@@ -17,6 +18,13 @@ public class ProductController : BaseController<Product, DTOProduct, DTOUpdatePr
     {
         _service = service;
         _logger = logger;
+    }
+
+    [HttpGet]
+    public override async Task<ActionResult<IEnumerable<DTOProductResponse>?>> GetAll([FromBody] QueryOptions options)
+    {
+        _logger.LogCritical(options.Search);
+        return Ok(await _service.GetAllAsync(options));
     }
 
     [HttpPut("{id:int}")]

@@ -2,7 +2,7 @@ using backend.src.Models;
 using backend.src.DTOs.DTOResponse;
 using backend.src.DTOs;
 using backend.src.Services.BaseService;
-
+using backend.src.Repository.BaseRepo;
 
 namespace backend.src.Services.ProductService;
 

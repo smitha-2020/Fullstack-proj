@@ -17,7 +17,7 @@ using backend.src.Repository.ImageRepository;
 using backend.src.Services.ImageService;
 using backend.src.Repository.RoleRepository;
 using backend.src.Services.RoleService;
-using backend.src.MiddleWare;
+//using backend.src.MiddleWare;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -59,7 +59,7 @@ builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IRoleRepo, RoleRepo>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 
-builder.Services.AddTransient<ErrorHandlerMiddleware>();
+//builder.Services.AddTransient<ErrorHandlerMiddleware>();
 
 //Add Identity
 builder.Services
@@ -104,7 +104,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware<ErrorHandlerMiddleware>();
+//app.UseMiddleware<ErrorHandlerMiddleware>();
 //Adding Authentication
 app.UseAuthentication();
 

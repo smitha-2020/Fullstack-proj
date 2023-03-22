@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using backend.src.Models;
 using backend.src.DTOs;
 
 namespace backend.src.ModelValidation;

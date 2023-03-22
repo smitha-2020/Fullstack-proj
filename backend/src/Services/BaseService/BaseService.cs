@@ -31,7 +31,7 @@ public class BaseService<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResp
         return await _repo.DeleteOneAsync(id);
     }
 
-    public async Task<IEnumerable<TResponse>?> GetAllAsync(QueryOptions options)
+    public virtual async Task<IEnumerable<TResponse>?> GetAllAsync(QueryOptions options)
     {
         var dataArr = await _repo.GetAllAsync(options);
         return dataArr is null ? null : _mapper.Map<IEnumerable<TModel>, IEnumerable<TResponse>>(dataArr);

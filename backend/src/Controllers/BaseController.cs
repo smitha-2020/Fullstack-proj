@@ -16,10 +16,18 @@ public abstract class BaseController<TModel, TCreateDto, TUpdateDto, TResponse, 
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<TResponse>?>> GetAll([FromQuery] QueryOptions options)
+    public virtual async Task<ActionResult<IEnumerable<TResponse>?>> GetAll([FromQuery] QueryOptions options)
     {
         return Ok(await _service.GetAllAsync(options));
     }
+
+    
+    [HttpGet("all")]
+    public virtual async Task<ActionResult<IEnumerable<TResponse>?>> GetAllData([FromBody] QueryOptions options)
+    {
+        return Ok(await _service.GetAllAsync(options));
+    }
+
 
     [HttpPost]
     public async Task<IActionResult> Create(TCreateDto item)

@@ -36,7 +36,7 @@ where TModel : BaseModel
         return true;
     }
 
-    public async Task<IEnumerable<TModel>?> GetAllAsync(QueryOptions options)
+    public virtual async Task<IEnumerable<TModel>?> GetAllAsync(QueryOptions options)
     {
         var query = DbSet.AsNoTracking().AsQueryable();
         if (options.SortByProperty.Trim().Length > 0)
