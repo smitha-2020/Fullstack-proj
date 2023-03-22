@@ -13,13 +13,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxYTc3Y2MwN
 GET https://localhost:5001/categorys/2 HTTP/1.1
 
 # create a category
-# POST https://localhost:5001/categorys HTTP/1.1
-# content-type: application/json
+POST https://localhost:5001/categorys HTTP/1.1
+content-type: application/json
 
-# {
-#     "Name": "New Category Created",
-#     "Image": "https://source.unsplash.com/164_6wVEHfI"
-# }
+{
+    "Name": "New Category Created",
+    "Image": "https://source.unsplash.com/164_6wVEHfI"
+}
 
 # Create a category
 # POST https://localhost:5001/categorys HTTP/1.1
@@ -124,7 +124,7 @@ content-type: application/json
     "FirstName": "Smitha",
     "LastName": "Kamath",
     "UserName": "smithakamath",
-    "Email": "smithaWinner@mail.com",
+    "Email": "smithawinner123@mail.com",
     "Password": "Smitha@123",
     "ConfirmPassword":"Smitha@123"
 }
@@ -135,7 +135,7 @@ POST https://localhost:5001/signin HTTP/1.1
 content-type: application/json
 
 {
-    "Email": "smithakamath@mail.com",
+    "Email": "smithaWinner@mail.com",
     "Password": "Smitha@123"
 }
 

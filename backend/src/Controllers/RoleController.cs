@@ -1,5 +1,5 @@
 using backend.src.Services.RoleService;
-using Microsoft.AspNetCore.Identity;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.src.Controllers;
@@ -26,15 +26,19 @@ public class RoleController : ApiController
         return BadRequest();
     }
 
-    // [HttpPost("{userId:Guid}/assign")]
-    // public async Task<IActionResult> AssignRoleToUser(Guid id,[FromBody] ICollection<Guid> names)
-    // {
-    //     return Ok(await _service.AssignRoleToUserAsync(id,names));
-    // }
+    [HttpPost("{userId:Guid}/assign")]
+    public async Task<IActionResult> AssignRoleToUser(Guid userId, [FromBody] IEnumerable<string> names)
+    {
+        if (await _service.AssignRoleToUserAsync(userId, names))
+        {
+            return Ok($" {userId} is assigned roles.");
+        }
+        return BadRequest("Either userId is already assigned or Invalid User or Invalid Role!!");
+    }
 
     [HttpGet]
-    public async Task<ActionResult<IList<IdentityRole<Guid>>>> GetRoles()
+    public async Task<IActionResult> GetRoles()
     {
-        return await _service.GetRolesAsync();
+        return Ok(await _service.GetRolesAsync());
     }
 }

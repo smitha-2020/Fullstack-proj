@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace backend.src.DTOs.DTOResponse;
 
 public class DTOImageResponse

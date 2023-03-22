@@ -37,7 +37,7 @@ IdentityDbContext<User, IdentityRole<Guid>, Guid>
         optionsBuilder
         .UseNpgsql(dbConn)
         .AddInterceptors(new AppDBContextInterceptor())
-        .UseSnakeCaseNamingConvention();
+        .UseSnakeCaseNamingConvention();   
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

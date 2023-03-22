@@ -18,9 +18,9 @@ public class CategoryService : BaseService<Category, DTOCategory, DTOUpdateCateg
         _mapper = mapper;
     }
 
-    public async Task<ICollection<DTOCategoryProductResponse>> GetAllProductsByCategory(int categoryId)
+    public async Task<ICollection<DTOCategoryImageResponse>> GetAllProductsByCategory(int categoryId)
     {
         var categoryProducts = await _repo.GetAllProductsByCategory(categoryId);
-        return _mapper.Map<ICollection<Category>,ICollection<DTOCategoryProductResponse>>(categoryProducts);
+        return _mapper.Map<ICollection<Category>,ICollection<DTOCategoryImageResponse>>(categoryProducts);
     }
 }

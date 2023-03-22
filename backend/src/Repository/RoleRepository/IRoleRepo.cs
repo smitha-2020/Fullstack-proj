@@ -1,17 +1,14 @@
 using Microsoft.AspNetCore.Identity;
 using backend.src.Models;
-using backend.src.DTOs;
 
 namespace backend.src.Repository.RoleRepository;
 
 public interface IRoleRepo
 {
-    Task<IEnumerable<string>> AddRolesAsync(ICollection<string> names);
-    Task<List<IdentityRole<Guid>>> GetRolesAsync();
-    //Task<bool> RemoveRolesAsync(ICollection<string> names);
-    //Task<bool> AssignRoleToUserAsync(User user,ICollection<Guid> names);
+    Task<IEnumerable<IdentityRole<Guid>>> GetAllRolesAsync();
+    Task<bool> AssignRoleToUserAsync(User user, IEnumerable<string> roles);
     Task<IdentityRole<Guid>?> FindByNameAsync(string name);
     Task<IdentityResult?> CreateRoleAsync(string name);
     Task<User?> FindByIdAsync(Guid id);
-    // Task<bool> UnAssignRoleToUserAsync();
+    Task<ICollection<IdentityRole<Guid>>?> GetRolesAsync(IEnumerable<string> roles);
 }

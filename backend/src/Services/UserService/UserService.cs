@@ -34,24 +34,24 @@ public class UserService : IUserService
         {
             throw new ArgumentNullException("InValid Password");
         }
-        return _service.GetTokenAsync(validUser);
+        return await _service.GetTokenAsync(validUser);
     }
 
     public async Task<DTOUserResponse?> SingnUpAsync(DTOUserSignUp request)
     {
         if (request is null)
         {
-            throw new ArgumentNullException("Data is not found");
+            throw ServiceException.BadRequest("Please Fill All the Fields!!");
         }
         var isUser = await IsEmailAvailable(request.Email);
         if (!isUser)
         {
-            throw ExceptionHandler.IllegalArgumentException("Email Address Already");
+            throw ServiceException.BadRequest("Email Address Already Exists!!");
         }
         var userIdentity = await _repo.SingnUpAsync(request, request.Password);
         if (userIdentity is null)
         {
-            throw new ArgumentNullException("Null Value found");
+            throw ServiceException.BadRequest("Email Address With Password Does Not Match!!");
         }
         return _mapper.Map<User, DTOUserResponse>(userIdentity);
     }

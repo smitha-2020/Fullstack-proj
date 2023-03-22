@@ -6,11 +6,10 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace backend.src.Controllers;
 
-[Authorize]
+
 public abstract class BaseController<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResponse> : ApiController
 {
     private readonly IBaseService<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResponse> _service;
-
     public BaseController(IBaseService<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResponse> service)
     {
         _service = service;
@@ -26,7 +25,6 @@ public abstract class BaseController<TModel, TCreateDto, TUpdateDto, TResponse, 
     public async Task<IActionResult> Create(TCreateDto item)
     {
         return Ok(await _service.CreateAsync(item));
-        //return CreatedAtAction("created", item);
     }
 
     [HttpGet("{id:int}")]

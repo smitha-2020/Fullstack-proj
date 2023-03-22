@@ -5,5 +5,5 @@ namespace backend.src.Services.TokenService;
 
 public interface ITokenService
 {
-    DTOUserSignInResponse GetTokenAsync(User user);
+    Task<DTOUserSignInResponse> GetTokenAsync(User user);
 }

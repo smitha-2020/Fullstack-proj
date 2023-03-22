@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.src.Controllers;
 
+[Authorize(Roles ="Admin")]
 public class ProductController : BaseController<Product, DTOProduct, DTOUpdateProduct, DTOProductResponse, DTOProductUpdatedResponse>
 {
     private readonly IProductService _service;

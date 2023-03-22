@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using backend.src.DTOs;
 using backend.src.Services;
 using backend.src.ModelValidation;
+using Microsoft.AspNetCore.Authorization;
+using backend.src.DTOs.DTORequest;
 
 namespace backend.src.Controllers;
 
@@ -10,6 +12,7 @@ public class UserController : ApiController
     private readonly IUserService _service;
     public UserController(IUserService service) => _service = service;
 
+    [AllowAnonymous]
     [HttpPost("/signup")]
     public async Task<IActionResult?> SingnUp([FromBody] DTOUserSignUp request)
     {
@@ -21,6 +24,7 @@ public class UserController : ApiController
         return Ok(user);
     }
 
+    [AllowAnonymous]
     [HttpPost("/signin")]
     public async Task<IActionResult?> SignIn([FromBody] DTOUserSignIn request)
     {
@@ -43,14 +47,14 @@ public class UserController : ApiController
         return Ok(userData);
     }
 
-    // [HttpDelete("{id:Guid}")]
-    // public async Task<IActionResult?> DeleteById(Guid id)
-    // {
-    //     var userData = await _service.(id);
-    //     if (userData is null)
-    //     {
-    //         return BadRequest();
-    //     }
-    //     return Ok(userData);
-    // }
+    [HttpGet("isavailable")]
+    public async Task<IActionResult?> IsAvailable([FromBody] DTOEmail request)
+    {
+        var isAvailableEmail = await _service.IsEmailAvailable(request.Email.Trim());
+        if (isAvailableEmail)
+        {
+            return Ok(new { isAvailable = true });
+        }
+        return Ok(new { isAvailable = false });
+    }
 }

@@ -13,11 +13,14 @@ public class ImageService : BaseService<Image, DTOImage, DTOUpdateImage, DTOImag
     private readonly IImageRepo _repo;
     private readonly ILogger<ImageService> _logger;
     private readonly IProductRepo _productRepo;
+    private readonly IMapper _mapper;
     public ImageService(IImageRepo repo, IProductRepo productRepo, ILogger<ImageService> logger, IMapper mapper) : base(repo, mapper)
     {
         _repo = repo;
         _productRepo = productRepo;
         _logger = logger;
+        _mapper = mapper;
+
     }
 
     public async Task<int> AssignImagesToProduct(int productId, ICollection<int> images)

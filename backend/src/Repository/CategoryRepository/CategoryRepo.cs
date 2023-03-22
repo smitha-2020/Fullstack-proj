@@ -16,7 +16,6 @@ public class CategoryRepo : BaseRepo<Category>, ICategoryRepo
 
     public async Task<ICollection<Category>> GetAllProductsByCategory(int categoryId)
     {
-        Console.WriteLine(DbDataCategory.GetType());
         return await DbDataCategory.Where(e => e.Id == categoryId).ToArrayAsync();
     }
 }

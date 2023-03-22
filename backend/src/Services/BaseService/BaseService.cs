@@ -14,7 +14,7 @@ public class BaseService<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResp
         _mapper = mapper;
     }
 
-    public async Task<TResponse?> CreateAsync(TCreateDto create)
+    public virtual async Task<TResponse?> CreateAsync(TCreateDto create)
     {
         var entity = _mapper.Map<TCreateDto, TModel>(create);
         var result = await _repo.CreateOneAsync(entity);

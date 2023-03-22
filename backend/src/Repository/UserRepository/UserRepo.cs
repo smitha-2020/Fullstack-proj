@@ -23,10 +23,9 @@ public class UserRepo : IUserRepo
 
     public async Task<bool> DeleteOneAsync(Guid id)
     {
-        var userFull = await _userManager.FindByIdAsync(id.ToString());
-        var data = await _userManager.DeleteAsync(userFull);
+        var user = await _userManager.FindByIdAsync(id.ToString());
+        var data = await _userManager.DeleteAsync(user);
         return data.Succeeded;
-        //return _userManager.DeleteAsync(userFull);
     }
 
     public async Task<User?> GetByIdAsync(Guid id)
@@ -49,44 +48,15 @@ public class UserRepo : IUserRepo
     public async Task<User?> SingnUpAsync(DTOUserSignUp userdata, string password)
     {
         var userFull = await _userManager.FindByEmailAsync(userdata.Email);
-        // var userRole = new User
-        // {
-        //     FirstName = userdata.FirstName,
-        //     LastName = userdata.LastName,
-        //     UserName = userdata.Email,
-        //     Email = userdata.Email,
-        //     SecurityStamp = userFull.SecurityStamp
-        // };
-
          var user = new User
         {
-            FirstName = userdata.FirstName,
-            LastName = userdata.LastName,
-            UserName = userdata.Email,
-            Email = userdata.Email
+            FirstName = userdata.FirstName.Trim(),
+            LastName = userdata.LastName.Trim(),
+            UserName = userdata.Email.Trim(),
+            Email = userdata.Email.Trim()
         };
-
-        //Adds the data to the user table
-        //var data = _mapper.Map<DTOUserSignUp, User>(user);
-        //TODO: Put all these into a separate controller/service for roles
-        var roles = new[] { "Admin", "Dev" };
-        foreach (var role in roles)
-        {
-            if (await _roleManager.FindByNameAsync(role) is null)
-            {
-                _logger.LogCritical("null");
-                await _roleManager.CreateAsync(new IdentityRole<Guid>
-                {
-                    Name = role,
-                });
-            }
-        }
-        await _userManager.AddToRolesAsync(userFull, roles);
-
-        //replace until this 
         var userData = await _userManager.CreateAsync(user, password);
         return await _userManager.FindByEmailAsync(userdata.Email);
-        //return _mapper.Map<IdentityResult, User>(userData);
     }
 
     public Task<User?> UpdateOneAsync(Guid id, User update)

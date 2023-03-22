@@ -17,6 +17,7 @@ using backend.src.Repository.ImageRepository;
 using backend.src.Services.ImageService;
 using backend.src.Repository.RoleRepository;
 using backend.src.Services.RoleService;
+using backend.src.MiddleWare;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,8 +29,6 @@ builder.WebHost.UseKestrel(options =>
 // Add database services to the container.
 builder.Services.AddDbContext<AppDBContext>();
 
-
-
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -37,10 +36,8 @@ builder.Services.AddSwaggerGen();
 
 //Configuration for AutoMapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
-//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //Dependency Injection
-//builder.Services.AddScoped<IWeatherForecastService, WeatherForecastService>();
 
 builder.Services.AddScoped<ICategoryRepo, CategoryRepo>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
@@ -62,7 +59,9 @@ builder.Services.AddScoped<IImageService, ImageService>();
 builder.Services.AddScoped<IRoleRepo, RoleRepo>();
 builder.Services.AddScoped<IRoleService, RoleService>();
 
-//Add services for the Identity
+builder.Services.AddTransient<ErrorHandlerMiddleware>();
+
+//Add Identity
 builder.Services
     .AddIdentity<User, IdentityRole<Guid>>(
     //     options =>
@@ -94,6 +93,7 @@ builder.Services.AddAuthentication(option =>
 });
 
 var app = builder.Build();
+
 //ExceptionHandler Middleware
 app.UseHttpsRedirection();
 
@@ -104,6 +104,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ErrorHandlerMiddleware>();
 //Adding Authentication
 app.UseAuthentication();
 

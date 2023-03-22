@@ -20,7 +20,7 @@ public class TokenService : ITokenService
         _userManager = userManager;
 
     }
-    public DTOUserSignInResponse GetTokenAsync(User user)
+    public async Task<DTOUserSignInResponse> GetTokenAsync(User user)
     {
         var claims = new List<Claim>
         {
@@ -29,6 +29,12 @@ public class TokenService : ITokenService
             new Claim(JwtRegisteredClaimNames.Email,user.Email!),
             new Claim(JwtRegisteredClaimNames.Name,user.FirstName!)
         };
+
+        var roles =await _userManager.GetRolesAsync(user);
+        foreach (var role in roles)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, role));
+        }
         //var secret = user.PasswordHash;
         var secret = _config["jwt:Secret"];
 
@@ -37,7 +43,7 @@ public class TokenService : ITokenService
             new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)), SecurityAlgorithms.HmacSha256);
 
         //var expiration_time = Double.TryParse(_config["jwt:Expiration"], out double a);
-        var expiration = DateTime.Now.AddHours(1);
+        var expiration = DateTime.Now.AddHours(3);
         //var expiration = DateTime.Now.AddHours(a);
 
         var token = new JwtSecurityToken(_config["jwt:Issuer"], _config["jwt:Aud"], claims, expires: expiration, signingCredentials: signkey);

@@ -13,7 +13,7 @@ public class ImageController : BaseController<Image, DTOImage, DTOUpdateImage, D
     private readonly IProductService _prodService;
     private readonly ILogger<ImageController> _logger;
 
-    public ImageController(IImageService service,IProductService prodService,ILogger<ImageController> logger) : base(service)
+    public ImageController(IImageService service, IProductService prodService, ILogger<ImageController> logger) : base(service)
     {
         _service = service;
         _prodService = prodService;
@@ -28,7 +28,6 @@ public class ImageController : BaseController<Image, DTOImage, DTOUpdateImage, D
         {
             return BadRequest();
         }
-        return Ok(count);
-        //return Ok(new { Message = $"{count} images are assigned to product"});
+        return Ok(new { Message = $"{count} images are assigned to product" });
     }
 }
