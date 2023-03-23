@@ -13,10 +13,10 @@ public interface IBaseRepo<TModel>
 
 public class QueryOptions
 {
-    public string SortByProperty { get; set; } = string.Empty;
-    public string Search { get; set; } = string.Empty;
-    public SortBy Sort { get; set; }
-    public int CardsPerPage { get; set; } = 1;
+    public string? SortByProperty { get; set; }
+    public string? Search { get; set; }
+    public string? Sort { get; set; }
+    public int CardsPerPage { get; set; } = 20;
     public int Page { get; set; } = 0;
 }
 

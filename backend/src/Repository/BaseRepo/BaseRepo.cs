@@ -36,17 +36,18 @@ where TModel : BaseModel
         return true;
     }
 
-    public virtual async Task<IEnumerable<TModel>?> GetAllAsync(QueryOptions options)
+    public virtual async Task<IEnumerable<TModel>?> GetAllAsync(QueryOptions? options)
     {
         var query = DbSet.AsNoTracking().AsQueryable();
-        if (options.SortByProperty.Trim().Length > 0)
+        if (options is null)
         {
-            Console.WriteLine(options.SortByProperty.Trim());
-            if (query.GetType().GetProperty(options.SortByProperty) != null)
-            {
-                query.OrderBy(e => e.GetType().GetProperty(options.SortByProperty));
-            }
+            return null;
         }
+        // if (query.GetType().GetProperty(options.SortByProperty) != null)
+        // {
+        //     query.OrderBy(e => e.GetType().GetProperty(options.SortByProperty));
+        // }
+
         query.Skip(options.Page).Take(options.CardsPerPage);
         return await query.ToArrayAsync();
     }
@@ -65,7 +66,8 @@ where TModel : BaseModel
     public async Task<TModel?> UpdateOneAsync(int id, TModel update)
     {
         var entity = await GetByIdAsync(id);
-        if(entity is null){
+        if (entity is null)
+        {
             return null;
         }
         _dbcontext.Entry(entity).State = EntityState.Detached;

@@ -21,9 +21,11 @@ public class ProductController : BaseController<Product, DTOProduct, DTOUpdatePr
     }
 
     [HttpGet]
-    public override async Task<ActionResult<IEnumerable<DTOProductResponse>?>> GetAll([FromBody] QueryOptions options)
+    public override async Task<ActionResult<IEnumerable<DTOProductResponse>?>> GetAll([FromBody] QueryOptions? options)
     {
-        _logger.LogCritical(options.Search);
+        if(options is null){
+            return Ok(await _service.GetAllAsync());
+        }
         return Ok(await _service.GetAllAsync(options));
     }
 
