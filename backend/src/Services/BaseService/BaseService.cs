@@ -1,4 +1,5 @@
 using AutoMapper;
+using backend.src.Helpers;
 using backend.src.Repository.BaseRepo;
 
 namespace backend.src.Services.BaseService;
@@ -20,7 +21,7 @@ public class BaseService<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResp
         var result = await _repo.CreateOneAsync(entity);
         if (result is null)
         {
-            throw new Exception("Item Cannot be Created");
+            throw ServiceException.BadRequest("Item Cannot be Created");
         }
         var newResult = _mapper.Map<TModel, TResponse>(result);
         return newResult;
@@ -28,6 +29,11 @@ public class BaseService<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResp
 
     public async Task<bool> DeleteAsync(int id)
     {
+        var singleData = await _repo.GetByIdAsync(id);
+        if (singleData is null)
+        {
+            throw ServiceException.BadRequest("Please Enter a Valid ID.");
+        }
         return await _repo.DeleteOneAsync(id);
     }
 
@@ -37,31 +43,18 @@ public class BaseService<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResp
         return dataArr is null ? null : _mapper.Map<IEnumerable<TModel>, IEnumerable<TResponse>>(dataArr);
     }
 
-    public async Task<ICollection<TResponse>?> GetAllDataAsync()
-    {
-        var dataArr = await _repo.GetAllDataAsync();
-        if (dataArr is null)
-        {
-            return null;
-        }
-        return _mapper.Map<ICollection<TModel>, ICollection<TResponse>>(dataArr);
-    }
-
-
     public async Task<TResponse?> GetAsync(int id)
     {
         var singleData = await _repo.GetByIdAsync(id);
         if (singleData is null)
         {
-            throw new Exception("ID is not found");
+            throw ServiceException.BadRequest("Please Enter a Valid ID.");
         }
         return _mapper.Map<TModel, TResponse>(singleData);
     }
 
     public async Task<TResponse?> UpdateAsync(int id, TUpdateDto update)
     {
-       
-
         var entity = _mapper.Map<TUpdateDto, TModel>(update);
         if (entity is null)
         {

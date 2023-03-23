@@ -9,6 +9,4 @@ namespace backend.src.Services.CartService;
 public interface ICartService : IBaseService<Cart, DTOCart, DTOUpdateCart, DTOCartResponse, DTOCartUpdatedResponse>
 {
     Task<ICollection<DTOCartResponse>?> GetByUserId(Guid userId);
-    //Task<ICollection<Category>> GetByNameOrder();
-    //Task<int> AddProductToCategory(int id, ICollection<int> productIds);
 }

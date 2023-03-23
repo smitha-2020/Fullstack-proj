@@ -20,7 +20,6 @@ public class ImageService : BaseService<Image, DTOImage, DTOUpdateImage, DTOImag
         _productRepo = productRepo;
         _logger = logger;
         _mapper = mapper;
-
     }
 
     public async Task<int> AssignImagesToProduct(int productId, ICollection<int> images)

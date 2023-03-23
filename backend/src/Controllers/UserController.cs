@@ -57,4 +57,10 @@ public class UserController : ApiController
         }
         return Ok(new { isAvailable = false });
     }
+
+    [HttpDelete("{id}")]
+    public async Task<bool> Delete(Guid id)
+    {
+        return await _service.Delete(id);
+    }
 }

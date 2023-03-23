@@ -9,6 +9,4 @@ namespace backend.src.Services.CategoryService;
 public interface ICategoryService : IBaseService<Category, DTOCategory, DTOUpdateCategory, DTOCategoryResponse, DTOCategoryUpdatedResponse>
 {
     Task<ICollection<DTOCategoryImageResponse>> GetAllProductsByCategory(int categoryId);
-    //Task<ICollection<Category>> GetByNameOrder();
-    //Task<int> AddProductToCategory(int id, ICollection<int> productIds);
 }

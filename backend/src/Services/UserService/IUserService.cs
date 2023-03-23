@@ -10,5 +10,5 @@ public interface IUserService
     Task<DTOUserSignInResponse?> SingnInAsync(DTOUserSignIn request);
     Task<bool> IsEmailAvailable(string email);
     Task<DTOUserResponse?> GetByIdAsync(Guid id);
-    //Task<string?> GetPasswordHash(string email);
+    Task<bool> Delete(Guid id);
 }

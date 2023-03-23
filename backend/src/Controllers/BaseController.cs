@@ -1,11 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using backend.src.Services.BaseService;
 using backend.src.Repository.BaseRepo;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Authorization;
 
 namespace backend.src.Controllers;
-
 
 public abstract class BaseController<TModel, TCreateDto, TUpdateDto, TResponse, TUpdatedResponse> : ApiController
 {
@@ -20,14 +17,6 @@ public abstract class BaseController<TModel, TCreateDto, TUpdateDto, TResponse, 
     {
         return Ok(await _service.GetAllAsync(options));
     }
-
-    
-    [HttpGet("all")]
-    public virtual async Task<ActionResult<IEnumerable<TResponse>?>> GetAllData([FromBody] QueryOptions options)
-    {
-        return Ok(await _service.GetAllAsync(options));
-    }
-
 
     [HttpPost]
     public async Task<IActionResult> Create(TCreateDto item)
@@ -47,7 +36,7 @@ public abstract class BaseController<TModel, TCreateDto, TUpdateDto, TResponse, 
         return Ok(await _service.UpdateAsync(id, item));
     }
 
-    [HttpDelete("{id:int}")]
+    [HttpDelete("{id}")]
     public async Task<ActionResult> Delete(int id)
     {
         return Ok(await _service.DeleteAsync(id));

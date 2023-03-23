@@ -48,7 +48,7 @@ public class UserRepo : IUserRepo
     public async Task<User?> SingnUpAsync(DTOUserSignUp userdata, string password)
     {
         var userFull = await _userManager.FindByEmailAsync(userdata.Email);
-         var user = new User
+        var user = new User
         {
             FirstName = userdata.FirstName.Trim(),
             LastName = userdata.LastName.Trim(),
@@ -62,5 +62,20 @@ public class UserRepo : IUserRepo
     public Task<User?> UpdateOneAsync(Guid id, User update)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<User?> DeleteOne(Guid id)
+    {
+        var deleteOne = await GetByIdAsync(id);
+        if (deleteOne is null)
+        {
+            return null;
+        }
+        var result = await _userManager.DeleteAsync(deleteOne);
+        if (!result.Succeeded)
+        {
+            return null;
+        }
+        return deleteOne;
     }
 }

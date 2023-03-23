@@ -13,4 +13,5 @@ public interface IUserRepo
     Task<User?> SingnUpAsync(DTOUserSignUp user, string password);
     Task<bool> SingnInAsync(User request, string password);
     Task<User> IsUserEmail(string email);
+    Task<User?> DeleteOne(Guid id);
 }

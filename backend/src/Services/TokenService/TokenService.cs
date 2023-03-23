@@ -18,7 +18,6 @@ public class TokenService : ITokenService
     {
         _config = config;
         _userManager = userManager;
-
     }
     public async Task<DTOUserSignInResponse> GetTokenAsync(User user)
     {
@@ -35,7 +34,6 @@ public class TokenService : ITokenService
         {
             claims.Add(new Claim(ClaimTypes.Role, role));
         }
-        //var secret = user.PasswordHash;
         var secret = _config["jwt:Secret"];
 
         //Generate Secret
@@ -43,7 +41,7 @@ public class TokenService : ITokenService
             new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)), SecurityAlgorithms.HmacSha256);
 
         //var expiration_time = Double.TryParse(_config["jwt:Expiration"], out double a);
-        var expiration = DateTime.Now.AddHours(3);
+        var expiration = DateTime.Now.AddHours(9);
         //var expiration = DateTime.Now.AddHours(a);
 
         var token = new JwtSecurityToken(_config["jwt:Issuer"], _config["jwt:Aud"], claims, expires: expiration, signingCredentials: signkey);

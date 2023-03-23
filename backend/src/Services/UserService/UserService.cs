@@ -75,4 +75,14 @@ public class UserService : IUserService
         }
         return _mapper.Map<User, DTOUserResponse>(userData);
     }
+
+    public async Task<bool> Delete(Guid id)
+    {
+        var userData = await _repo.DeleteOne(id);
+        if (userData is null)
+        {
+            return false;
+        }
+        return true;
+    }
 }

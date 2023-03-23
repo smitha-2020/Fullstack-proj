@@ -33,7 +33,7 @@ public class RoleController : ApiController
         {
             return Ok($" {userId} is assigned roles.");
         }
-        return BadRequest("Either userId is already assigned or Invalid User or Invalid Role!!");
+        return BadRequest(new {Message = "Either userId is already assigned or Invalid User or Invalid Role!!"});
     }
 
     [HttpGet]

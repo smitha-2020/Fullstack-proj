@@ -16,12 +16,11 @@ public class ImageRepo : BaseRepo<Image>, IImageRepo
 
     public async Task<int> AssignImagesToProduct(Product product, ICollection<Image> images)
     {
-        _dbcontext.Entry(product).State = EntityState.Detached;
+        //_dbcontext.Entry(product).State = EntityState.Detached;
         foreach (var imageObj in images)
         {
             if (imageObj is not null)
             {
-                
                 product.ImageLink.Add(imageObj);
             }
         }

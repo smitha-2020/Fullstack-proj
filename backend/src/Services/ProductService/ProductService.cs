@@ -30,33 +30,40 @@ public class ProductService : BaseService<Product, DTOProduct, DTOUpdateProduct,
 
     public async override Task<IEnumerable<DTOProductResponse>?> GetAllAsync(QueryOptions? options)
     {
-
+        SortBy order;
         var result = await _repo.GetAllAsync();
-        if (options is null)
+        if (options is null && result is not null)
         {
-            return null;
+            return _mapper.Map<IEnumerable<Product>, IEnumerable<DTOProductResponse>>(result);
         }
-        if (options.Search is not null && options.Search.Length > 0)
+        if (options is not null)
         {
-            result = await _repo.GetBySearch(options.Search.Trim());
+            if (options.Search is not null && options.Search.Length > 0)
+            {
+                result = await _repo.GetBySearch(options.Search.Trim());
+            }
+            if (result is null)
+            {
+                return null;
+            }
+            if (Enum.TryParse<SortBy>(options.Sort!.ToUpper(), out order))
+            {
+                if (options.SortByProperty == "Title")
+                {
+                    result = await _repo.SortByOrder(order, result);
+                }
+                if (options.SortByProperty == "Price")
+                {
+                    Console.WriteLine(options.Sort);
+                    result = await _repo.SortByPrice(order, result);
+                }
+            }
+            result = result.Skip(options.Page * options.CardsPerPage).Take(options.CardsPerPage);
         }
         if (result is null)
         {
             return null;
         }
-        if (options.SortByProperty == "Title")
-        {
-            result = await _repo.SortBy(options, result);
-        }
-        if (options.SortByProperty == "Price")
-        {
-            result = await _repo.SortByPrice(options, result);
-        }
-        if (result is null)
-        {
-            return null;
-        }
-        result=result.Skip(options.Page*options.CardsPerPage).Take(options.CardsPerPage);
         return _mapper.Map<IEnumerable<Product>, IEnumerable<DTOProductResponse>>(result);
     }
 }

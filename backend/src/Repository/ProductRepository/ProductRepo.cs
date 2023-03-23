@@ -28,29 +28,37 @@ public class ProductRepo : BaseRepo<Product>, IProductRepo
             {
                 query.OrderByDescending(e => e.GetType().GetProperty(options.SortByProperty));
             }
-           else
+            else
             {
                 query.OrderByDescending(e => e.GetType().GetProperty(options.SortByProperty));
             }
         }
         query.Skip(options.Page).Take(options.CardsPerPage);
-        return await Task.Run(()=> query);
+        return await Task.Run(() => query);
     }
 
     public async Task<IEnumerable<Product>> GetBySearch(string searchText)
     {
-        return await Task.Run(() => DbSet.Where(e => e.Title.Contains(searchText)).ToArray());
-    
+        return await Task.Run(() => DbSet.Where(e => e.Title.ToLower().Contains(searchText.ToLower())).ToArray());
     }
 
-    public async Task<IEnumerable<Product>> SortBy(QueryOptions options,IEnumerable<Product> query)
+    public async Task<IEnumerable<Product>> SortByOrder(SortBy order, IEnumerable<Product> query)
     {
-        return await Task.Run(()=> query.OrderByDescending(e => e.Title).ToArray()); 
+        if (order == SortBy.DESC)
+        {
+            return await Task.Run(() => query.OrderByDescending(e => e.Title).ToArray());
+        }
+        return await Task.Run(() => query.OrderBy(e => e.Title).ToArray());
     }
 
-    public async Task<IEnumerable<Product>> SortByPrice(QueryOptions options,IEnumerable<Product> query)
+    public async Task<IEnumerable<Product>> SortByPrice(SortBy order, IEnumerable<Product> query)
     {
-        return await Task.Run(()=> query.OrderByDescending(e => e.Price).ToArray()); 
+        if (order == SortBy.DESC)
+        {
+            Console.WriteLine("Price");
+            return await Task.Run(() => query.OrderByDescending(e => e.Price).ToArray());
+        }
+        return await Task.Run(() => query.OrderBy(e => e.Price).ToArray());
     }
 
     public async Task<IEnumerable<Product>> SortByProperty(string property, SortBy order)
