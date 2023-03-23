@@ -21,10 +21,25 @@ using backend.src.MiddleWare;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.Configure<RouteOptions>(options =>
+        {
+            options.LowercaseUrls = true;
+        });
+
 builder.WebHost.UseKestrel(options =>
-    //options.ListenLocalhost(5000),
     options.ListenLocalhost(5001, options => options.UseHttps())
 );
+
+builder.Services.AddCors(options =>
+  {
+      options.AddPolicy("CorsPolicy",
+          builder => builder
+              .AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader());
+  });
+
+
 
 // Add database services to the container.
 builder.Services.AddDbContext<AppDBContext>();
@@ -103,6 +118,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("CorsPolicy");
+
+app.UseHttpsRedirection();
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
 //Adding Authentication
