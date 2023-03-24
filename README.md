@@ -12,7 +12,71 @@
 * Backend: ASP .NET Core, Entity Framework Core, PostgreSQL
 
 FrontEnd:
+
+Developed Endpoints for the ECommerce website.
+PostgreSQL as Database.
+EFCore ORM fr connecting c# application to database.
+
 Description:
+
+MiddleWare.
+Authentication and Authorization using IdentityFramework.
+AutoMapper for mapping across different requirement.
+ValidationAttribute for validating of DTO's.
+Custom Validation of DTOs.
+Made use of OOPs concepts(Encapsulation,Inheritance).
+Used Migration.
+
+Endpoints:
+Category:
+
+GET https://localhost:5001/categorys
+GET https://localhost:5001/categorys/{id}
+POST https://localhost:5001/categorys
+PUT https://localhost:5001/categorys/{id}
+DELETE  https://localhost:5001/categorys/{id}
+
+Product:
+
+POST https://localhost:5001/products
+GET https://localhost:5001/products/all
+GET https://localhost:5001/products?Search={searchtext}&SortByProperty={property}&CardsPerPage={pageend}&Page={pagestart}&Sort={sortorder}
+GET https://localhost:5001/products/{id}
+GET https://localhost:5001/categorys/{id}/products 
+PUT https://localhost:5001/products/{id}
+DELETE https://localhost:5001/products/{id}
+
+Roles:
+
+POST https://localhost:5001/roles
+POST https://localhost:5001/roles/{userId}/assign
+GET https://localhost:5001/roles
+DELETE https://localhost:5001/roles/{roleid}
+
+
+Images:
+
+POST https://localhost:5001/images
+POST https://localhost:5001/images/{productId}/assign
+GET https://localhost:5001/images
+DELETE https://localhost:5001/images/{id}
+
+Athentication:
+
+POST https://localhost:5001/signup
+
+Authentication:
+
+POST https://localhost:5001/signin
+GET https://localhost:5001/users/isavailable
+DELETE https://localhost:5001/users/{userId}
+
+Cart:
+
+POST https://localhost:5001/carts
+GET https://localhost:5001/carts/{userId}/products
+GET https://localhost:5001/carts
+DELETE https://localhost:5001/carts/{id}
 
 
 
