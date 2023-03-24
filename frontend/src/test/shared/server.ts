@@ -11,11 +11,11 @@ import {
 import { IAuthenticUser } from "../../types/userType";
 
 const handler = [
-  rest.get("https://api.escuelajs.co/api/v1/products", (req, res, ctx) => {
+  rest.get("https://localhost:5001/products/all", (req, res, ctx) => {
     return res(ctx.json(products));
   }),
   rest.put(
-    "https://api.escuelajs.co/api/v1/products/:id",
+    "https://localhost:5001/products/:id",
     async (req, res, ctx) => {
       const product: Partial<IProduct> = await req.json();
       const { id } = req.params;
@@ -53,7 +53,7 @@ const handler = [
   //   }
   // ),
   rest.post(
-    "https://api.escuelajs.co/api/v1/products",
+    "https://localhost:5001/products",
     async (req, res, ctx) => {
       const product: IProductDesc = await req.json();
       if (product.price < 0) {
@@ -82,7 +82,7 @@ const handler = [
   //   }
   // ),
   rest.get(
-    "https://api.escuelajs.co/api/v1/categories",
+    "https://localhost:5001/categorys",
     async (req, res, ctx) => {
       return res(ctx.json(categoryList));
     }

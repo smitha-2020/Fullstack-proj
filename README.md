@@ -11,7 +11,7 @@
 * Frontend: SASS, TypeScript, React, Redux Toolkit
 * Backend: ASP .NET Core, Entity Framework Core, PostgreSQL
 
-FrontEnd:
+# FrontEnd
 
 Developed Endpoints for the ECommerce website.
 PostgreSQL as Database.
@@ -29,15 +29,16 @@ Used Migration.
 
 Endpoints:
 Category:
-
+```sh
 GET https://localhost:5001/categorys
 GET https://localhost:5001/categorys/{id}
 POST https://localhost:5001/categorys
 PUT https://localhost:5001/categorys/{id}
 DELETE  https://localhost:5001/categorys/{id}
-
+```
 Product:
 
+```sh
 POST https://localhost:5001/products
 GET https://localhost:5001/products/all
 GET https://localhost:5001/products?Search={searchtext}&SortByProperty={property}&CardsPerPage={pageend}&Page={pagestart}&Sort={sortorder}
@@ -45,40 +46,46 @@ GET https://localhost:5001/products/{id}
 GET https://localhost:5001/categorys/{id}/products 
 PUT https://localhost:5001/products/{id}
 DELETE https://localhost:5001/products/{id}
+```
 
 Roles:
 
+```sh
 POST https://localhost:5001/roles
 POST https://localhost:5001/roles/{userId}/assign
 GET https://localhost:5001/roles
 DELETE https://localhost:5001/roles/{roleid}
-
+```
 
 Images:
 
+```sh
 POST https://localhost:5001/images
 POST https://localhost:5001/images/{productId}/assign
 GET https://localhost:5001/images
 DELETE https://localhost:5001/images/{id}
-
+```
 Athentication:
 
+```sh
 POST https://localhost:5001/signup
-
+```
 Authentication:
 
+```sh
 POST https://localhost:5001/signin
 GET https://localhost:5001/users/isavailable
 DELETE https://localhost:5001/users/{userId}
+```
 
 Cart:
 
+```sh
 POST https://localhost:5001/carts
 GET https://localhost:5001/carts/{userId}/products
 GET https://localhost:5001/carts
 DELETE https://localhost:5001/carts/{id}
-
-
+```
 
 
 Folder Structure
