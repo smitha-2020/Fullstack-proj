@@ -11,19 +11,173 @@
 * Frontend: SASS, TypeScript, React, Redux Toolkit
 * Backend: ASP .NET Core, Entity Framework Core, PostgreSQL
 
-You can follow the same topics as your backend project. It is also possible to select from different topic
+FrontEnd:
+Description:
 
-## Setting Up for folder `Backend`
 
-1. Create `appsettings.json` (and `appsettings.*.json` if needed) file in the root of folder `Backend`. You can refer to the content of file `example.json`
-2. Install all the needed packages:
-    * AutoMapper
-    * AutoMapper.Extensions.Microsoft.DependencyInjection
-    * Microsoft.EntityFrameworkCore
-    * Microsoft.EntityFrameworkCore.Design
-    * Npgsql.EntityFrameworkCore.PostgreSQL
-    \
-   *You can add more packages when necessary.*
+
+
+Folder Structure
+```sh
+C:.
+│   api.http
+│   appsettings.Development.json
+│   appsettings.json
+│   backend.csproj
+│   Program.cs
+│
+├───Mapper
+│       BaseMapper.cs
+│       CartMapper.cs
+│       CategoryMapper.cs
+│       ImageMapper.cs
+│       ProductCategoryExtension.cs
+│       ProductMapper.cs
+│       UserExtension.cs
+│       UserMapper.cs
+│
+├───Migrations
+│       20230321114342_initial_commit.cs
+│       20230321114342_initial_commit.Designer.cs
+│       AppDBContextModelSnapshot.cs
+└───src
+    ├───Controllers
+    │       ApiController.cs
+    │       BaseController.cs
+    │       CartController.cs
+    │       CategoryController.cs
+    │       ImageController.cs
+    │       ProductController.cs
+    │       RoleController.cs
+    │       UserController.cs
+    │
+    ├───DB
+    │       AppDBContext.cs
+    │       AppDBContextInterceptor.cs
+    │       IdentityConfigExtension.cs
+    │       ModelConfiguration.cs
+    │
+    ├───DTOs
+    │   │   BaseDTO.cs
+    │   │   DTOAssignImageToPoduct.cs
+    │   │   DTOCart.cs
+    │   │   DTOCategory.cs
+    │   │   DTOCreateUser.cs
+    │   │   DTOImage.cs
+    │   │   DTOProduct.cs
+    │   │   DTOUpdateCart.cs
+    │   │   DTOUpdateCategory.cs
+    │   │   DTOUpdateImage.cs
+    │   │   DTOUpdateProduct.cs
+    │   │   DTOUserSignIn.cs
+    │   │   DTOUserSignUp.cs
+    │   │
+    │   ├───DTORequest
+    │   │       DTOEmail.cs
+    │   │       DTORole.cs
+    │   │
+    │   └───DTOResponse
+    │           DTOCartResponse.cs
+    │           DTOCartUpdatedResponse.cs
+    │           DTOCategoryImageResponse.cs
+    │           DTOCategoryProductResponse.cs
+    │           DTOCategoryResponse.cs
+    │           DTOCategoryUpdatedResponse.cs
+    │           DTOImageResponse.cs
+    │           DTOImageUpdatedResponse.cs
+    │           DTOProductCategoryResponse.cs
+    │           DTOProductResponse.cs
+    │           DTOProductUpdatedResponse.cs
+    │           DTOUserResponse.cs
+    │           DTOUserSignInResponse.cs
+    │
+    ├───Helpers
+    │       ServiceException.cs
+    │
+    ├───MiddleWare
+    │       ErrorHandlerMiddleware.cs
+    │
+    ├───Models
+    │       BaseModel.cs
+    │       Cart.cs
+    │       Category.cs
+    │       Image.cs
+    │       Product.cs
+    │       Rating.cs
+    │       User.cs
+    │
+    ├───ModelValidation
+    │       EnsureMandatoryFieldsActionFilter.cs
+    │       User_EnsurePasswordsMatch.cs
+    │
+    ├───Repository
+    │   ├───BaseRepo
+    │   │       BaseRepo.cs
+    │   │       IBaseRepo.cs
+    │   │       ITokenRepo.cs
+    │   │
+    │   ├───CartRepository
+    │   │   │   CartRepo.cs
+    │   │   │
+    │   │   └───Cart
+    │   │           ICartRepo.cs
+    │   │
+    │   ├───CategoryRepository
+    │   │       CategoryRepo.cs
+    │   │       ICategoryRepo.cs
+    │   │
+    │   ├───ImageRepository
+    │   │       IImageRepo.cs
+    │   │       ImageRepo.cs
+    │   │
+    │   ├───ProductRepository
+    │   │       IProductRepo.cs
+    │   │       ProductRepo.cs
+    │   │
+    │   ├───RoleRepository
+    │   │       IRoleRepo.cs
+    │   │       RoleRepo.cs
+    │   │
+    │   └───UserRepository
+    │           IUserRepo.cs
+    │           UserRepo.cs
+    │
+    └───Services
+        ├───BaseService
+        │       BaseService.cs
+        │       IBaseService.cs
+        │       IUserService.cs
+        │
+        ├───CartService
+        │       CartService.cs
+        │       ICartService.cs
+        │
+        ├───CategoryService
+        │       CategoryService.cs
+        │       ICategoryService.cs
+        │
+        ├───ImageService
+        │       IImageService.cs
+        │       ImageService.cs
+        │
+        ├───ProductService
+        │       IProductService.cs
+        │       ProductService.cs
+        │
+        ├───RoleService
+        │       IRoleService.cs
+        │       RoleService.cs
+        │
+        ├───TokenService
+        │       ITokenService.cs
+        │       TokenService.cs
+        │
+        └───UserService
+                IUserService.cs
+                UserService.cs
+```
+
+
 3. You can change .NET Core version to be compatible with your local machine
 
 ## Requirements
