@@ -1,0 +1,75 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+  color: #666666;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  margin-top: 10px;
+  background-size: contain;
+}
+
+.successMsg {
+  font-size: 10px;
+  color: green;
+}
+
+.errorwarnings {
+  font-size: 10px;
+  color: red;
+}
+
+.avatarImg {
+  border-radius: "50%";
+}
+
+.navlinkfont {
+  color: "gray";
+  font-size: "12px";
+}
+
+.navlinkcolor {
+  color: gray;
+}
+
+.grayfill {
+  fill: "gray";
+}
+
+.whitefill {
+  color: "white";
+}
+
+.icons {
+  fill: "orange";
+  color: "orange";
+}
+
+.grayfill-circle {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  fill: "gray";
+}
+
+.NavBtn {
+  background-color: purple;
+  padding: 10px;
+}
+
+.centered-icon {
+  text-align: center;
+}
+
+.home-img {
+  fill: #0059b3;
+}
+
+/*# sourceMappingURL=main.css.map */
