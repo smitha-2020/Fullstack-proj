@@ -12,13 +12,13 @@
 * Backend: ASP .NET Core, Entity Framework Core, PostgreSQL
 
 # FrontEnd
-
+```sh
 Developed Endpoints for the ECommerce website.
 PostgreSQL as Database.
 EFCore ORM fr connecting c# application to database.
-
+```
 Description:
-
+```sh
 MiddleWare.
 Authentication and Authorization using IdentityFramework.
 AutoMapper for mapping across different requirement.
@@ -26,6 +26,7 @@ ValidationAttribute for validating of DTO's.
 Custom Validation of DTOs.
 Made use of OOPs concepts(Encapsulation,Inheritance).
 Used Migration.
+```
 
 Endpoints:
 Category:
