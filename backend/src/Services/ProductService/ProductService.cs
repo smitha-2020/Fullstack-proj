@@ -66,4 +66,14 @@ public class ProductService : BaseService<Product, DTOProduct, DTOUpdateProduct,
         }
         return _mapper.Map<IEnumerable<Product>, IEnumerable<DTOProductResponse>>(result);
     }
+
+    public async Task<IEnumerable<DTOProductResponse>?> GetAllProductsAsync()
+    {
+        var result = await _repo.GetAllProductsAsync();
+        if (result is null)
+        {
+            return null;
+        }
+        return _mapper.Map<IEnumerable<Product>, IEnumerable<DTOProductResponse>>(result);
+    }
 }

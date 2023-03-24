@@ -7,6 +7,7 @@ public interface IProductRepo : IBaseRepo<Product>
 {
     Task<IEnumerable<Product>> GetBySearch(string searchText);
     Task<IEnumerable<Product>?> GetAllAsync();
+    Task<IEnumerable<Product>?> GetAllProductsAsync();
     Task<IEnumerable<Product>> SortByOrder(SortBy order, IEnumerable<Product> query);
     Task<IEnumerable<Product>> SortByPrice(SortBy order, IEnumerable<Product> query);
     Task<IEnumerable<Product>> SortByProperty(string property, SortBy order);

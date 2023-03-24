@@ -1,3 +1,4 @@
+using backend.src.DTOs;
 using backend.src.DTOs.DTOResponse;
 using backend.src.Models;
 using Microsoft.EntityFrameworkCore;
@@ -28,6 +29,7 @@ public static class ModelConfiguration
     public static void ConfigureCategory(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<DTOCategoryProductResponse>().Navigation(x => x.Products).AutoInclude();
+        modelBuilder.Entity<DTOProductResponse>().Navigation(x => x.Category).AutoInclude();
         modelBuilder.Entity<Category>().Navigation(x => x.Products).AutoInclude();
     }
 }

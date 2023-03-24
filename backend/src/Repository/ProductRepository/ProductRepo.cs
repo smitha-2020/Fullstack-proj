@@ -37,6 +37,11 @@ public class ProductRepo : BaseRepo<Product>, IProductRepo
         return await Task.Run(() => query);
     }
 
+    public async Task<IEnumerable<Product>?> GetAllProductsAsync()
+    {
+       return await Task.Run(() => _dbcontext.Products.OrderBy(e => e.Title).ToArray());
+    }
+
     public async Task<IEnumerable<Product>> GetBySearch(string searchText)
     {
         return await Task.Run(() => DbSet.Where(e => e.Title.ToLower().Contains(searchText.ToLower())).ToArray());

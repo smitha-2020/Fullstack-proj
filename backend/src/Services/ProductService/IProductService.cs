@@ -9,6 +9,7 @@ namespace backend.src.Services.ProductService;
 public interface IProductService : IBaseService<Product, DTOProduct, DTOUpdateProduct, DTOProductResponse,DTOProductUpdatedResponse>
 {
     Task<IEnumerable<DTOProductResponse>?> GetAllAsync();
+     Task<IEnumerable<DTOProductResponse>?> GetAllProductsAsync();
     
     //Task<ICollection<Category>> GetByNameOrder();
     //Task<int> AddProductToCategory(int id, ICollection<int> productIds);

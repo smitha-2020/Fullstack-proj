@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.src.Controllers;
 
-[Authorize(Roles = "Admin")]
+//[Authorize(Roles = "Admin")]
 public class ProductController : BaseController<Product, DTOProduct, DTOUpdateProduct, DTOProductResponse, DTOProductUpdatedResponse>
 {
     private readonly IProductService _service;
@@ -21,12 +21,18 @@ public class ProductController : BaseController<Product, DTOProduct, DTOUpdatePr
     }
 
     [HttpGet]
-    public override async Task<ActionResult<IEnumerable<DTOProductResponse>?>> GetAll([FromBody] QueryOptions? options)
+    public override async Task<ActionResult<IEnumerable<DTOProductResponse>?>> GetAll([FromQuery] QueryOptions? options)
     {
         if(options is null){
             return Ok(await _service.GetAllAsync());
         }
         return Ok(await _service.GetAllAsync(options));
+    }
+
+    [HttpGet("all")]
+    public async Task<ActionResult<IEnumerable<DTOProductResponse>?>> GetAllProducts()
+    {
+        return Ok(await _service.GetAllProductsAsync());
     }
 
     [HttpPut("{id:int}")]
