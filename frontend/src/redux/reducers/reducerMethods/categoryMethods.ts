@@ -31,18 +31,18 @@ export const fetchAllCategories = createAsyncThunk(
 //             return error
 //         }
 //     })
-// export const createCategory = createAsyncThunk(
-//     "createCategory",
-//     async (category: ICategory) => {
-//         try {
-//             const res: AxiosResponse<ICategory, any> = await axios.post('https://api.escuelajs.co/api/v1/categories/', category)
-//             return res.data;
-//         }
-//         catch (e) {
-//             const error = e as AxiosError
-//             return error
-//         }
-//     })
+export const createCategory = createAsyncThunk(
+    "createCategory",
+    async (category: ICategory) => {
+        try {
+            const res: AxiosResponse<ICategory, any> = await axios.post('https://localhost:5001/products', category)
+            return res.data;
+        }
+        catch (e) {
+            const error = e as AxiosError
+            return error
+        }
+    })
 //     export const updateCategory = createAsyncThunk(
 //         "updateCategory",
 //         async (data: ICategory) => {

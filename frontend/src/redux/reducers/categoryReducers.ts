@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios';
 import { ICategory } from '../../types/productType';
-import { fetchAllCategories } from './reducerMethods/categoryMethods';
+import { fetchAllCategories,createCategory } from './reducerMethods/categoryMethods';
 
-// getSingleCategory, createCategory, updateCategory,deleteCategory
+// getSingleCategory, , updateCategory,deleteCategory
 
 const initialState: ICategory[] = [];
 
@@ -30,17 +30,17 @@ const categorySlice = createSlice({
             //         }
             //     }
             // })
-            // .addCase(createCategory.fulfilled, (state, action) => {
-            //     if (action.payload instanceof AxiosError) {
-            //         return state;
-            //     } else {
-            //         if (action.payload && "name" in action.payload) {
-            //             return [...state, action.payload]
-            //         } else {
-            //             return state;
-            //         }
-            //     }
-            // })
+            .addCase(createCategory.fulfilled, (state, action) => {
+                if (action.payload instanceof AxiosError) {
+                    return state;
+                } else {
+                    if (action.payload && "name" in action.payload) {
+                        return [...state, action.payload]
+                    } else {
+                        return state;
+                    }
+                }
+            })
             // .addCase(updateCategory.fulfilled, (state, action) => {
             //     if (action.payload instanceof AxiosError) {
             //         return state;

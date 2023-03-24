@@ -37,53 +37,83 @@ export const data = {
 }
 export const products = [
     {
-        id: 13,
-        title: "Incredible Metal Bacon",
-        price: 317,
-        description: "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
-        images: [
-            "https://api.lorem.space/image/watch?w=640&h=480&r=9003",
-            "https://api.lorem.space/image/watch?w=640&h=480&r=375",
-            "https://api.lorem.space/image/watch?w=640&h=480&r=6293"
-        ],
-        category: {
-            id: 2,
-            name: "Electronics",
-            image: "https://api.lorem.space/image/watch?w=640&h=480&r=9863",
-        }
-    },
-    {
-        id: 12,
-        title: "Awesome Frozen Salad",
-        price: 444,
-        description: "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-        images: [
-            "https://api.lorem.space/image/watch?w=640&h=480&r=8808",
-            "https://api.lorem.space/image/watch?w=640&h=480&r=6980",
-            "https://api.lorem.space/image/watch?w=640&h=480&r=1512"
-        ],
-        category: {
-            id: 2,
-            name: "Electronics",
-            image: "https://api.lorem.space/image/watch?w=640&h=480&r=6865",
-        }
-    },
-    {
-        id: 1,
-        title: "Twesome Frozen Salad22",
-        price: 600,
-        description: "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
-        images: [
-            "https://api.lorem.space/image/watch?w=640&h=480&r=8808",
-            "https://api.lorem.space/image/watch?w=640&h=480&r=6980",
-            "https://api.lorem.space/image/watch?w=640&h=480&r=1512"
-        ],
-        category: {
-            id: 1,
-            name: "Electronics",
-            image: "https://api.lorem.space/image/watch?w=640&h=480&r=6865",
-        }
-    },
+		id: 29,
+		title: "Best Home Trendy Furniture",
+		price: 500,
+		description: "Best Home Trendy Furniture",
+		categoryId: 16,
+		category: {
+			id: 16,
+			name: "Furniture",
+			image: "https://cdn.lorem.space/images/furniture/.cache/640x480/paul-weaver-nWidMEQsnAQ-unsplash.jpg"
+		},
+		imageLink: [
+			{
+				id: 47,
+				imageURL: "https://cdn.lorem.space/images/furniture/.cache/640x480/scopic-ltd-NLlWwR4d3qU-unsplash.jpg"
+			},
+			{
+				id: 48,
+				imageURL: "https://cdn.lorem.space/images/furniture/.cache/640x480/vincent-botta-J41ffLK_OSM-unsplash.jpg"
+			},
+			{
+				id: 49,
+				imageURL: "https://cdn.lorem.space/images/furniture/.cache/640x480/minh-pham-OtXADkUh3-I-unsplash.jpg"
+			}
+		]
+	},
+	{
+		id: 26,
+		title: "Sofesticated Artificial Pink Floral skirt",
+		price: 100,
+		description: "SofesticatedArtificial Pink Floral skirt",
+		categoryId: 2,
+		category: {
+			id: 2,
+			name: "Women's Clothing",
+			image: "https://source.unsplash.com/164_6wVEHfI"
+		},
+		imageLink: [
+			{
+				id: 37,
+				imageURL: "https://cdn.lorem.space/images/furniture/.cache/640x480/rabie-madaci-4iwG8QD17AE-unsplash.jpg"
+			},
+			{
+				id: 39,
+				imageURL: "https://cdn.lorem.space/images/furniture/.cache/640x480/eugene-chystiakov-3neSwyntbQ8-unsplash.jpg"
+			},
+			{
+				id: 40,
+				imageURL: "https://cdn.lorem.space/images/furniture/.cache/640x480/minh-pham-OtXADkUh3-I-unsplash.jpg"
+			}
+		]
+	},
+	{
+		id: 27,
+		title: "Trendy Jacket With Diamond Studs",
+		price: 500,
+		description: "Trendy Jacket With Diamond Studs",
+		categoryId: 2,
+		category: {
+			id: 2,
+			name: "Women's Clothing",
+			image: "https://source.unsplash.com/164_6wVEHfI"
+		},
+		imageLink: [
+			{
+				id: 41,
+				imageURL: "https://cdn.lorem.space/images/fashion/.cache/640x480/mike-von-TPUGbQmyVwE-unsplash.jpg"
+			},
+			{
+				id: 42,
+				imageURL: "https://cdn.lorem.space/images/fashion/.cache/640x480/wesley-tingey-3mGnYRUNIck-unsplash.jpg"
+			},
+			{
+				id: 43,
+				imageURL: "https://cdn.lorem.space/images/fashion/.cache/640x480/brooke-cagle-z1B9f48F5dc-unsplash.jpg"
+			}
+		]
+	}
 ]
 export const categoryList:ICategory[] = [
     {
