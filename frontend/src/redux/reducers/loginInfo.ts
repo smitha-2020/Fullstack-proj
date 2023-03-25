@@ -72,12 +72,12 @@ const loginSlice = createSlice({
                 state.isLogin = false;
                 return state
             })
-            .addCase(uploadImagefromForm.fulfilled, (state, action) => {
-                state.user = action.payload;
-                if (action.payload) {
-                    state.isRegistered = true;
-                }
-            })
+            // .addCase(uploadImagefromForm.fulfilled, (state, action) => {
+            //     state.user = action.payload;
+            //     if (action.payload) {
+            //         state.isRegistered = true;
+            //     }
+            // })
             .addCase(uploadImagefromForm.rejected, (state, action) => {
                 return state;
             })

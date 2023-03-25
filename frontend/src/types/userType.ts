@@ -21,10 +21,12 @@ export interface IRegisteredUser {
     isLoading:boolean
 }
 export type Inputs = {
-    name: string,
+    username: string,
+    firstname: string,
+    lastname: string,
     email: string,
     password: string,
-    repassword?: string,
+    confirmpassword?: string,
     avatar: FileList
 }
 export interface ILoginData {
