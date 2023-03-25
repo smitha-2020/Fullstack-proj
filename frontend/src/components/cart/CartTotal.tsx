@@ -4,7 +4,7 @@ import Typography from '@mui/material/Typography';
 
 const CartTotal = () => {
     const cart = useAppSelector(state => { return state.cartReducer; })
-    const carttotal = cart.reduce((acc, cartElement) => { return acc + (cartElement.product.price * cartElement.quantity) }, 0)
+    const carttotal = cart.reduce((acc, cartElement) => { return acc + (cartElement.products.price * cartElement.quantity) }, 0)
     return (
         <>
             <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" sx={{ minHeight: '10px', minWidth: '100vw',backgroundColor:'primary.main' }}>

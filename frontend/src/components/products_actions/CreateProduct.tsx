@@ -7,7 +7,6 @@ import {IProductBase } from '../../types/productType';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 //import { addingProduct } from '../../redux/reducers/reducerMethods/productMethods';
 
-
 const CreateProduct = () => {
   const navigate = useNavigate();
   const { register, handleSubmit, reset, watch, formState: { errors } } = useForm<IProductBase>({

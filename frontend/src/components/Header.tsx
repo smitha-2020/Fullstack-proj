@@ -20,7 +20,7 @@ const Header = () => {
     const authentication: IAuthenticUser = useAppSelector(state => state.auhtReducer)
     const switchcheck: ImodeCheck = useAppSelector(state => state.switchReducer)
     const cart = useAppSelector(state => { return state.cartReducer; })
-    const carttotal=cart.filter((cartElement) => cartElement.userInfo.id === authentication.id).reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
+    //const carttotal=cart.filter((cartElement) => cartElement.userInfo.id === authentication.id).reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
     //const carttotal = cart.reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
     const dispatch = useAppDispatch();
     const deleteSession = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
@@ -135,9 +135,9 @@ const Header = () => {
                             <Button sx={{ my: 2, color: 'gray', display: 'block' }}>
                                 <NavLink className="navlinkcolor" to="/register"><FaUserAlt /></NavLink>
                             </Button>
-                            <Button sx={{ my: 2, color: 'gray', display: 'block' }}>
+                            {/* <Button sx={{ my: 2, color: 'gray', display: 'block' }}>
                                 <NavLink to="/cart" className="navlinkcolor"><BsBasketFill className="grayfill" /><span className="grayfill-circle">{carttotal}</span></NavLink>
-                            </Button>
+                            </Button> */}
                         </Box>
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">

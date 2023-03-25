@@ -15,6 +15,7 @@ const IndividualProduct = ({ products }: { products: IProduct[] }) => {
   let { id } = useParams();
   let images: imageLink[] = [];
   let img: ICategory = {id: 0, name: "", image: "" };
+  let userId:string = "fb23e582-09e3-46ed-b471-410ff012b2d7";
   // let rating: number = 0;
   // let reviews: number = 0;
   //let image: Category = { id: 0, name: "", image: "" };
@@ -43,10 +44,11 @@ const IndividualProduct = ({ products }: { products: IProduct[] }) => {
       // rating = data.rating.rate;
       // reviews = data.rating.count;
     })
-
   }
+
   if (price && description && title) {
     let idPass: string = (id) ? id : "";
+  
     return (
       <>
         <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" sx={{ minHeight: '100vh', minWidth: '100vw',backgroundColor:'primary.main' }}>
@@ -96,7 +98,7 @@ const IndividualProduct = ({ products }: { products: IProduct[] }) => {
                 <Grid item sx={{ marginTop: '20px', fontSize: '12px', fontWeight: '400' }}>Brand: {title}</Grid>
                 <Grid item sx={{ border: "1px solid gray", marginTop: '20px' }}></Grid>
                 <Grid item>
-                  <AddToCart products={newdata} id={idPass} />
+                  <AddToCart products={newdata} id={idPass} userId={userId} />
                 </Grid>
               </Grid>
             </Grid>

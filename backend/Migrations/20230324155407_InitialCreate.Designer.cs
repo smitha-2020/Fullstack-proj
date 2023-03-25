@@ -12,8 +12,8 @@ using backend.src.DB;
 namespace backend.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    [Migration("20230321114342_initial_commit")]
-    partial class initial_commit
+    [Migration("20230324155407_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -25,7 +25,7 @@ namespace backend.Migrations
             NpgsqlModelBuilderExtensions.HasPostgresEnum(modelBuilder, "sort_by", new[] { "asc", "desc" });
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("backend.src.DTOs.DTOProductCategoryResponse", b =>
+            modelBuilder.Entity("backend.src.DTOs.DTOProductResponse", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,6 +33,10 @@ namespace backend.Migrations
                         .HasColumnName("id");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("integer")
+                        .HasColumnName("category_id");
 
                     b.Property<int?>("DTOCategoryProductResponseId")
                         .HasColumnType("integer")
@@ -53,12 +57,15 @@ namespace backend.Migrations
                         .HasColumnName("title");
 
                     b.HasKey("Id")
-                        .HasName("pk_dto_product_category_response");
+                        .HasName("pk_dto_product_response");
+
+                    b.HasIndex("CategoryId")
+                        .HasDatabaseName("ix_dto_product_response_category_id");
 
                     b.HasIndex("DTOCategoryProductResponseId")
-                        .HasDatabaseName("ix_dto_product_category_response_dto_category_product_response");
+                        .HasDatabaseName("ix_dto_product_response_dto_category_product_response_id");
 
-                    b.ToTable("dto_product_category_response", (string)null);
+                    b.ToTable("dto_product_response", (string)null);
                 });
 
             modelBuilder.Entity("backend.src.DTOs.DTOResponse.DTOCategoryProductResponse", b =>
@@ -88,6 +95,31 @@ namespace backend.Migrations
                     b.ToTable("dto_category_product_response", (string)null);
                 });
 
+            modelBuilder.Entity("backend.src.DTOs.DTOResponse.DTOCategoryResponse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("image");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.HasKey("Id")
+                        .HasName("pk_dto_category_response");
+
+                    b.ToTable("dto_category_response", (string)null);
+                });
+
             modelBuilder.Entity("backend.src.DTOs.DTOResponse.DTOImageResponse", b =>
                 {
                     b.Property<int>("Id")
@@ -97,6 +129,10 @@ namespace backend.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("DTOProductResponseId")
+                        .HasColumnType("integer")
+                        .HasColumnName("dto_product_response_id");
+
                     b.Property<string>("ImageURL")
                         .IsRequired()
                         .HasColumnType("text")
@@ -104,6 +140,9 @@ namespace backend.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_dto_image_response");
+
+                    b.HasIndex("DTOProductResponseId")
+                        .HasDatabaseName("ix_dto_image_response_dto_product_response_id");
 
                     b.ToTable("dto_image_response", (string)null);
                 });
@@ -271,6 +310,11 @@ namespace backend.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("access_failed_count");
 
+                    b.Property<string>("Avatar")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("avatar");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("text")
@@ -287,14 +331,12 @@ namespace backend.Migrations
 
                     b.Property<string>("FirstName")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)")
+                        .HasColumnType("text")
                         .HasColumnName("first_name");
 
                     b.Property<string>("LastName")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("character varying(30)")
+                        .HasColumnType("text")
                         .HasColumnName("last_name");
 
                     b.Property<bool>("LockoutEnabled")
@@ -534,12 +576,21 @@ namespace backend.Migrations
                     b.ToTable("user_tokens", (string)null);
                 });
 
-            modelBuilder.Entity("backend.src.DTOs.DTOProductCategoryResponse", b =>
+            modelBuilder.Entity("backend.src.DTOs.DTOProductResponse", b =>
                 {
+                    b.HasOne("backend.src.DTOs.DTOResponse.DTOCategoryResponse", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_dto_product_response_dto_category_response_category_id");
+
                     b.HasOne("backend.src.DTOs.DTOResponse.DTOCategoryProductResponse", null)
                         .WithMany("Products")
                         .HasForeignKey("DTOCategoryProductResponseId")
-                        .HasConstraintName("fk_dto_product_category_response_dto_category_product_response");
+                        .HasConstraintName("fk_dto_product_response_dto_category_product_response_dto_cate");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("backend.src.DTOs.DTOResponse.DTOCategoryProductResponse", b =>
@@ -554,6 +605,14 @@ namespace backend.Migrations
                     b.Navigation("Image");
                 });
 
+            modelBuilder.Entity("backend.src.DTOs.DTOResponse.DTOImageResponse", b =>
+                {
+                    b.HasOne("backend.src.DTOs.DTOProductResponse", null)
+                        .WithMany("ImageLink")
+                        .HasForeignKey("DTOProductResponseId")
+                        .HasConstraintName("fk_dto_image_response_dto_product_response_dto_product_response_id");
+                });
+
             modelBuilder.Entity("backend.src.Models.Cart", b =>
                 {
                     b.HasOne("backend.src.Models.Product", "Products")
@@ -563,7 +622,7 @@ namespace backend.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_cart_products_product_id");
 
-                    b.HasOne("backend.src.Models.User", "User")
+                    b.HasOne("backend.src.Models.User", "Users")
                         .WithMany("Carts")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -572,7 +631,7 @@ namespace backend.Migrations
 
                     b.Navigation("Products");
 
-                    b.Navigation("User");
+                    b.Navigation("Users");
                 });
 
             modelBuilder.Entity("backend.src.Models.Product", b =>
@@ -659,6 +718,11 @@ namespace backend.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_user_tokens_user_user_id");
+                });
+
+            modelBuilder.Entity("backend.src.DTOs.DTOProductResponse", b =>
+                {
+                    b.Navigation("ImageLink");
                 });
 
             modelBuilder.Entity("backend.src.DTOs.DTOResponse.DTOCategoryProductResponse", b =>

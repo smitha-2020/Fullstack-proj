@@ -19,5 +19,11 @@ public class CartController : BaseController<Cart, DTOCart, DTOUpdateCart, DTOCa
     public async Task<ActionResult<DTOCartResponse?>> GetCartData(Guid id)
     {
         return Ok(await _service.GetByUserId(id));
-    }    
+    }
+
+    [HttpGet("isavailable/{id}")]
+    public async Task<IActionResult> GetCartItemIsAvailable(int id)
+    {
+        return Ok(await _service.IsAvailableeInCart(id));
+    }
 }

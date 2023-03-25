@@ -31,4 +31,11 @@ export interface ILoginData {
     email: string,
     password: string
 }
+export interface IUserResponse {
+    firstName: string,
+    lastName: string,
+    username: string,
+    email: string,
+    avatar: string
+}
 

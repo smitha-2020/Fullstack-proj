@@ -5,6 +5,9 @@ import { FaStarHalfAlt, FaStar } from "react-icons/fa";
 
 const Star = () => {
     const star = 4.5;
+    const min=1;
+    const max=100;
+    let keyId = (Math.random() * (max - min))
     const ratingStar = Array.from({ length: 5 }, (v, i) => {
         let number = i + 0.5; // 0.5,1.5,2.5...
         return (<>

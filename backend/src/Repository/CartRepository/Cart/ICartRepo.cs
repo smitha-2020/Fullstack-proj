@@ -8,4 +8,5 @@ namespace backend.src.Repository.CartRepository;
 public interface ICartRepo : IBaseRepo<Cart>
 {
     Task<ICollection<Cart>?> GetByUserId(Guid userId);
+    Task<ICollection<Cart>?> IsAlreadyAvailable(int id);
 }

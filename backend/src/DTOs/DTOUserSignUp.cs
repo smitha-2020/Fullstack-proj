@@ -13,6 +13,9 @@ public class DTOUserSignUp
 
     [EmailAddress]
     public string Email { get; set; } = null!;
+
+    [Url]
+    public string Avatar { get; set; } = null!;
     
     //Custom Validation
     [User_EnsurePasswordsMatch(ErrorMessage ="Password and Confirm Password do not Match")]

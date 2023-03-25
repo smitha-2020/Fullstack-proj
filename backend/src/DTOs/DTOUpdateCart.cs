@@ -1,8 +1,8 @@
-using backend.src.Models;
+// using backend.src.Models;
 
-namespace backend.src.DTOs;
+// namespace backend.src.DTOs;
 
-public class DTOUpdateCart
-{
-    public Guid UserId { get; set; }
-}
+// public class DTOUpdateCart
+// {
+//     public Guid UserId { get; set; }
+// }

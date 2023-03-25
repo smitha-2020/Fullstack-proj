@@ -10,5 +10,6 @@ public class CartMapper : BaseMapper
     {
         CreateMap<DTOCart, Cart>();
         CreateMap<Cart, DTOCartResponse>();
+        CreateMap<DTOUpdateCart, Cart>();
     }
 }

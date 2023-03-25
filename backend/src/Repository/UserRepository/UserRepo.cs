@@ -53,7 +53,8 @@ public class UserRepo : IUserRepo
             FirstName = userdata.FirstName.Trim(),
             LastName = userdata.LastName.Trim(),
             UserName = userdata.Email.Trim(),
-            Email = userdata.Email.Trim()
+            Email = userdata.Email.Trim(),
+            Avatar = userdata.Avatar.Trim()
         };
         var userData = await _userManager.CreateAsync(user, password);
         return await _userManager.FindByEmailAsync(userdata.Email);

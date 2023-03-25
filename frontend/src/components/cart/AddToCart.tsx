@@ -2,15 +2,16 @@ import React, { useState } from 'react'
 import { Button } from "@mui/material";
 import ToggleButton from './ToggleButton';
 import styled from "@emotion/styled";
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import { IProduct } from '../../types/productType';
-import {ICart} from '../../types/cartType';
+import {ICart, ICartInput, ICartResponse} from '../../types/cartType';
 import { IAuthenticUser } from '../../types/userType';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
-import { addToCart } from '../../redux/reducers/cartReducer';
+import { addingToCart } from '../../redux/reducers/reducerMethods/cartMethod';
+//import { addToCart } from '../../redux/reducers/cartReducer';
 
-const AddToCart = ({ products,id }: { products: IProduct,id:string }) => {
+const AddToCart = ({ products,id,userId }: { products: IProduct,id:string,userId:string }) => {
     const ButtonNew = styled(Button)({
         backgroundColor: "darkgray",
         color: "white",
@@ -32,21 +33,37 @@ const AddToCart = ({ products,id }: { products: IProduct,id:string }) => {
         backgroundColor: "lightblue",
         color: "gray"
     });
-    const data: ICart = {
-        quantity: amount,
-        product: products,
-        userInfo:authentication
-    }
+
+    // function handleClick() {
+    //     let cartItem:ICartInput = {
+    //         userId: userId,
+    //         ProductId: id,
+    //         quantity:amount
+    //     }
+    //     dispatch(addingToCart(cartItem));
+       
+    //   }
+
+    // const data: ICart = {
+    //     quantity: amount,
+    //     product: products,
+    //     userInfo:authentication
+    // }
     const addCart = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-         console.log({...data})
-         dispatch(addToCart({ ...data }))  
+        let cartItem:ICartInput = {
+            userId: userId,
+            ProductId: id,
+            quantity:amount
+        }
+         console.log({...cartItem})
+         dispatch(addingToCart(cartItem)); 
 
     }
     return (
         <>
             <ToggleButton amount={amount} setIncrease={setIncrease} setDecrease={setDecrease} />
-            <NavLink to="/cart" onClick={(e) => { addCart(e) }}>
-                <Button variant='contained' style={{backgroundColor: "darkgray",color: "white",marginTop: "20px"}}>Add To Cart</Button>
+            <NavLink to="/cart" onClick={(e) => { addCart(e) }}> 
+                <Button variant='contained' style={{backgroundColor: "darkgray",color: "white",marginTop: "20px"}} >Add To Cart</Button>
             </NavLink>
         </>
     )

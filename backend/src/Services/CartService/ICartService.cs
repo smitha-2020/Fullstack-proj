@@ -9,4 +9,5 @@ namespace backend.src.Services.CartService;
 public interface ICartService : IBaseService<Cart, DTOCart, DTOUpdateCart, DTOCartResponse, DTOCartUpdatedResponse>
 {
     Task<ICollection<DTOCartResponse>?> GetByUserId(Guid userId);
+    Task<bool> IsAvailableeInCart(int id);
 }

@@ -16,6 +16,8 @@ import Register from './Pages/Register'
 import { fetchSession } from './redux/reducers/reducerMethods/authMethods'
 import Footer from './components/Footer'
 import Fulfilled from './components/products_actions/Fulfilled'
+import { ICart, ICartResponse } from './types/cartType'
+import { fetchCartDetails } from './redux/reducers/reducerMethods/cartMethod'
 
 const getDesignTokens = (mode: any) => ({
   palette: {
@@ -65,10 +67,12 @@ const App = () => {
   }, [darkMode]);
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
   const authentication = useAppSelector(state => state.loginReducer.user)
+  const cart:ICartResponse[] = useAppSelector(state => state.cartReducer)
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchAllProducts())
     dispatch(fetchAllCategories())
+    dispatch(fetchCartDetails())
     const userJson = localStorage.getItem('access_token')!;
     if (!userJson) {
       //console.log("Authentication Failed")

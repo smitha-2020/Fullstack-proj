@@ -9,7 +9,7 @@ export const fetchAllCategories = createAsyncThunk(
             const res = await axios.get("https://localhost:5001/categorys", {
                 headers: {
                 "Access-Control-Allow-Origin": "*",
-                  'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
                 }
               })
             return res.data;

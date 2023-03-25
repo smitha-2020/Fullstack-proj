@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios, { AxiosError, AxiosResponse } from 'axios';
+import { ICartInput } from '../../../types/cartType';
 import { IProduct, IProductDesc, IProductModify } from '../../../types/productType';
 
 export const fetchAllProducts = createAsyncThunk(
@@ -20,6 +21,21 @@ export const fetchAllProducts = createAsyncThunk(
         }
     }
 )
+
+export const addingProduct = createAsyncThunk(
+    "addingProduct",
+    async (product: ICartInput) => {
+        try {
+            const response: AxiosResponse<IProduct, any> = await axios.post("https://localhost:5001/carts", product)
+            return response.data
+        }
+        catch (e) {
+            const error = e as AxiosError
+            return error
+        }
+    }
+)
+
 // export const fetchAllProductsbyCategory = createAsyncThunk(
 //     "fetchAllProductsbyCategory",
 //     async (id: number) => {
@@ -52,22 +68,6 @@ export const fetchAllProducts = createAsyncThunk(
 //             const response: AxiosResponse<any, IProduct> = await axios.get(url)
 //             return response.data
 //         } catch (e) {
-//             const error = e as AxiosError
-//             return error
-//         }
-//     }
-// )
-// export const addingProduct = createAsyncThunk(
-//     "addingProduct",
-//     async (product: IProductDesc) => {
-//         try {
-//             //const responseImg = await axios.post("https://api.escuelajs.co/api/v1/files/upload", { 'file': product.imagestr[0] }, { headers: { 'Content-Type': 'multipart/form-data' } })
-//             // if (responseImg.data) {
-//             //const response: AxiosResponse<Product, Product> = await axios.post("https://api.escuelajs.co/api/v1/products/", product)
-//             const response: AxiosResponse<IProduct, any> = await axios.post("https://api.escuelajs.co/api/v1/products", product)
-//             return response.data
-//         }
-//         catch (e) {
 //             const error = e as AxiosError
 //             return error
 //         }

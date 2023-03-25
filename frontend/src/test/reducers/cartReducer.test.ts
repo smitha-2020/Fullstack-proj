@@ -1,6 +1,6 @@
 import { AnyAction, MiddlewareArray, ThunkMiddleware } from "@reduxjs/toolkit";
 import { ToolkitStore } from "@reduxjs/toolkit/dist/configureStore";
-import { addToCart, decreaseQuantity, increaseQuantity, removeFromCart } from "../../redux/reducers/cartReducer";
+//import { addToCart, decreaseQuantity, increaseQuantity, removeFromCart } from "../../redux/reducers/cartReducer";
 import { createStore, RootState } from "../../redux/store";
 import server from "../shared/server";
 import { newcartProduct } from "../../common/data";

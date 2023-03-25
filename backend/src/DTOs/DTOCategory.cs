@@ -5,7 +5,7 @@ namespace backend.src.DTOs;
 
 public class DTOCategory : BaseDTO<Category>
 {
-  [StringLength(50, MinimumLength = 9)]
+  [StringLength(50, MinimumLength = 5)]
   public string Name { get; set; } = String.Empty;
   
   [Url]

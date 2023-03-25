@@ -24,6 +24,7 @@ public static class ModelConfiguration
     public static void ConfigureCart(this ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Cart>().Navigation(x => x.Products).AutoInclude();
+        modelBuilder.Entity<Cart>().Navigation(x => x.Users).AutoInclude();
     }
 
     public static void ConfigureCategory(this ModelBuilder modelBuilder)

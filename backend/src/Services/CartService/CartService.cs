@@ -26,4 +26,14 @@ public class CartService : BaseService<Cart, DTOCart, DTOUpdateCart, DTOCartResp
         }
         return _mapper.Map<ICollection<Cart>, ICollection<DTOCartResponse>>(cartData);
     }
+
+    public async Task<bool> IsAvailableeInCart(int id)
+    {
+        var cartData = await _repo.IsAlreadyAvailable(id);
+        if (cartData is not null && cartData.Count > 0)
+        {
+            return true;
+        }
+        return false;
+    }
 }

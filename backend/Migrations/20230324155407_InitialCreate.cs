@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace backend.Migrations
 {
-    public partial class initial_commit : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,16 +30,17 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "dto_image_response",
+                name: "dto_category_response",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    image_url = table.Column<string>(type: "text", nullable: false)
+                    name = table.Column<string>(type: "text", nullable: false),
+                    image = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_dto_image_response", x => x.id);
+                    table.PrimaryKey("pk_dto_category_response", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -76,8 +77,9 @@ namespace backend.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    first_name = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
-                    last_name = table.Column<string>(type: "character varying(30)", maxLength: 30, nullable: false),
+                    first_name = table.Column<string>(type: "text", nullable: false),
+                    last_name = table.Column<string>(type: "text", nullable: false),
+                    avatar = table.Column<string>(type: "text", nullable: false),
                     user_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     normalized_user_name = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -118,26 +120,6 @@ namespace backend.Migrations
                         name: "fk_products_categorys_category_id",
                         column: x => x.category_id,
                         principalTable: "categorys",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "dto_category_product_response",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    name = table.Column<string>(type: "text", nullable: false),
-                    image_id = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_dto_category_product_response", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_dto_category_product_response_dto_image_response_image_id",
-                        column: x => x.image_id,
-                        principalTable: "dto_image_response",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -302,7 +284,21 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "dto_product_category_response",
+                name: "dto_category_product_response",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    name = table.Column<string>(type: "text", nullable: false),
+                    image_id = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_dto_category_product_response", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "dto_product_response",
                 columns: table => new
                 {
                     id = table.Column<int>(type: "integer", nullable: false)
@@ -310,15 +306,41 @@ namespace backend.Migrations
                     title = table.Column<string>(type: "text", nullable: false),
                     price = table.Column<double>(type: "double precision", nullable: false),
                     description = table.Column<string>(type: "text", nullable: false),
+                    category_id = table.Column<int>(type: "integer", nullable: false),
                     dto_category_product_response_id = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_dto_product_category_response", x => x.id);
+                    table.PrimaryKey("pk_dto_product_response", x => x.id);
                     table.ForeignKey(
-                        name: "fk_dto_product_category_response_dto_category_product_response",
+                        name: "fk_dto_product_response_dto_category_product_response_dto_cate",
                         column: x => x.dto_category_product_response_id,
                         principalTable: "dto_category_product_response",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_dto_product_response_dto_category_response_category_id",
+                        column: x => x.category_id,
+                        principalTable: "dto_category_response",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "dto_image_response",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    image_url = table.Column<string>(type: "text", nullable: false),
+                    dto_product_response_id = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_dto_image_response", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_dto_image_response_dto_product_response_dto_product_response_id",
+                        column: x => x.dto_product_response_id,
+                        principalTable: "dto_product_response",
                         principalColumn: "id");
                 });
 
@@ -338,8 +360,18 @@ namespace backend.Migrations
                 column: "image_id");
 
             migrationBuilder.CreateIndex(
-                name: "ix_dto_product_category_response_dto_category_product_response",
-                table: "dto_product_category_response",
+                name: "ix_dto_image_response_dto_product_response_id",
+                table: "dto_image_response",
+                column: "dto_product_response_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_dto_product_response_category_id",
+                table: "dto_product_response",
+                column: "category_id");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_dto_product_response_dto_category_product_response_id",
+                table: "dto_product_response",
                 column: "dto_category_product_response_id");
 
             migrationBuilder.CreateIndex(
@@ -398,15 +430,24 @@ namespace backend.Migrations
                 name: "ix_user_roles_role_id",
                 table: "user_roles",
                 column: "role_id");
+
+            migrationBuilder.AddForeignKey(
+                name: "fk_dto_category_product_response_dto_image_response_image_id",
+                table: "dto_category_product_response",
+                column: "image_id",
+                principalTable: "dto_image_response",
+                principalColumn: "id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "cart");
+            migrationBuilder.DropForeignKey(
+                name: "fk_dto_category_product_response_dto_image_response_image_id",
+                table: "dto_category_product_response");
 
             migrationBuilder.DropTable(
-                name: "dto_product_category_response");
+                name: "cart");
 
             migrationBuilder.DropTable(
                 name: "image_product");
@@ -427,9 +468,6 @@ namespace backend.Migrations
                 name: "user_tokens");
 
             migrationBuilder.DropTable(
-                name: "dto_category_product_response");
-
-            migrationBuilder.DropTable(
                 name: "images");
 
             migrationBuilder.DropTable(
@@ -442,10 +480,19 @@ namespace backend.Migrations
                 name: "user");
 
             migrationBuilder.DropTable(
+                name: "categorys");
+
+            migrationBuilder.DropTable(
                 name: "dto_image_response");
 
             migrationBuilder.DropTable(
-                name: "categorys");
+                name: "dto_product_response");
+
+            migrationBuilder.DropTable(
+                name: "dto_category_product_response");
+
+            migrationBuilder.DropTable(
+                name: "dto_category_response");
         }
     }
 }
