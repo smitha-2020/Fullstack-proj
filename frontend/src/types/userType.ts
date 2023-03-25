@@ -14,7 +14,7 @@ export interface IAuthenticUser {
     role: string
 }
 export interface IRegisteredUser {
-    access_token: string,
+    accessToken: string,
     user: IAuthenticUser,
     isRegistered: boolean,
     isLogin: boolean,

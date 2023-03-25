@@ -7,7 +7,7 @@ import {fetchLoginInfo, uploadImagefromForm} from '../reducers/reducerMethods/lo
 
 const initialState: IRegisteredUser =
 {
-    access_token: "",
+    accessToken: "",
     user: {
         id: 0,
         avatar: "",
@@ -25,12 +25,12 @@ const loginSlice = createSlice({
     initialState: initialState,
     reducers: {
         setData: (state, action) => {
-            localStorage.setItem("access_token", state.access_token)
+            localStorage.setItem("accessToken", state.accessToken)
             return state;
         },
         clearSession(state) {
             return {
-                access_token: "",
+                accessToken: "",
                 user: {
                     id: 0,
                     avatar: "",
@@ -51,9 +51,10 @@ const loginSlice = createSlice({
                 state.isLogin = true;
                 state.isLoading = false;
             } else {
-                //state.isLogin = false;
-                if (action.payload && 'access_token' in action.payload) {
-                    localStorage.setItem('access_token', action.payload.access_token)
+                state.isLogin = false;
+                if (action.payload && 'accessToken' in action.payload) {
+                    console.log(action.payload)
+                    localStorage.setItem('accessToken', action.payload.accessToken)
                     return action.payload;
                 } else {
                     state.isLogin = true;

@@ -25,7 +25,7 @@ const Login = () => {
   const onSubmit: SubmitHandler<ILoginData> = async (data) => {
     try {
       await dispatch(fetchLoginInfo(data))
-      const userJson = localStorage.getItem('access_token');
+      const userJson = localStorage.getItem('accessToken');
       if (userJson) {
         await dispatch(fetchSession(userJson))
         navigate('/profile')

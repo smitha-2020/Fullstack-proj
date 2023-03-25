@@ -73,7 +73,7 @@ const App = () => {
     dispatch(fetchAllProducts())
     dispatch(fetchAllCategories())
     dispatch(fetchCartDetails())
-    const userJson = localStorage.getItem('access_token')!;
+    const userJson = localStorage.getItem('accessToken')!;
     if (!userJson) {
       //console.log("Authentication Failed")
     } else {

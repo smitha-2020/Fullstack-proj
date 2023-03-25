@@ -18,13 +18,14 @@ const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const Header = () => {
     const navigate = useNavigate();
     const authentication: IAuthenticUser = useAppSelector(state => state.auhtReducer)
+    console.log("authentication",authentication)
     const switchcheck: ImodeCheck = useAppSelector(state => state.switchReducer)
     const cart = useAppSelector(state => { return state.cartReducer; })
     //const carttotal=cart.filter((cartElement) => cartElement.userInfo.id === authentication.id).reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
     //const carttotal = cart.reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
     const dispatch = useAppDispatch();
-    const deleteSession = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
-        localStorage.setItem("access_token", "")
+    const deleteSession = ( e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
+        localStorage.setItem("accessToken", "")
         dispatch(clearSession())
         navigate("/login")
     }
