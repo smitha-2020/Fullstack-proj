@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { IAuthenticUser } from '../../types/userType'
 import { fetchSession } from './reducerMethods/authMethods';
 
-const initialState: IAuthenticUser = { id: 0, avatar: "", email: "", password: "", name: "", role: "" };
+const initialState: IAuthenticUser = { id: 0, avatar: "", email: "",name: "", role: "" };
 //get the user session
 
 export const authSlice = createSlice({
@@ -16,6 +16,7 @@ export const authSlice = createSlice({
     },
     extraReducers: (build) => {
         build.addCase(fetchSession.fulfilled, (state, action) => {
+            console.log("fetchSesionn",action.payload)
             return action.payload;
         })
         .addCase(fetchSession.rejected, (state) => {

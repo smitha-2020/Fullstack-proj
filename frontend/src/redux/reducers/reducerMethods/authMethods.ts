@@ -5,7 +5,7 @@ export const fetchSession = createAsyncThunk(
     "fetchSession",
     async (data: string) => {
         try {
-            const response = await axios.get("https://api.escuelajs.co/api/v1/auth/profile", { headers: { Authorization: `Bearer ${data}` } })
+            const response = await axios.post("https://localhost:5001/tokens", { headers: {'Authorization': `Bearer ${data}` , 'Content-Type': 'application/json'} })
             return response.data;
         } catch (e) {
             const error = e as AxiosError

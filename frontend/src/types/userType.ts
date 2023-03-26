@@ -9,7 +9,6 @@ export interface IAuthenticUser {
     id: number,
     avatar: string,
     email: string,
-    password: string,
     name: string,
     role: string
 }

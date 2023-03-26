@@ -22,7 +22,6 @@ export const addingToCart = createAsyncThunk(
             const id = cart.ProductId;
             const userId = cart.userId;
             let totalQuantity=0;
-            console.log(userId)
             const responseCartItemAvailable:AxiosResponse<boolean,any> = await axios.get(`https://localhost:5001/carts/isavailable/${cart.ProductId}`)
             const userCart = await axios.get(`https://localhost:5001/carts/${userId}/products`)
             if(!responseCartItemAvailable.data){
@@ -32,9 +31,7 @@ export const addingToCart = createAsyncThunk(
             userCart.data.forEach((element: any) => {
                 totalQuantity+=element.quantity;
             });
-            console.log(totalQuantity)
             if((totalQuantity+cart.quantity)<=5){
-                console.log("hi")
                 const response= await axios.post("https://localhost:5001/carts", cart)
                 return response.data
             }

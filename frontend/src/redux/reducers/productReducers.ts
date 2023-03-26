@@ -41,7 +41,6 @@ const productSlice = createSlice({
           if (!action.payload) {
             return state;
           }
-          console.log(action.payload)
           state.product = action.payload;
           state.totalCount = action.payload.length;
         }

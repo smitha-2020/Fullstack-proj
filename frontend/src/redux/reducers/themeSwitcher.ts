@@ -10,7 +10,6 @@ export const switchSlice = createSlice({
     reducers:{
         toggleTheme:(state) => {
             state.darkMode = !state.darkMode;
-            console.log(state.darkMode)
         }
     }
 })

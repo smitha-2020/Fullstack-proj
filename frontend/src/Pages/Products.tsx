@@ -31,7 +31,6 @@ const Products = () => {
       return filteredData;
     }
     else if (search.search !== "") {
-      console.log("hi");
       [...data] = state.productReducer.product.filter((product: IProduct) => product.title.toLocaleLowerCase().includes(search.search.toLocaleLowerCase()))
       filteredData.push(...data)
       return filteredData;
@@ -49,7 +48,6 @@ const Products = () => {
     dataPaginated.gotoPage(value)
   };
   const handleNumbSelect = (e: SelectChangeEvent<unknown>) => {
-    console.log(e.target.value)
     setNumbofPages(Number(e.target.value))
   }
   const handleChange = (e: SelectChangeEvent<unknown>) => {

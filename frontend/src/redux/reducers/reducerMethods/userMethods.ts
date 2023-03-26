@@ -36,7 +36,6 @@ export const updateUser = createAsyncThunk(
     "updateUser", async (user: IUser) => {
         try {
             const userData = user.user;
-            //console.log("userDara", userData)
             const res: AxiosResponse<any, IAuthenticUser> = await axios.put(`https://api.escuelajs.co/api/v1/users/${user.id}`, userData)
             return res.data
         }

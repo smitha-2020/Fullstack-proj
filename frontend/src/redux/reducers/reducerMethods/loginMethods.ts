@@ -7,7 +7,6 @@ export const fetchLoginInfo = createAsyncThunk(
     "fetchLoginInfo",
     async (data: ILoginData) => {
         try {
-            console.log(data)
             const response = await axios.post("https://localhost:5001/signin", data, { headers: { 'Content-Type': 'application/json' } })
             return response.data;
         } catch (e: any) {
@@ -21,20 +20,12 @@ export const uploadImagefromForm = createAsyncThunk(
     "uploadImagefromForm",
     async (inputFile: Inputs) => {
         try {
-            console.log(inputFile)
-            // const responseEmail = await axios.get("https://api.escuelajs.co/api/v1/users")
-            // const resEmailArr: IAuthenticUser[] = responseEmail.data
-            // const emailArr = resEmailArr.filter((element) => element.email === inputFile.email)
-            // if (emailArr.length === 0) {
                 const response = await axios.post("https://api.escuelajs.co/api/v1/files/upload", { 'file': inputFile.avatar[0] }, { headers: { 'Content-Type': 'multipart/form-data' } })
                 const url: string = response.data.location;
-                console.log(url)
                 if (url) {
                     const responseRegister = await axios.post("https://localhost:5001/signup", { ...inputFile, avatar: url })
-                    console.log(responseRegister.data)
                     return responseRegister.data
                 }
-           // }
         } catch (e: any) {
             const error = e as AxiosError
             return error

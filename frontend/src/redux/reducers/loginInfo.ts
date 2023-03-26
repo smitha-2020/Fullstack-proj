@@ -4,6 +4,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { ILoginData } from '../../types/userType';
 import { Inputs, IAuthenticUser, IRegisteredUser } from '../../types/userType';
 import {fetchLoginInfo, uploadImagefromForm} from '../reducers/reducerMethods/loginMethods';
+import { fetchSession } from './reducerMethods/authMethods';
 
 const initialState: IRegisteredUser =
 {
@@ -12,7 +13,6 @@ const initialState: IRegisteredUser =
         id: 0,
         avatar: "",
         email: "",
-        password: "",
         name: "",
         role: ""
     },
@@ -53,7 +53,6 @@ const loginSlice = createSlice({
             } else {
                 state.isLogin = false;
                 if (action.payload && 'accessToken' in action.payload) {
-                    console.log(action.payload)
                     localStorage.setItem('accessToken', action.payload.accessToken)
                     return action.payload;
                 } else {
@@ -73,12 +72,12 @@ const loginSlice = createSlice({
                 state.isLogin = false;
                 return state
             })
-            // .addCase(uploadImagefromForm.fulfilled, (state, action) => {
-            //     state.user = action.payload;
-            //     if (action.payload) {
-            //         state.isRegistered = true;
-            //     }
-            // })
+            .addCase(uploadImagefromForm.fulfilled, (state, action) => {
+                state.user = action.payload;
+                if (action.payload) {
+                    state.isRegistered = true;
+                }
+            })
             .addCase(uploadImagefromForm.rejected, (state, action) => {
                 return state;
             })
