@@ -6,4 +6,5 @@ namespace backend.src.Services.TokenService;
 public interface ITokenService
 {
     Task<DTOUserSignInResponse> GetTokenAsync(User user);
+    Task<Dictionary<string, string>?> GetTokenInfo(string token);
 }

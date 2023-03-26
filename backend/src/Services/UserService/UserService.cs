@@ -85,4 +85,13 @@ public class UserService : IUserService
         }
         return true;
     }
+
+    public async Task<ICollection<string>?> GetUserRole(Guid id)
+    {
+        var user = await _repo.GetByIdAsync(id);
+        if(user is null){
+            return null;
+        }
+        return await _repo.GetUserRole(user);
+    }
 }

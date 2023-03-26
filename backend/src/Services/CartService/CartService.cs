@@ -29,7 +29,7 @@ public class CartService : BaseService<Cart, DTOCart, DTOUpdateCart, DTOCartResp
 
     public async Task<bool> IsAvailableeInCart(int id)
     {
-        var cartData = await _repo.IsAlreadyAvailable(id);
+        var cartData = await _repo.IsAlreadyRegistered(id);
         if (cartData is not null && cartData.Count > 0)
         {
             return true;

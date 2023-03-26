@@ -19,6 +19,7 @@ public class TokenService : ITokenService
         _config = config;
         _userManager = userManager;
     }
+
     public async Task<DTOUserSignInResponse> GetTokenAsync(User user)
     {
         var claims = new List<Claim>
@@ -29,7 +30,7 @@ public class TokenService : ITokenService
             new Claim(JwtRegisteredClaimNames.Name,user.FirstName!)
         };
 
-        var roles =await _userManager.GetRolesAsync(user);
+        var roles = await _userManager.GetRolesAsync(user);
         foreach (var role in roles)
         {
             claims.Add(new Claim(ClaimTypes.Role, role));
@@ -53,5 +54,24 @@ public class TokenService : ITokenService
             AccessToken = tokenWriter.WriteToken(token),
             ExpirationTime = expiration,
         };
+    }
+
+    public async Task<Dictionary<string, string>?> GetTokenInfo(string token)
+    {
+        Console.WriteLine("sfsdfdf", token);
+        var TokenInfo = new Dictionary<string, string>();
+        var handler = new JwtSecurityTokenHandler();
+        if (token is null)
+        {
+            return null;
+        }
+        var jwtSecurityToken = await Task.Run(() => handler.ReadJwtToken(token));
+        var claims = jwtSecurityToken.Claims.ToList();
+
+        foreach (var claim in claims)
+        {
+            TokenInfo.Add(claim.Type, claim.Value);
+        }
+        return TokenInfo;
     }
 }

@@ -11,4 +11,5 @@ public interface IUserService
     Task<bool> IsEmailAvailable(string email);
     Task<DTOUserResponse?> GetByIdAsync(Guid id);
     Task<bool> Delete(Guid id);
+    Task<ICollection<string>?> GetUserRole(Guid id);
 }

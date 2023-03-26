@@ -58,6 +58,17 @@ public class UserController : ApiController
         return Ok(new { isAvailable = false });
     }
 
+    [HttpGet("{id}/userrole")]
+    public async Task<IActionResult> IsAvailable(Guid id)
+    {
+        var roles = await _service.GetUserRole(id);
+        if (roles is null)
+        {
+            return Ok(new { message = "No Role Associated with the User" });
+        }
+        return Ok(roles);
+    }
+
     [HttpDelete("{id}")]
     public async Task<bool> Delete(Guid id)
     {

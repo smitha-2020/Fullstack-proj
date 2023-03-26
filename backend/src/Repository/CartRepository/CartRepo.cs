@@ -19,7 +19,7 @@ public class CartRepo : BaseRepo<Cart>, ICartRepo
         return await DbData.Where(e => e.UserId == userId).ToListAsync();
     }
 
-    public async Task<ICollection<Cart>?> IsAlreadyAvailable(int id)
+    public async Task<ICollection<Cart>?> IsAlreadyRegistered(int id)
     {
         var cartDetails = await DbData.Where(e => e.ProductId == id).ToListAsync();
         return cartDetails;

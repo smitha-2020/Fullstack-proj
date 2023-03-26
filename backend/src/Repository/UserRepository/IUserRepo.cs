@@ -14,4 +14,5 @@ public interface IUserRepo
     Task<bool> SingnInAsync(User request, string password);
     Task<User> IsUserEmail(string email);
     Task<User?> DeleteOne(Guid id);
+    Task<ICollection<string>?> GetUserRole(User user);
 }

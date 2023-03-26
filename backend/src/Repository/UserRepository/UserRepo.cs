@@ -79,4 +79,10 @@ public class UserRepo : IUserRepo
         }
         return deleteOne;
     }
+
+    public async Task<ICollection<string>?> GetUserRole(User user)
+    {
+        return await _userManager.GetRolesAsync(user);
+    }
+
 }
