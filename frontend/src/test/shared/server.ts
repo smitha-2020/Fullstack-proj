@@ -151,30 +151,30 @@ const handler = [
     const createUserNew = createUserObjs;
     return res(ctx.json(createUserNew));
   }),
-  rest.put(
-    "https://api.escuelajs.co/api/v1/users/:id",
-    async (req, res, ctx) => {
-      const { idUrl } = req.params;
-      const reqData = await req.json();
-      //console.log(reqData.id)
-      const { id, ...filteredData } = reqData;
-      const foundUser: IAuthenticUser[] = users.filter((user) => {
-        return user.id === Number(idUrl);
-      });
-      const [found] = foundUser;
-      if (found) {
-        //console.log({...found,...filteredData})
-        return res(
-          ctx.json({
-            ...found,
-            ...filteredData.user,
-          })
-        );
-      } else {
-        return res(ctx.status(404, "Np product found"));
-      }
-    }
-  ),
+  // rest.put(
+  //   "https://api.escuelajs.co/api/v1/users/:id",
+  //   async (req, res, ctx) => {
+  //     const { idUrl } = req.params;
+  //     const reqData = await req.json();
+  //     //console.log(reqData.id)
+  //     const { id, ...filteredData } = reqData;
+  //     const foundUser: IAuthenticUser[] = users.filter((user) => {
+  //       return user.id === Number(idUrl);
+  //     });
+  //     const [found] = foundUser;
+  //     if (found) {
+  //       //console.log({...found,...filteredData})
+  //       return res(
+  //         ctx.json({
+  //           ...found,
+  //           ...filteredData.user,
+  //         })
+  //       );
+  //     } else {
+  //       return res(ctx.status(404, "Np product found"));
+  //     }
+  //   }
+  // ),
 ];
 
 const server = setupServer(...handler);

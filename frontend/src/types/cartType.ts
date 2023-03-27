@@ -12,6 +12,12 @@ export interface ICart {
   userId: string;
 }
 
+export interface ICartType {
+  quantity: number;
+  products: IProduct;
+  userId: IAuthenticUser;
+}
+
 export interface ICartInput {
   userId: string;
   ProductId: string;

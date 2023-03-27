@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { IAuthenticUser } from '../../types/userType';
+import { removeCart } from '../../redux/reducers/cartReducer';
 
 const CartBtn = () => {
     const cart = useAppSelector(state => { return state.cartReducer; })
@@ -13,9 +14,10 @@ const CartBtn = () => {
     const navigate = useNavigate()
     const clearCart = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         if(authentication.id){
-          //dispatch(removeCart(authentication.id))
+          console.log(authentication.id)
+          dispatch(removeCart(authentication.id))
         }else{
-          //dispatch(removeCart(0))
+          dispatch(removeCart(0))
         }
       }
       const movetoProducts = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

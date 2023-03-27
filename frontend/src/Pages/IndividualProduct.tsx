@@ -98,7 +98,7 @@ const IndividualProduct = ({ products }: { products: IProduct[] }) => {
                 <Grid item sx={{ marginTop: '20px', fontSize: '12px', fontWeight: '400' }}>Brand: {title}</Grid>
                 <Grid item sx={{ border: "1px solid gray", marginTop: '20px' }}></Grid>
                 <Grid item>
-                  <AddToCart products={newdata} id={idPass} userId={userId} />
+                  <AddToCart products={newdata} id={idPass}/>
                 </Grid>
               </Grid>
             </Grid>

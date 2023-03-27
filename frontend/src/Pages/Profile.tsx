@@ -9,9 +9,6 @@ import { useAppSelector } from '../hooks/reduxHook'
 const Profile = () => {
   const [display, setDisplay] = useState<string>("");
   const authentication = useAppSelector(state => state.auhtReducer)
-  useEffect(() => {
-    //console.log("data refreshed");
-  }, [authentication])
   if (authentication.avatar !== "") {
     return (
       <>

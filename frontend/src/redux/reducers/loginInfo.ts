@@ -1,15 +1,12 @@
-import axios from 'axios'
 import { createSlice } from '@reduxjs/toolkit'
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import { ILoginData } from '../../types/userType';
-import { Inputs, IAuthenticUser, IRegisteredUser } from '../../types/userType';
+import { IRegisteredUser } from '../../types/userType';
 import {fetchLoginInfo, uploadImagefromForm} from '../reducers/reducerMethods/loginMethods';
-import { fetchSession } from './reducerMethods/authMethods';
 
 const initialState: IRegisteredUser =
 {
     accessToken: "",
     user: {
+        sub:"",
         id: 0,
         avatar: "",
         email: "",
@@ -32,10 +29,10 @@ const loginSlice = createSlice({
             return {
                 accessToken: "",
                 user: {
+                    sub:"",
                     id: 0,
                     avatar: "",
                     email: "",
-                    password: "",
                     name: "",
                     role: ""
                 },

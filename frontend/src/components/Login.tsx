@@ -28,7 +28,7 @@ const Login = () => {
       const userJson = localStorage.getItem('accessToken');
       if (userJson) {
         await dispatch(fetchSession(userJson))
-        //navigate('/profile')
+        navigate('/profile')
       }
     }
     catch (e) {

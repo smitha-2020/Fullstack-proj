@@ -6,6 +6,7 @@ export interface CreateUser {
     user:Partial<IAuthenticUser>
 }
 export interface IAuthenticUser {
+    sub:string,
     id: number,
     avatar: string,
     email: string,

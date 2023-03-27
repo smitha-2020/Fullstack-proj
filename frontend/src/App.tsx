@@ -16,7 +16,7 @@ import Register from './Pages/Register'
 import { fetchSession } from './redux/reducers/reducerMethods/authMethods'
 import Footer from './components/Footer'
 import Fulfilled from './components/products_actions/Fulfilled'
-import { ICart, ICartResponse } from './types/cartType'
+import { ICart, ICartResponse, ICartType } from './types/cartType'
 import { fetchCartDetails } from './redux/reducers/reducerMethods/cartMethod'
 
 const getDesignTokens = (mode: any) => ({
@@ -67,7 +67,7 @@ const App = () => {
   }, [darkMode]);
   const theme = useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
   const authentication = useAppSelector(state => state.loginReducer.user)
-  const cart:ICartResponse[] = useAppSelector(state => state.cartReducer)
+  const cart:ICartType[] = useAppSelector(state => state.cartReducer)
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchAllProducts())
