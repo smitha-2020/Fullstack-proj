@@ -18,7 +18,6 @@ public class TokenController : ApiController
     {
        
         var jwtTokenString=(jwttoken.Authorization.Length>0)?jwttoken.Authorization.Split(' ')[1]:null;
-         Console.WriteLine("rtertertertretertereteter",jwtTokenString);
         if(jwtTokenString is null){
             return null;
         }

@@ -41,9 +41,9 @@ public class TokenService : ITokenService
         var signkey = new SigningCredentials(
             new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)), SecurityAlgorithms.HmacSha256);
 
-        //var expiration_time = Double.TryParse(_config["jwt:Expiration"], out double a);
-        var expiration = DateTime.Now.AddHours(9);
-        //var expiration = DateTime.Now.AddHours(a);
+        var expiration_time = Double.TryParse(_config["jwt:Expiration"], out double a);
+        //var expiration = DateTime.Now.AddHours(9);
+        var expiration = DateTime.Now.AddHours(a);
 
         var token = new JwtSecurityToken(_config["jwt:Issuer"], _config["jwt:Aud"], claims, expires: expiration, signingCredentials: signkey);
 

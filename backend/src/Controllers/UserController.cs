@@ -37,6 +37,7 @@ public class UserController : ApiController
         return Ok(response);
     }
 
+    [AllowAnonymous]
     [HttpGet("{id:Guid}")]
     public async Task<IActionResult?> GetByGuid(Guid id)
     {
@@ -60,7 +61,7 @@ public class UserController : ApiController
     }
 
     [HttpGet("{id}/userrole")]
-    public async Task<IActionResult> IsAvailable(Guid id)
+    public async Task<IActionResult> GetUserRole(Guid id)
     {
         var roles = await _service.GetUserRole(id);
         if (roles is null)
