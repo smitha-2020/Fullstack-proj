@@ -41,10 +41,10 @@ const AddToCart = ({ products,id }: { products: IProduct,id:string }) => {
         userId:authentication
     }
     const addCart = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        console.log({...data})
-        dispatch(addToCart(data))  
+        if(data.userId.sub === authentication.sub){
+            dispatch(addToCart(data))  
+        }
     }
-
     return (
         <>
             <ToggleButton amount={amount} setIncrease={setIncrease} setDecrease={setDecrease} />

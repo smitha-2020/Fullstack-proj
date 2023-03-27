@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios';
-import { ICart, ICartResponse, ICartType } from '../../types/cartType'
+import { ICart, ICartOp, ICartResponse, ICartType } from '../../types/cartType'
 import { addingToCart, fetchCartDetails } from './reducerMethods/cartMethod';
 
 const initialState: ICartType[] = [];
@@ -9,7 +9,8 @@ const cartSlice = createSlice({
     initialState: initialState,
     reducers: {
         addToCart(state, action: PayloadAction<ICartType>) {
-            const existingData = [...state].filter((cartElement) => { return cartElement.products.id === action.payload.products.id })     
+            console.log('smitha',action.payload)
+            const existingData = state.filter((cartElement) => { return (cartElement.products.id === action.payload.products.id && cartElement.userId.sub === action.payload.userId.sub) })     
             if (existingData.length>0) {
                 const datanew = state.map((cartElement) => {
                     let quantity
@@ -23,8 +24,6 @@ const cartSlice = createSlice({
                 return datanew;
             } 
             return [...state,action.payload];
-           
-            
         },
         removeFromCart(state, action) {
             const newCart = state.filter((cartElement) => { return cartElement.products.id !== action.payload })
@@ -34,27 +33,28 @@ const cartSlice = createSlice({
             const newCart = state.filter((cartElement) => { return cartElement.userId! === action.payload })
             return newCart;
         },
-        increaseQuantity(state, action) {
-            const existingData = state.filter((cartElement) => { return cartElement.products.id === action.payload })
-            if (existingData.length) {
+        increaseQuantity(state, action:PayloadAction<ICartOp>) {
+            const existingData = state.filter((cartElement) => { return cartElement.products.id === action.payload.id })
+            if (existingData) {
                 const datanew = state.map((cartElement) => {
                     let quantity
-                    if (cartElement.products.id === action.payload) {
+                    if (cartElement.products.id === action.payload.id && cartElement.userId.sub === action.payload.authentication.sub && action.payload.authentication.sub!==undefined) {
                         quantity = (cartElement.quantity + 1) >= Number(5) ? Number(5) : (cartElement.quantity + 1);
                         return { ...cartElement, quantity }
-                    } else {
+                    } 
+                    else {
                         return cartElement
                     }
                 })
                 return datanew;
             }
         },
-        decreaseQuantity(state, action) {
-            const existingData = state.filter((cartElement) => { return cartElement.products.id === action.payload })
-            if (existingData.length) {
+        decreaseQuantity(state, action:PayloadAction<ICartOp>) {
+            const existingData = state.filter((cartElement) => { return cartElement.products.id === action.payload.id })
+            if (existingData) {
                 const datanew = state.map((cartElement) => {
                     let quantity
-                    if (cartElement.products.id === action.payload) {
+                    if (cartElement.products.id === action.payload.id && cartElement.userId.sub === action.payload.authentication.sub && action.payload.authentication.sub!==undefined) {
                         quantity = (cartElement.quantity - 1) <= Number(1) ? Number(1) : (cartElement.quantity - 1);
                         return { ...cartElement, quantity }
                     } else {

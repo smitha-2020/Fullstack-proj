@@ -32,3 +32,8 @@ export interface ICartResponse {
   ProductId: string;
   users:IUserResponse
 }
+
+export interface ICartOp{
+  id:number,
+  authentication:IAuthenticUser
+}

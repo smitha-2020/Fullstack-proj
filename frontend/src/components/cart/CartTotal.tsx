@@ -1,10 +1,13 @@
 import { Grid } from "@mui/material";
 import { useAppSelector } from '../../hooks/reduxHook';
 import Typography from '@mui/material/Typography';
+import { IAuthenticUser } from "../../types/userType";
 
 const CartTotal = () => {
     const cart = useAppSelector(state => { return state.cartReducer; })
-    const carttotal = cart.reduce((acc, cartElement) => { return acc + (cartElement.products.price * cartElement.quantity) }, 0)
+    const authentication: IAuthenticUser = useAppSelector(state => state.auhtReducer)
+    const newCart = cart.filter((cartElement) => { return cartElement.userId.sub === authentication.sub })   
+    const carttotal = newCart.reduce((acc, cartElement) => { return acc + (cartElement.products.price * cartElement.quantity) }, 0)
     return (
         <>
             <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" sx={{ minHeight: '10px', minWidth: '100vw',backgroundColor:'primary.main' }}>

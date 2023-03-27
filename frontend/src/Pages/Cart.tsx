@@ -8,7 +8,7 @@ import ToggleButton from '../components/cart/ToggleButton';
 import CartBtn from '../components/cart/CartBtn';
 import CartTotal from '../components/cart/CartTotal';
 import { NotFound } from '../styledComponent/productstyle';
-import { ICartResponse, ICartType } from "../types/cartType";
+import { ICartOp, ICartResponse, ICartType } from "../types/cartType";
 
 
 const Cart = () => {
@@ -18,16 +18,18 @@ const Cart = () => {
   console.log('cart',Array.isArray(cart))
   let userCart:ICartType[] = cart.filter((cartInfo: ICartType) => { return cartInfo.userId.sub === authentication.sub })
   const cartSize: number = cart.length;
-  console.log("adsdasdssssssssssssssssssssssssssssssssssss",userCart)
   function deleteCartitem(e: React.MouseEvent<SVGElement, MouseEvent>, id: number): void {
     e.preventDefault();
     dispatch(removeFromCart(id))
   }
-  const setIncrease = (id: number) => {
-    dispatch(increaseQuantity(id))
+
+  const setIncrease = (id: number) => {   
+    var data:ICartOp = {id:id,authentication:authentication}
+    dispatch(increaseQuantity(data))
   }
   const setDecrease = (id: number) => {
-    dispatch(decreaseQuantity(id))
+    var data:ICartOp = {id:id,authentication:authentication}
+    dispatch(decreaseQuantity(data))
   }
   if (cartSize) {
     return (
