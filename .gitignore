@@ -5,8 +5,8 @@ backend/appsettings.json
 backend/appsettings.*.json
 backend/obj
 backend/bin
-backend/*.http
-backend/src/ModelValidation
+backend/api.http
+backend/Migrations
 
 #settings 
 appsettings.Development.json
@@ -74,6 +74,7 @@ artifacts/
 
 # dependencies
 frontend/node_modules
+frontend/public
 
 # testing
 frontend/coverage

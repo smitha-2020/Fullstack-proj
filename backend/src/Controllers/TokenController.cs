@@ -13,7 +13,6 @@ public class TokenController : ApiController
         _service = service;
     }
 
-    //[AllowAnonymous]
     [HttpPost]
     public async Task<ActionResult?> GetTokenClaims([FromHeader] DTOToken jwttoken)
     {
