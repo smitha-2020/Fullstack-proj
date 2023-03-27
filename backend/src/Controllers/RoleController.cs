@@ -1,9 +1,10 @@
 using backend.src.Services.RoleService;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.src.Controllers;
 
+[Authorize]
 public class RoleController : ApiController
 {
     private readonly IRoleService _service;

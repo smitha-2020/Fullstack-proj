@@ -7,6 +7,7 @@ using backend.src.DTOs.DTORequest;
 
 namespace backend.src.Controllers;
 
+[Authorize]
 public class UserController : ApiController
 {
     private readonly IUserService _service;
