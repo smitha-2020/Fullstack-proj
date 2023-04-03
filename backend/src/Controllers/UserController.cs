@@ -17,39 +17,23 @@ public class UserController : ApiController
     [HttpPost("/signup")]
     public async Task<IActionResult?> SingnUp([FromBody] DTOUserSignUp request)
     {
-        var user = await _service.SingnUpAsync(request);
-        if (user is null)
-        {
-            return BadRequest();
-        }
-        return Ok(user);
+        return Ok(await _service.SingnUpAsync(request));
     }
 
     [AllowAnonymous]
     [HttpPost("/signin")]
     public async Task<IActionResult?> SignIn([FromBody] DTOUserSignIn request)
     {
-        var response = await _service.SingnInAsync(request);
-        if (response is null)
-        {
-            return Unauthorized();
-        }
-        return Ok(response);
+        return Ok(await _service.SingnInAsync(request));
     }
 
-    [AllowAnonymous]
     [HttpGet("{id:Guid}")]
     public async Task<IActionResult?> GetByGuid(Guid id)
     {
-        var userData = await _service.GetByIdAsync(id);
-        if (userData is null)
-        {
-            return BadRequest();
-        }
-        return Ok(userData);
+        return Ok(await _service.GetByIdAsync(id));
     }
 
-    [HttpGet("isavailable")]
+    [HttpPost("isavailable")]
     public async Task<IActionResult?> IsAvailable([FromBody] DTOEmail request)
     {
         var isAvailableEmail = await _service.IsEmailAvailable(request.Email.Trim());
@@ -72,8 +56,8 @@ public class UserController : ApiController
     }
 
     [HttpDelete("{id}")]
-    public async Task<bool> Delete(Guid id)
+    public async Task<IActionResult> Delete(Guid id)
     {
-        return await _service.Delete(id);
+        return Ok(await _service.Delete(id));
     }
 }

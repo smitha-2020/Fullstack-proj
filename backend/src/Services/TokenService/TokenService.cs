@@ -8,16 +8,18 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-
+using backend.src.Helpers;
 
 public class TokenService : ITokenService
 {
     private readonly IConfiguration _config;
     private readonly UserManager<User> _userManager;
-    public TokenService(IConfiguration config, UserManager<User> userManager)
+    private readonly RoleManager<IdentityRole<Guid>> _roleManager;
+    public TokenService(IConfiguration config, UserManager<User> userManager, RoleManager<IdentityRole<Guid>> roleManager)
     {
         _config = config;
         _userManager = userManager;
+        _roleManager = roleManager;
     }
 
     public async Task<DTOUserSignInResponse> GetTokenAsync(User user)
@@ -31,10 +33,14 @@ public class TokenService : ITokenService
         };
 
         var roles = await _userManager.GetRolesAsync(user);
-        foreach (var role in roles)
-        {
-            claims.Add(new Claim(ClaimTypes.Role, role));
-        }
+
+        claims.AddRange(roles.Select(role => new Claim(ClaimsIdentity.DefaultRoleClaimType, role)));
+
+        // foreach (var role in roles)
+        // {
+        //     claims.Add(new Claim(ClaimTypes.Role, role));
+        // }
+
         var secret = _config["jwt:Secret"];
 
         //Generate Secret
@@ -58,19 +64,26 @@ public class TokenService : ITokenService
 
     public async Task<Dictionary<string, string>?> GetTokenInfo(string token)
     {
-        Console.WriteLine("sfsdfdf", token);
         var TokenInfo = new Dictionary<string, string>();
         var handler = new JwtSecurityTokenHandler();
         if (token is null)
         {
-            return null;
+            throw ServiceException.NotFound("Token is empty");
         }
         var jwtSecurityToken = await Task.Run(() => handler.ReadJwtToken(token));
         var claims = jwtSecurityToken.Claims.ToList();
 
         foreach (var claim in claims)
         {
-            TokenInfo.Add(claim.Type, claim.Value);
+            if (claim.Type.Contains("role"))
+            {
+                var arr = claim.Type.Split('/');
+                TokenInfo.Add(claim.Type.Split('/')[arr.Length - 1], claim.Value);
+            }
+            else
+            {
+                TokenInfo.Add(claim.Type, claim.Value);
+            }
         }
         return TokenInfo;
     }

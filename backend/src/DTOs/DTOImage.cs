@@ -8,3 +8,8 @@ public class DTOImage : BaseDTO<Image>
     [Url]
     public string ImageURL { get; set; } = null!;
 }
+
+public class DTOUpdateImage
+{
+    public string ImageURL { get; set; } = null!;
+}

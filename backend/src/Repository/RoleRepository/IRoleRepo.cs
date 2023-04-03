@@ -10,5 +10,5 @@ public interface IRoleRepo
     Task<IdentityRole<Guid>?> FindByNameAsync(string name);
     Task<IdentityResult?> CreateRoleAsync(string name);
     Task<User?> FindByIdAsync(Guid id);
-    Task<ICollection<IdentityRole<Guid>>?> GetRolesAsync(IEnumerable<string> roles);
+    //Task<ICollection<IdentityRole<Guid>>?> GetRolesAsync(IEnumerable<string> roles);
 }

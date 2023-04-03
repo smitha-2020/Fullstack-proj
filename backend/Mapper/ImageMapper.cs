@@ -11,5 +11,6 @@ public class ImageMapper : BaseMapper
       CreateMap<DTOImage,Image>();
       CreateMap<Image,DTOImageResponse>();
       CreateMap<Image,DTOImage>();
+      CreateMap<DTOUpdateImage,Image>();
     }
 }

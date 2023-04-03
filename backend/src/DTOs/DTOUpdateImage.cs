@@ -1,10 +1,10 @@
-using System.ComponentModel.DataAnnotations;
-using backend.src.Models;
+// using System.ComponentModel.DataAnnotations;
+// using backend.src.Models;
 
-namespace backend.src.DTOs;
+// namespace backend.src.DTOs;
 
-public class DTOUpdateImage
-{
-    public string ImageURL { get; set; } = null!;
-}
+// public class DTOUpdateImage
+// {
+//     public string ImageURL { get; set; } = null!;
+// }
 

@@ -18,6 +18,8 @@ using backend.src.Services.ImageService;
 using backend.src.Repository.RoleRepository;
 using backend.src.Services.RoleService;
 using backend.src.MiddleWare;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +51,19 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+    builder.Services.AddSwaggerGen(options =>
+        {
+            options.AddSecurityDefinition(
+                "oauth2",
+                new OpenApiSecurityScheme
+                {
+                    Description = "Bearer token authentication",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                }
+            );
+            options.OperationFilter<SecurityRequirementsOperationFilter>();
+        });
 //Configuration for AutoMapper
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 

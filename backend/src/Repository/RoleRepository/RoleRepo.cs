@@ -25,15 +25,15 @@ public class RoleRepo : IRoleRepo
         return result.Succeeded;
     }
 
-    public async Task<ICollection<IdentityRole<Guid>>?> GetRolesAsync(IEnumerable<string> request)
-    {
-        ICollection<IdentityRole<Guid>> roles = new List<IdentityRole<Guid>>();
-        foreach (var role in request)
-        {
-            roles.Add(await _roleManager.FindByNameAsync(role));
-        }
-        return roles;
-    }
+    // public async Task<ICollection<IdentityRole<Guid>>?> GetRolesAsync(IEnumerable<string> request)
+    // {
+    //     ICollection<IdentityRole<Guid>> roles = new List<IdentityRole<Guid>>();
+    //     foreach (var role in request)
+    //     {
+    //         roles.Add(await _roleManager.FindByNameAsync(role));
+    //     }
+    //     return roles;
+    // }
 
     public async Task<IdentityResult?> CreateRoleAsync(string name)
     {

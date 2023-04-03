@@ -20,15 +20,14 @@ public class ProductController : BaseController<Product, DTOProduct, DTOUpdatePr
         _logger = logger;
     }
 
+    [AllowAnonymous]
     [HttpGet]
     public override async Task<ActionResult<IEnumerable<DTOProductResponse>?>> GetAll([FromQuery] QueryOptions? options)
     {
-        if(options is null){
-            return Ok(await _service.GetAllAsync());
-        }
-        return Ok(await _service.GetAllAsync(options));
+        return Ok(await _service.GetAllAsync(options!));
     }
 
+    [AllowAnonymous]
     [HttpGet("all")]
     public async Task<ActionResult<IEnumerable<DTOProductResponse>?>> GetAllProducts()
     {

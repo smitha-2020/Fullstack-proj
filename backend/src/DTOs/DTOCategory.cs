@@ -11,3 +11,10 @@ public class DTOCategory : BaseDTO<Category>
   [Url]
   public string Image { get; set; } = null!;
 }
+
+public class DTOUpdateCategory
+{
+    public string Name { get; set; } = String.Empty;
+    public string Image { get; set; } = null!;
+
+}

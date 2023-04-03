@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using backend.src.Repository.RoleRepository;
+using backend.src.Helpers;
 
 namespace backend.src.Services.RoleService;
 
@@ -13,6 +14,10 @@ public class RoleService : IRoleService
 
     public async Task<IEnumerable<string>> AddRolesAsync(ICollection<string> names)
     {
+        if (names.Count() < 0)
+        {
+            throw ServiceException.BadRequest("There should be atleast 1 role in the array");
+        }
         List<string> addedRoles = new List<string>();
         foreach (var name in names)
         {
@@ -31,13 +36,37 @@ public class RoleService : IRoleService
 
     public async Task<bool> AssignRoleToUserAsync(Guid id, IEnumerable<string> role_names)
     {
+        ICollection<IdentityRole<Guid>> roles = new List<IdentityRole<Guid>>();
+        var count = 0;
         var user = await _repo.FindByIdAsync(id);
-        var roles = await _repo.GetRolesAsync(role_names);
+        if (user is null)
+        {
+            throw ServiceException.NotFound("Not a Valid User");
+        }
+        foreach (var role in role_names)
+        {
+            var validRole = await _repo.FindByNameAsync(role);
+            if (validRole is null)
+            {
+                count++;
+            }
+            else
+            {
+                roles.Add(validRole);
+            }
+        }
+        if (count == roles.Count)
+        {
+            throw ServiceException.BadRequest("Roles cannot be assigned to the user since it is an InValid");
+        }
         if (user is null || roles is null)
         {
-            return false;
+            throw ServiceException.BadRequest("Either UserId or RoleName field is empty");
         }
-        return await _repo.AssignRoleToUserAsync(user, roles.Select(e => e.Name).ToArray());
+        else
+        {
+            return await _repo.AssignRoleToUserAsync(user, roles.Select(e => e.Name).ToArray());
+        }
     }
 
     public async Task<IEnumerable<IdentityRole<Guid>>> GetRolesAsync()

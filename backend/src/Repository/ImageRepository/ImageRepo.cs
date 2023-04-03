@@ -19,10 +19,7 @@ public class ImageRepo : BaseRepo<Image>, IImageRepo
         //_dbcontext.Entry(product).State = EntityState.Detached;
         foreach (var imageObj in images)
         {
-            if (imageObj is not null)
-            {
                 product.ImageLink.Add(imageObj);
-            }
         }
         await _dbcontext.SaveChangesAsync();
         return await Task.Run(() => images.Count);

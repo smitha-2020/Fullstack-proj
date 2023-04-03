@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace backend.src.Controllers;
 
+//[Authorize(Roles="Admin")]
 [EnableCors("CorsPolicy")]
 [ApiController]
 [Route("[controller]s")]

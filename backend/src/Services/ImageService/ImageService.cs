@@ -5,6 +5,7 @@ using AutoMapper;
 using backend.src.Services.BaseService;
 using backend.src.Repository.ImageRepository;
 using backend.src.Repository.ProductRepository;
+using backend.src.Helpers;
 
 namespace backend.src.Services.ImageService;
 
@@ -27,15 +28,21 @@ public class ImageService : BaseService<Image, DTOImage, DTOUpdateImage, DTOImag
         var validProduct = await _productRepo.GetByIdAsync(productId);
         if (validProduct is null)
         {
-            return -1;
+            throw ServiceException.NotFound("Item with ID does not exist");
+            //return -1;
         }
         var validImagesCollection = await _repo.GetAllDataAsync();
-        
         if (validImagesCollection is null)
         {
-            return -1;
+            throw ServiceException.NotFound("Collection of Items to be assigned does not exist");
+            //return -1;
         }
         var validImagObj = validImagesCollection.Where(e => images.Contains(e.Id)).ToArray();
+        if (validImagObj.Length < 3)
+        {
+            throw ServiceException.NotFound("Collection must contain atleast 3 valid images");
+            //return -1;
+        }
         var count = await _repo.AssignImagesToProduct(validProduct, validImagObj);
         return count;
     }

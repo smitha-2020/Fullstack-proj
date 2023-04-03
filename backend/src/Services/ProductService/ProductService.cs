@@ -5,6 +5,7 @@ using backend.src.Services.BaseService;
 using backend.src.Repository.ProductRepository;
 using backend.src.DTOs.DTOResponse;
 using backend.src.Repository.BaseRepo;
+using backend.src.Helpers;
 
 namespace backend.src.Services.ProductService;
 
@@ -23,7 +24,7 @@ public class ProductService : BaseService<Product, DTOProduct, DTOUpdateProduct,
         var result = await _repo.GetAllAsync();
         if (result is null)
         {
-            return null;
+           throw ServiceException.NotFound("No Products to Display");
         }
         return _mapper.Map<IEnumerable<Product>, IEnumerable<DTOProductResponse>>(result);
     }
@@ -72,7 +73,7 @@ public class ProductService : BaseService<Product, DTOProduct, DTOUpdateProduct,
         var result = await _repo.GetAllProductsAsync();
         if (result is null)
         {
-            return null;
+             throw ServiceException.NotFound("No Products to Display");
         }
         return _mapper.Map<IEnumerable<Product>, IEnumerable<DTOProductResponse>>(result);
     }

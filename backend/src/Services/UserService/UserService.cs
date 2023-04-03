@@ -51,7 +51,7 @@ public class UserService : IUserService
         var userIdentity = await _repo.SingnUpAsync(request, request.Password);
         if (userIdentity is null)
         {
-            throw ServiceException.BadRequest("Email Address With Password Does Not Match!!");
+            throw ServiceException.BadRequest("Email Address field is not of a correct format!!");
         }
         return _mapper.Map<User, DTOUserResponse>(userIdentity);
     }
@@ -71,7 +71,7 @@ public class UserService : IUserService
         var userData = await _repo.GetByIdAsync(id);
         if (userData is null)
         {
-            return null;
+             throw ServiceException.BadRequest("No User with this UserId Exists!!");
         }
         return _mapper.Map<User, DTOUserResponse>(userData);
     }
@@ -81,16 +81,17 @@ public class UserService : IUserService
         var userData = await _repo.DeleteOne(id);
         if (userData is null)
         {
-            return false;
+            throw ServiceException.BadRequest("No User with the UserId Exists!!");
         }
         return true;
+        //throw ServiceException.BadRequest("Deleted Successfully");
     }
 
     public async Task<ICollection<string>?> GetUserRole(Guid id)
     {
         var user = await _repo.GetByIdAsync(id);
         if(user is null){
-            return null;
+            throw ServiceException.BadRequest($"No Roles assigned to user with Id ${id}");
         }
         return await _repo.GetUserRole(user);
     }

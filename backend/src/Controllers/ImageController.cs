@@ -23,11 +23,6 @@ public class ImageController : BaseController<Image, DTOImage, DTOUpdateImage, D
     [HttpPost("{id}/assign")]
     public async Task<IActionResult> AssignImagesToProduct(int id, DTOAssignImageToPoduct request)
     {
-        var count = await _service.AssignImagesToProduct(id, request.images);
-        if (count <= 0)
-        {
-            return BadRequest();
-        }
-        return Ok(new { Message = $"{count} images are assigned to product" });
+        return Ok(new {Message = await _service.AssignImagesToProduct(id, request.images) + $"roles assigned to the user ${id}"});
     }
 }

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using backend.src.Services.BaseService;
 using backend.src.Repository.BaseRepo;
+using Microsoft.AspNetCore.Authorization;
 
 namespace backend.src.Controllers;
 
@@ -12,6 +13,7 @@ public abstract class BaseController<TModel, TCreateDto, TUpdateDto, TResponse, 
         _service = service;
     }
 
+    [AllowAnonymous]
     [HttpGet]
     public virtual async Task<ActionResult<IEnumerable<TResponse>?>> GetAll([FromQuery] QueryOptions options)
     {
@@ -23,7 +25,8 @@ public abstract class BaseController<TModel, TCreateDto, TUpdateDto, TResponse, 
     {
         return Ok(await _service.CreateAsync(item));
     }
-
+    
+    [AllowAnonymous]
     [HttpGet("{id:int}")]
     public async Task<ActionResult<TResponse?>> Get(int id)
     {
