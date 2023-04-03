@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 using backend.src.DTOs.DTOResponse;
 
 namespace backend.src.DTOs;
