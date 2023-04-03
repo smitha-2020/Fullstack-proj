@@ -1,7 +1,7 @@
 
 import { IProduct } from "../../types/productType";
 import { NavLink } from 'react-router-dom';
-import { Card, CategorySBox, DescriptionBox, ImgBox, NameBox, NotFound, ProductListing } from "../../styledComponent/productstyle";
+import { Card, CategorySBox, DescriptionBox, ImgBox, NameBox, NotFound, ProductListing, ShowMore } from "../../styledComponent/productstyle";
 
 const ProductList = ({
   products,

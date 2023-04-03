@@ -15,12 +15,12 @@
 
 - Developed Endpoints for the ECommerce website.
 - PostgreSQL as Database.
-- EFCore ORM fr connecting c# application to database.
+- EFCore ORM for connecting c# application to database.
 
 Description:
 
 - MiddleWare.
-- Authentication and Authorization using IdentityFramework.
+- Authentication and Role based Authorization using IdentityFramework.
 - AutoMapper for mapping across different requirement.
 - ValidationAttribute for validating of DTO's.
 - Custom Validation of DTOs.

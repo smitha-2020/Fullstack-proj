@@ -19,8 +19,9 @@ const Products = () => {
   const [numbofPages, setNumbofPages] = useState(12);
   const [search, setSearch] = useState({ search: "" });
   const dispatch = useAppDispatch();
+
   const displayNewProducts = (state: RootState) => {
-    let data, newData;
+    let data;
 
     let filteredData: IProduct[] = [];
     if (selCategory.length > 0) {
@@ -95,7 +96,7 @@ const Products = () => {
             <OuterBox>
               <Grid container spacing={2}>
                 <Grid item xs={5}></Grid>
-                <Grid sx={{ color: 'text.primary' }} item xs={3}>{products.length} products displayed</Grid>
+                <Grid sx={{ color: 'text.primary' }} item xs={3}>{products.length>0?products.length:0} products displayed</Grid>
                 {/* <Grid item xs={5}></Grid> */}
                 <Grid item xs={4}>
                   <Grid container spacing={0} display="flex" flexDirection="row">
@@ -136,7 +137,7 @@ const Products = () => {
               </Grid>
             </OuterBox>
             <Box sx={{ backgroundColor: 'primary.main' }}>
-              <ProductList products={products} />
+              <ProductList products={newProducts} />
             </Box>
           </ProductBox>
         </AnatherBox>

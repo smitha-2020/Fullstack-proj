@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios';
 import { ICart, ICartOp, ICartResponse, ICartType } from '../../types/cartType'
-import { addingToCart, fetchCartDetails } from './reducerMethods/cartMethod';
+//import { addingToCart, fetchCartDetails } from './reducerMethods/cartMethod';
 
 const initialState: ICartType[] = [];
 const cartSlice = createSlice({
@@ -25,15 +25,25 @@ const cartSlice = createSlice({
             } 
             return [...state,action.payload];
         },
-        removeFromCart(state, action) {
-            const newCart = state.filter((cartElement) => { return cartElement.products.id !== action.payload })
+        removeFromCart(state, action: PayloadAction<ICartOp>) {
+            const newCart = state.filter((cartElement) => { return (cartElement.products.id !== action.payload.id)})
             return newCart;
+            //return state;
         },
         removeCart(state,action) {
             const newCart = state.filter((cartElement) => { return cartElement.userId! === action.payload })
             return newCart;
         },
         increaseQuantity(state, action:PayloadAction<ICartOp>) {
+            if(action.payload.authentication.sub === undefined){
+                console.log("undefined");
+            }
+            if(action.payload.authentication.sub === null){
+                console.log("null");
+            }
+            if(action.payload.authentication.sub === ""){
+                console.log("Empty");
+            }
             const existingData = state.filter((cartElement) => { return cartElement.products.id === action.payload.id })
             if (existingData) {
                 const datanew = state.map((cartElement) => {

@@ -1,5 +1,6 @@
 import { Grid } from "@mui/material";
 import { FaTrashAlt } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 import { increaseQuantity, decreaseQuantity, removeFromCart } from '../redux/reducers/cartReducer';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHook';
@@ -11,16 +12,23 @@ import { NotFound } from '../styledComponent/productstyle';
 import { ICartOp, ICartResponse, ICartType } from "../types/cartType";
 
 
+
 const Cart = () => {
   const cart = useAppSelector(state => { return state.cartReducer; })
   const dispatch = useAppDispatch();
+  let navigate = useNavigate();
   const authentication: IAuthenticUser = useAppSelector(state => state.auhtReducer)
-  console.log('cart',Array.isArray(cart))
+  if(authentication.sub.length === 0){
+    navigate(-2);
+  }
   let userCart:ICartType[] = cart.filter((cartInfo: ICartType) => { return cartInfo.userId.sub === authentication.sub })
+  console.log("total Cart", cart)
+  console.log("cart",userCart);
   const cartSize: number = cart.length;
   function deleteCartitem(e: React.MouseEvent<SVGElement, MouseEvent>, id: number): void {
     e.preventDefault();
-    dispatch(removeFromCart(id))
+    var data:ICartOp = {id:id,authentication:authentication}
+    dispatch(removeFromCart(data))
   }
 
   const setIncrease = (id: number) => {   
@@ -42,6 +50,7 @@ const Cart = () => {
               </Grid>
             </Grid>
           </Grid>
+          {authentication.avatar?
           <Grid container spacing={0} direction="row" alignItems="center" justifyContent="center" sx={{ minHeight: '5vh', minWidth: '100vw', color: 'text.primary', backgroundColor: 'primary.main' }}>
             <Grid container spacing={0} alignItems="center" justifyContent="center" sx={{ width: '1300px', height: 'auto', minHeight: '200px', marginLeft: "20px", backgroundColor: "primary.main", color: 'text.primary' }}>
               <Grid container spacing={0} direction="row" sx={{ padding: '10px', color: 'text.primary' }}>
@@ -78,9 +87,11 @@ const Cart = () => {
               })}
             </Grid>
           </Grid>
+           :""}
         </Grid>
-        <CartBtn />
-        <CartTotal />
+        {authentication.avatar?<CartBtn />:""}
+        {authentication.avatar?<CartTotal />:""}
+       
       </>
     )
   } else {

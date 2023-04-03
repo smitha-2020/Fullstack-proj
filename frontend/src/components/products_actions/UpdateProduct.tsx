@@ -5,27 +5,46 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 
 //import { json } from 'stream/consumers';
 //import { string } from 'yup';
-//import { modifyProduct } from '../../redux/reducers/reducerMethods/productMethods';
-import { ChangeEvent } from 'react';
+import { modifyProduct } from '../../redux/reducers/reducerMethods/productMethods';
+import { ChangeEvent, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 const UpdateProduct = () => {
   const { register, handleSubmit, reset, watch,setValue, formState: { errors } } = useForm<IProductOpt>({});
   const navigate = useNavigate();
+  const [isloading,setIsLoading] = useState(false);
+  const [image,setImage] =useState<string[]>([]);
   const product = useAppSelector(state => state.productReducer)
   const categories = useAppSelector(state => state.categoryReducers)
   const dispatch = useAppDispatch();
   let selectedItem:IProduct[] = [];
   const onSubmit: SubmitHandler<IProductOpt> = async(data) => {
     if (data.id) {
-      const { id, categoryId,images, ...dataRemaing } = data
-      const newData: IProductModify = { id: id, updateProduct: dataRemaing }
-      //await dispatch(modifyProduct(newData))
-      if (product.isDone) {
-        navigate('/fulfilled')
-      }
+      const { id, categoryId, ...dataRemaing } = data
+      const newData: IProductModify = { id: id, updateProduct: dataRemaing,images:image }
+      console.log(newData.images.length)
+      await dispatch(modifyProduct(newData))
+      // if (product.isDone) {
+      //   navigate('/fulfilled')
+      // }
     }
   };
+
+  const uploadImage = async(e: any) => {
+    const files = e.target.files[0];
+    console.log(files.name);
+    const data = new FormData();
+    data.append('file',files);
+    data.append('upload_preset','geekyimages');
+    const response = await fetch('https://api.cloudinary.com/v1_1/dllghhg4r/auto/upload',{
+      method:'POST',
+      mode:'cors',
+      body:data
+    })
+    const file =await response.json();
+    setImage([...image,file.secure_url]);
+  }
+
   const productIdSelected = (e: ChangeEvent<HTMLSelectElement>) => {
     selectedItem = product.product.filter((productItem) => { return productItem.id === Number(e.target.value) })
     setValue('id',selectedItem[0].id)
@@ -33,7 +52,6 @@ const UpdateProduct = () => {
     setValue('price',selectedItem[0].price)
     setValue('description',selectedItem[0].description)
     setValue('categoryId',selectedItem[0].category.id)
-    //setValue('images',selectedItem[0].images)
     //setValue('data.title',selectedItem[0].title)
   }
   return (
@@ -61,8 +79,12 @@ const UpdateProduct = () => {
             </select>
           </p>
           {/* <input type="file" id="myFile" style={{ marginTop: "10px" }} {...register("images")} /> */}
-          <TextField type="text" variant="outlined" placeholder="Image url here" margin="normal"  {...register("images")} />
-          <Button sx={{ marginTop: 3, borderRadius: 3, fill: 'white' }} variant="contained" color="warning" type="submit"> Add</Button>
+          <input type="file" id="myfile" style={{ marginTop: "10px" }} placeholder="uploadImage" onChange={uploadImage}/>
+          <input type="file" id="myFile" style={{ marginTop: "10px" }} placeholder="uploadImage" onChange={uploadImage}/>
+          <input type="file" id="myFile" style={{ marginTop: "10px" }} placeholder="uploadImage" onChange={uploadImage}/>
+
+           {/* <p className="successMsg">{isloading ? 'Image Loading...' : ''}</p> */}
+          <Button sx={{ marginTop: 3, borderRadius: 3, fill: 'white' }} variant="contained" color="warning" type="submit"> Update</Button>
           <br />
           {/* <p className="successMsg">{product.isDone && 'Data Updated'}</p> */}
           <p className="successMsg">Fill the fields you wish to update.Select the Product Id</p>

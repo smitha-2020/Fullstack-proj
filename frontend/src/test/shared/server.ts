@@ -1,12 +1,13 @@
 import { rest } from "msw";
 import { setupServer } from "msw/node";
-import { IProduct, IProductDesc } from "../../types/productType";
+import { IProduct, IProductBase, IProductDesc } from "../../types/productType";
 import { ICategory } from "../../types/productType";
 import {
   products,
   categoryList,
   users,
   createUserObjs,
+  createProductObjs
 } from "../../common/data";
 import { IAuthenticUser } from "../../types/userType";
 
@@ -55,85 +56,88 @@ const handler = [
   rest.post(
     "https://localhost:5001/products",
     async (req, res, ctx) => {
-      const product: IProductDesc = await req.json();
-      if (product.price < 0) {
-        return res(ctx.status(400, "invalid data"));
-      } else {
-        return res(
-            ctx.json({
-              product,
-            })
-          );
-      }
+      const createProductNew = createProductObjs;
+      console.log("wdwqewerwer",createProductNew);
+      return res(ctx.json(createProductNew));
+      // const product: IProductBase = await req.json();
+      // if (product.price < 0) {
+      //   return res(ctx.status(400, "invalid data"));
+      // } else {
+      //   return res(
+      //       ctx.json({
+      //         product,
+      //       })
+      //     );
+      // }
    }
   ),
-  // rest.delete(
-  //   "https://api.escuelajs.co/api/v1/products/:id",
-  //   async (req, res, ctx) => {
-  //     const { id } = req.params;
-  //     const remainingProduct: IProduct[] = products.filter((reqProduct) => {
-  //       return reqProduct.id !== Number(id);
-  //     });
-  //     return res(
-  //       ctx.json({
-  //         ...remainingProduct,
-  //       })
-  //     );
-  //   }
-  // ),
+  rest.delete(
+    "https://localhost:5001/products/:id",
+    async (req, res, ctx) => {
+      const { id } = req.params;
+      const remainingProduct: IProduct[] = products.filter((reqProduct) => {
+        return reqProduct.id !== Number(id);
+      });
+      return res(
+        ctx.json({
+          ...remainingProduct,
+        })
+      );
+    }
+  ),
   rest.get(
     "https://localhost:5001/categorys",
     async (req, res, ctx) => {
       return res(ctx.json(categoryList));
     }
   ),
-  rest.get(
-    "https://api.escuelajs.co/api/v1/categories/:id",
-    async (req, res, ctx) => {
-      const { id } = req.params;
-      const foundCategory = categoryList.filter((category) => {
-        return category.id === Number(id);
-      });
-      return res(ctx.json(foundCategory));
-    }
-  ),
-  rest.post(
-    "https://api.escuelajs.co/api/v1/categories/",
-    async (req, res, ctx) => {
-      const category: ICategory = await req.json();
-      return res(ctx.json(category));
-    }
-  ),
-  rest.put(
-    "https://api.escuelajs.co/api/v1/categories/:id",
-    async (req, res, ctx) => {
-      const { id } = req.params;
-      const foundCategory = categoryList.find(
-        (reqProduct: ICategory) => reqProduct.id === Number(id)
-      );
-      const newcategory: ICategory = await req.json();
-      if (foundCategory) {
-        return res(
-          ctx.json({
-            ...foundCategory,
-            ...newcategory,
-          })
-        );
-      } else {
-        return res(ctx.status(404, "Np product found"));
-      }
-    }
-  ),
-  rest.delete(
-    "https://api.escuelajs.co/api/v1/categories/:id",
-    async (req, res, ctx) => {
-      const { id } = req.params;
-      const foundCategory: ICategory[] = categoryList.filter((reqProduct) => {
-        return reqProduct.id === Number(id);
-      });
-      return res(ctx.json(foundCategory));
-    }
-  ),
+  // rest.get(
+  //   "https://api.escuelajs.co/api/v1/categories/:id",
+  //   async (req, res, ctx) => {
+  //     const { id } = req.params;
+  //     const foundCategory = categoryList.filter((category) => {
+  //       return category.id === Number(id);
+  //     });
+  //     return res(ctx.json(foundCategory));
+  //   }
+  // ),
+  // rest.post(
+  //   "https://api.escuelajs.co/api/v1/categories/",
+  //   async (req, res, ctx) => {
+  //     const category: ICategory = await req.json();
+  //     return res(ctx.json(category));
+  //   }
+  // ),
+  // rest.put(
+  //   "https://api.escuelajs.co/api/v1/categories/:id",
+  //   async (req, res, ctx) => {
+  //     const { id } = req.params;
+  //     const foundCategory = categoryList.find(
+  //       (reqProduct: ICategory) => reqProduct.id === Number(id)
+  //     );
+  //     const newcategory: ICategory = await req.json();
+  //     if (foundCategory) {
+  //       return res(
+  //         ctx.json({
+  //           ...foundCategory,
+  //           ...newcategory,
+  //         })
+  //       );
+  //     } else {
+  //       return res(ctx.status(404, "Np product found"));
+  //     }
+  //   }
+  // ),
+  // rest.delete(
+  //   "https://api.escuelajs.co/api/v1/categories/:id",
+  //   async (req, res, ctx) => {
+  //     const { id } = req.params;
+  //     const foundCategory: ICategory[] = categoryList.filter((reqProduct) => {
+  //       return reqProduct.id === Number(id);
+  //     });
+  //     return res(ctx.json(foundCategory));
+  //   }
+  // ),
   rest.get("https://api.escuelajs.co/api/v1/users", async (req, res, ctx) => {
     return res(ctx.json(users));
   }),

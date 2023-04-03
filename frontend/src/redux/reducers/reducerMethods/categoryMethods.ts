@@ -12,6 +12,7 @@ export const fetchAllCategories = createAsyncThunk(
                 'Content-Type': 'application/json'
                 }
               })
+              console.log(res.data)
             return res.data;
         } catch (e) {
             const error = e as AxiosError

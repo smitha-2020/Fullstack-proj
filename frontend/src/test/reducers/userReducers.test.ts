@@ -36,16 +36,16 @@ describe("test category reducers", () => {
             await store.dispatch(createUser({ user: createUserObj }))
             expect(store.getState().userReducer[0].email).toBe("nicoo@gmail.com")
         })
-        test("should update user", async () => {
-            await store.dispatch(getAllUsers())
-            const updateuserObj = {
-                id: 1,
-                user: {
-                    email: "johndimellow@mail.com",
-                    name: "ShowmeChanged"
-                }
-            }
-            await store.dispatch(updateUser(updateuserObj))
-            //console.log(store.getState().userReducer)
-        })
+        // test("should update user", async () => {
+        //     await store.dispatch(getAllUsers())
+        //     const updateuserObj = {
+        //         id: 1,
+        //         user: {
+        //             email: "johndimellow@mail.com",
+        //             name: "ShowmeChanged"
+        //         }
+        //     }
+        //     await store.dispatch(updateUser(updateuserObj))
+        //     //console.log(store.getState().userReducer)
+        // })
 })

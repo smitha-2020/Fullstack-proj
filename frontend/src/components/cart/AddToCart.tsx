@@ -11,6 +11,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 //import { addingToCart } from '../../redux/reducers/reducerMethods/cartMethod';
 import { addToCart } from '../../redux/reducers/cartReducer';
 import { SubmitHandler } from 'react-hook-form';
+import { AxiosError } from 'axios';
+
 
 
 const AddToCart = ({ products,id }: { products: IProduct,id:string }) => {
@@ -20,6 +22,7 @@ const AddToCart = ({ products,id }: { products: IProduct,id:string }) => {
         marginTop: "20px"
     });
     //const cart = useAppSelector(state => { return state.cartReducer; })
+    let navigate = useNavigate();
     const authentication: IAuthenticUser = useAppSelector(state => state.auhtReducer)
     const dispatch = useAppDispatch();
     const stock = 5;
@@ -41,8 +44,13 @@ const AddToCart = ({ products,id }: { products: IProduct,id:string }) => {
         userId:authentication
     }
     const addCart = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-        if(data.userId.sub === authentication.sub){
+        if(data.userId.sub.length===0){
+            navigate('/login')
+        }
+        else if(data.userId.sub === authentication.sub){
             dispatch(addToCart(data))  
+        }else{
+            navigate('/login')
         }
     }
     return (

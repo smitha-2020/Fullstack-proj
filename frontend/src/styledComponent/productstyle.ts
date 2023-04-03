@@ -57,6 +57,19 @@ export const CategorySBox = styled(Box)({
   top: "25px",
   right: "25px"
 });
+export const ShowMore = styled(Box)({
+  minWidth: "100px",
+  width: "auto",
+  color: "lightgray",
+  backgroundColor: "white",
+  padding: "5px",
+  fontSize: "10px",
+  borderRadius: "1em",
+  position: "absolute",
+  top: "200px",
+  alignItems: "center",
+  justifyContent: "center"
+});
 export const Card = styled(Box)({
   display: "flex",
   flexDirection: "column",

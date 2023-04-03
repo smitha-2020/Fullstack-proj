@@ -36,15 +36,15 @@ const Profile = () => {
                 <Grid item xs={2}>
                 </Grid>
                 <Grid item xs={2}>
-                {authentication.role === "admin" ? <a href="#" onClick={(e) => { setDisplay('createProduct'); }}>Create Product</a> : ''}
+                {authentication.role === "Admin" ? <a href="#" onClick={(e) => { setDisplay('createProduct'); }}>Create Product</a> : ''}
                 </Grid>
                 <br />
                 <Grid item xs={2}>
-                  {authentication.role === "admin" ? <a href="#" onClick={(e) => { setDisplay('updateProduct'); }}>Update Product</a> : ''}
+                  {authentication.role === "Admin" ? <a href="#" onClick={(e) => { setDisplay('updateProduct'); }}>Update Product</a> : ''}
                 </Grid>
                 <br />
                 <Grid item xs={2}>
-                  {authentication.role === "admin" ? <a href="#" onClick={(e) => { setDisplay('deleteProduct'); }}>Delete Product</a> : ''}
+                  {authentication.role === "Admin" ? <a href="#" onClick={(e) => { setDisplay('deleteProduct'); }}>Delete Product</a> : ''}
                 </Grid>
 
                 {/* <Grid item xs={2}>
@@ -54,9 +54,9 @@ const Profile = () => {
             </Grid>
           </Grid>
           <Grid item alignItems="center" justifyContent="center" xs={10} sx={{ minHeight: '80vh' }}>
-            {(display === 'createProduct' && authentication.role === "admin") ? <CreateProduct /> : ''}
-            {(display === 'updateProduct' && authentication.role === "admin") ? <UpdateProduct /> : ''}
-            {(display === 'deleteProduct' && authentication.role === "admin") ? <DeleteProduct /> : ''}
+            {(display === 'createProduct' && authentication.role === "Admin") ? <CreateProduct /> : ''}
+            {(display === 'updateProduct' && authentication.role === "Admin") ? <UpdateProduct /> : ''}
+            {(display === 'deleteProduct' && authentication.role === "Admin") ? <DeleteProduct /> : ''}
           </Grid>
         </Grid>
       </>

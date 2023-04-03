@@ -14,8 +14,11 @@ export const usePagination = (cardsPerPage: number, cards: IProduct[]) => {
     const currentPageData = (): IProduct[] => {
         const start = (currentPageIndex - 1) * cardsPerPage
         const end = start + cardsPerPage
-        return cards.slice(start, end)
+        if(cards.length>0){
+            return cards.slice(start, end)
+        }
+        return [];
+       
     }
     return { totalPages, currentPageIndex,currentPageData, gotoPage }
-
 };

@@ -21,7 +21,7 @@ const Header = () => {
     console.log("authentication",authentication)
     const switchcheck: ImodeCheck = useAppSelector(state => state.switchReducer)
     const cart = useAppSelector(state => { return state.cartReducer; })
-    const carttotal=cart.filter((cartElement) => cartElement.userId.sub === authentication.sub).reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
+    const carttotal=cart.length>0?cart.filter((cartElement) => cartElement.userId.sub === authentication.sub).reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0):[]
     //const carttotal = cart.reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0)
     const dispatch = useAppDispatch();
     const deleteSession = ( e: React.MouseEvent<HTMLSpanElement, MouseEvent>) => {
