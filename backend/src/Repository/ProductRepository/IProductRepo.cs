@@ -12,4 +12,5 @@ public interface IProductRepo : IBaseRepo<Product>
     Task<IEnumerable<Product>> SortByPrice(SortBy order, IEnumerable<Product> query);
     Task<IEnumerable<Product>> SortByProperty(string property, SortBy order);
     Task<IEnumerable<Product>?> GetAllAsync(QueryOptions options, IEnumerable<Product> result);
+    Task<IEnumerable<Image>?> GetProductImages(int id);
 }

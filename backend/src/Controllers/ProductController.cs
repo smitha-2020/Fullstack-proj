@@ -34,6 +34,12 @@ public class ProductController : BaseController<Product, DTOProduct, DTOUpdatePr
         return Ok(await _service.GetAllProductsAsync());
     }
 
+    [HttpGet("{id}/productimages")]
+    public async Task<ActionResult> GetProductImages(int id)
+    {
+        return Ok(await _service.GetProductImages(id));
+    }
+
     [HttpPut("{id:int}")]
     public override async Task<ActionResult> Update(int id, DTOUpdateProduct item)
     {

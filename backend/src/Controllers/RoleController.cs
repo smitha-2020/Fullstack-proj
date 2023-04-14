@@ -27,6 +27,7 @@ public class RoleController : ApiController
         //return BadRequest();
     }
 
+    //[AllowAnonymous]
     [HttpPost("{userId:Guid}/assign")]
     public async Task<IActionResult> AssignRoleToUser(Guid userId, [FromBody] IEnumerable<string> names)
     {

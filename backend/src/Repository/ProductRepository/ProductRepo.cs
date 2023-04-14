@@ -75,4 +75,11 @@ public class ProductRepo : BaseRepo<Product>, IProductRepo
         }
         return await Task.Run(() => query);
     }
+
+     public async Task<IEnumerable<Image>?> GetProductImages(int id)
+    {
+       return await Task.Run(() => _dbcontext.Products.Where(x => x.Id == id).SelectMany(x => x.ImageLink));
+    }
+
+
 }

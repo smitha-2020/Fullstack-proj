@@ -77,4 +77,14 @@ public class ProductService : BaseService<Product, DTOProduct, DTOUpdateProduct,
         }
         return _mapper.Map<IEnumerable<Product>, IEnumerable<DTOProductResponse>>(result);
     }
+
+    public async Task<IEnumerable<DTOImageResponse>?> GetProductImages(int id)
+    {
+        var result = await _repo.GetProductImages(id);
+        if (result is null)
+        {
+             throw ServiceException.NotFound("No Products to Display");
+        }
+        return _mapper.Map<IEnumerable<Image>, IEnumerable<DTOImageResponse>>(result);
+    }
 }

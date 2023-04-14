@@ -29,6 +29,8 @@ public static class ModelConfiguration
 
     public static void ConfigureCategory(this ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Category>()
+              .HasIndex(x => x.Name).IsUnique();
         modelBuilder.Entity<DTOCategoryProductResponse>().Navigation(x => x.Products).AutoInclude();
         modelBuilder.Entity<DTOProductResponse>().Navigation(x => x.Category).AutoInclude();
         modelBuilder.Entity<Category>().Navigation(x => x.Products).AutoInclude();

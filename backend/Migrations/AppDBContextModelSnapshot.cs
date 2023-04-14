@@ -216,6 +216,10 @@ namespace backend.Migrations
                     b.HasKey("Id")
                         .HasName("pk_categorys");
 
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasDatabaseName("ix_categorys_name");
+
                     b.ToTable("categorys", (string)null);
                 });
 

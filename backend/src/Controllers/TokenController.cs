@@ -4,7 +4,7 @@ using backend.src.Services.TokenService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-[Authorize]
+[Authorize(Roles="Admin")]
 public class TokenController : ApiController
 {
     private readonly ITokenService _service;
@@ -13,10 +13,10 @@ public class TokenController : ApiController
         _service = service;
     }
 
+    [AllowAnonymous]
     [HttpPost]
     public async Task<ActionResult?> GetTokenClaims([FromHeader] DTOToken jwttoken)
     {
-       
         var jwtTokenString=(jwttoken.Authorization.Length>0)?jwttoken.Authorization.Split(' ')[1]:null;
         return Ok(await _service.GetTokenInfo(jwtTokenString!));
     }

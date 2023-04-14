@@ -7,7 +7,7 @@ using backend.src.DTOs.DTORequest;
 
 namespace backend.src.Controllers;
 
-[Authorize]
+[Authorize(Roles="Admin")]
 public class UserController : ApiController
 {
     private readonly IUserService _service;
@@ -27,12 +27,13 @@ public class UserController : ApiController
         return Ok(await _service.SingnInAsync(request));
     }
 
+    [AllowAnonymous]
     [HttpGet("{id:Guid}")]
     public async Task<IActionResult?> GetByGuid(Guid id)
     {
         return Ok(await _service.GetByIdAsync(id));
     }
-
+    
     [HttpPost("isavailable")]
     public async Task<IActionResult?> IsAvailable([FromBody] DTOEmail request)
     {

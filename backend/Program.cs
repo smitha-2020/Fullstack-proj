@@ -41,8 +41,6 @@ builder.Services.AddCors(options =>
               .AllowAnyHeader());
   });
 
-
-
 // Add database services to the container.
 builder.Services.AddDbContext<AppDBContext>();
 
