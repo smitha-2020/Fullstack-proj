@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { AxiosError } from 'axios';
 import { ICategory } from '../../types/productType';
-import { fetchAllCategories,createCategory } from './reducerMethods/categoryMethods';
+import { fetchAllCategories,createCategory,deleteCategory } from './reducerMethods/categoryMethods';
 
-// getSingleCategory, , updateCategory,deleteCategory
+// getSingleCategory, , updateCategory,
 
 const initialState: ICategory[] = [];
 
@@ -52,11 +52,11 @@ const categorySlice = createSlice({
             //         )
             //     }
             // })
-            // .addCase(deleteCategory.fulfilled, (state, action) => {
-            //     const deletedData = [...state]
-            //     const result = deletedData.filter(category => { return category.id === action.payload })
-            //     return result
-            // })
+            .addCase(deleteCategory.fulfilled, (state, action) => {
+                const data = [...state]
+                const result = data.filter(category => { return category.id === action.payload })
+                return result
+            })
     }
 })
 

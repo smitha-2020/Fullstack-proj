@@ -27,7 +27,7 @@ export type Inputs = {
     email: string,
     password: string,
     confirmpassword?: string,
-    avatar: FileList
+    avatar: string
 }
 export interface ILoginData {
     email: string,

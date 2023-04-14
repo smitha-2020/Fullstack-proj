@@ -18,7 +18,7 @@ const label = { inputProps: { 'aria-label': 'Switch demo' } };
 const Header = () => {
     const navigate = useNavigate();
     const authentication: IAuthenticUser = useAppSelector(state => state.auhtReducer)
-    console.log("authentication",authentication)
+    //console.log("authentication",authentication)
     const switchcheck: ImodeCheck = useAppSelector(state => state.switchReducer)
     const cart = useAppSelector(state => { return state.cartReducer; })
     const carttotal=cart.length>0?cart.filter((cartElement) => cartElement.userId.sub === authentication.sub).reduce((acc, cartElement) => { return acc + cartElement.quantity }, 0):[]

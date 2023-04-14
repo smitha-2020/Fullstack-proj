@@ -14,8 +14,7 @@ export const fetchSession = createAsyncThunk(
                 const responseAvatar:AxiosResponse<any,IUserResponse> = await axios.get(`https://localhost:5001/users/${userId}`, { headers: {'Authorization': `Bearer ${data}`}})
                 if(responseAvatar.data){
                     avatar = responseAvatar.data.avatar
-                    console.log("avatra",avatar)
-                    
+                    //console.log("avatra",avatar) 
                 }
             }
             return {...response.data,avatar:avatar}

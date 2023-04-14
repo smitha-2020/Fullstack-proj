@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 const UpdateProduct = () => {
   const { register, handleSubmit, reset, watch,setValue, formState: { errors } } = useForm<IProductOpt>({});
   const navigate = useNavigate();
+  const [showMessage,setShowMessage] =useState<string>("");
   const [isloading,setIsLoading] = useState(false);
   const [image,setImage] =useState<string[]>([]);
   const product = useAppSelector(state => state.productReducer)
@@ -20,19 +21,18 @@ const UpdateProduct = () => {
   let selectedItem:IProduct[] = [];
   const onSubmit: SubmitHandler<IProductOpt> = async(data) => {
     if (data.id) {
-      const { id, categoryId, ...dataRemaing } = data
-      const newData: IProductModify = { id: id, updateProduct: dataRemaing,images:image }
-      console.log(newData.images.length)
+      const { id,...dataRemaing} = data
+      const newData: IProductModify = { id: id, updateProduct: dataRemaing,images:image}
       await dispatch(modifyProduct(newData))
-      // if (product.isDone) {
-      //   navigate('/fulfilled')
-      // }
+      setShowMessage("Updated Successfully");
+      reset({ id:-1,title: "", price: 0, description: "", categoryId: -1 })
+      setTimeout(()=> setShowMessage(""),5000 )
     }
   };
 
   const uploadImage = async(e: any) => {
+    setIsLoading(true);
     const files = e.target.files[0];
-    console.log(files.name);
     const data = new FormData();
     data.append('file',files);
     data.append('upload_preset','geekyimages');
@@ -43,6 +43,7 @@ const UpdateProduct = () => {
     })
     const file =await response.json();
     setImage([...image,file.secure_url]);
+    setIsLoading(false);
   }
 
   const productIdSelected = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -52,7 +53,6 @@ const UpdateProduct = () => {
     setValue('price',selectedItem[0].price)
     setValue('description',selectedItem[0].description)
     setValue('categoryId',selectedItem[0].category.id)
-    //setValue('data.title',selectedItem[0].title)
   }
   return (
     <>
@@ -83,11 +83,13 @@ const UpdateProduct = () => {
           <input type="file" id="myFile" style={{ marginTop: "10px" }} placeholder="uploadImage" onChange={uploadImage}/>
           <input type="file" id="myFile" style={{ marginTop: "10px" }} placeholder="uploadImage" onChange={uploadImage}/>
 
-           {/* <p className="successMsg">{isloading ? 'Image Loading...' : ''}</p> */}
+           <p className="successMsg">{isloading ? 'Image Loading...' : ''}</p>
           <Button sx={{ marginTop: 3, borderRadius: 3, fill: 'white' }} variant="contained" color="warning" type="submit"> Update</Button>
           <br />
-          {/* <p className="successMsg">{product.isDone && 'Data Updated'}</p> */}
-          <p className="successMsg">Fill the fields you wish to update.Select the Product Id</p>
+          <p className="successMsg">{showMessage}</p>
+          <p className="successMsg">** Fill the fields you wish to update.Select the Product Id</p>
+          <br/>
+          <p className="successMsg">** Images may or may not be selected.If not selected previous images will be choosen.</p>
         </Box>
       </form>
     </>

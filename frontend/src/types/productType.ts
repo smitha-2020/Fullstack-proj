@@ -1,5 +1,11 @@
+import { StringLiteralLike } from "typescript"
+
 export interface ICategory {
     id: number,
+    name: string,
+    image: string
+}
+export interface ICategoryBase{
     name: string,
     image: string
 }

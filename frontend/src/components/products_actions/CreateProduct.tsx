@@ -35,7 +35,7 @@ const CreateProduct = () => {
     const uploadImage = async(e: any) => {
     setIsLoading(true);
     const files = e.target.files[0];
-    console.log(files.name);
+    //console.log(files.name);
     const data = new FormData();
     data.append('file',files);
     data.append('upload_preset','geekyimages');
@@ -61,7 +61,6 @@ const CreateProduct = () => {
       const newData = { ...newDatanew, imagestr: image }
       await dispatch(addingProduct(newData))
       reset({ title: "", price: 0, description: "", categoryId: 0 })
-      //setTimeout(()=>window.location.reload(),2000 )
       setShowMessage("Added Successfully");
       setTimeout(()=> setShowMessage(""),5000 )
     } else {

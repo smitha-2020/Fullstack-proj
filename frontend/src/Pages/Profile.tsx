@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react'
 import CreateProduct from '../components/products_actions/CreateProduct';
 import DeleteProduct from '../components/products_actions/DeleteProduct';
 import UpdateProduct from '../components/products_actions/UpdateProduct';
-import { useAppSelector } from '../hooks/reduxHook'
+import { useAppSelector } from '../hooks/reduxHook';
+import CategoryCreate from '../components/category_actions/CategoryCreate';
 
 const Profile = () => {
   const [display, setDisplay] = useState<string>("");
@@ -31,10 +32,15 @@ const Profile = () => {
               <Grid item xs={2}>
                 {authentication.role}
               </Grid>
+              
               <br />
               <Grid container spacing={0} direction="column" alignItems="center" justifyContent="center">
                 <Grid item xs={2}>
                 </Grid>
+                {/* <Grid item xs={2}>
+                {authentication.role === "Admin" ? <a href="#" onClick={(e) => { setDisplay('createCategory'); }}>Create Category</a> : ''}
+                </Grid> */}
+                <br />
                 <Grid item xs={2}>
                 {authentication.role === "Admin" ? <a href="#" onClick={(e) => { setDisplay('createProduct'); }}>Create Product</a> : ''}
                 </Grid>
@@ -57,6 +63,7 @@ const Profile = () => {
             {(display === 'createProduct' && authentication.role === "Admin") ? <CreateProduct /> : ''}
             {(display === 'updateProduct' && authentication.role === "Admin") ? <UpdateProduct /> : ''}
             {(display === 'deleteProduct' && authentication.role === "Admin") ? <DeleteProduct /> : ''}
+            {/* {(display === 'createCategory' && authentication.role === "Admin") ? <CategoryCreate /> : ''} */}
           </Grid>
         </Grid>
       </>
